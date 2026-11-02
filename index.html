@@ -40,7 +40,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(11, 11, 14, 0.9);
+      background: rgba(11, 11, 14, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
@@ -48,31 +48,31 @@
     .nav-pill {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 40px;
+      padding: 8px 16px;
+      border-radius: 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
       max-width: 1400px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-      gap: 8px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .logo {
       color: var(--primary);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       letter-spacing: 1px;
       font-weight: 900;
       text-decoration: none;
       cursor: pointer;
-      white-space: nowrap;
     }
 
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 4px;
+      gap: 6px;
       margin: 0;
       padding: 0;
       align-items: center;
@@ -94,7 +94,7 @@
     .nav-links li a:hover { color: #fff; background: rgba(255,255,255,0.06); }
     .nav-links li a.active { color: #fff; background: #22222c; font-weight: 600; }
 
-    .nav-right { display: flex; align-items: center; gap: 6px; position: relative; }
+    .nav-right { display: flex; align-items: center; gap: 8px; position: relative; }
 
     /* Live Search Input */
     .search-box { position: relative; display: flex; align-items: center; }
@@ -106,15 +106,15 @@
       border-radius: 20px;
       outline: none;
       font-size: 0.78rem;
-      width: 110px;
+      width: 120px;
       transition: width 0.3s ease, border-color 0.2s;
     }
-    .search-input:focus { width: 150px; border-color: var(--primary); }
+    .search-input:focus { width: 160px; border-color: var(--primary); }
 
     .search-results-dropdown {
       display: none;
       position: absolute;
-      top: 40px;
+      top: 45px;
       right: 0;
       width: 280px;
       background: var(--surface);
@@ -447,24 +447,25 @@
     .site-star { color: #444; }
     .site-star.rated { color: #f5c518; }
 
-    /* Mobile Responsive Fixes */
     @media (max-width: 768px) {
       .nav-pill { 
-        padding: 6px 10px; 
-        gap: 6px; 
+        padding: 8px 12px; 
         border-radius: 20px;
       }
-      .logo { font-size: 1rem; }
+      .logo { font-size: 1.1rem; }
       .nav-links { 
         width: 100%; 
         justify-content: center; 
-        margin-top: 4px; 
+        order: 3;
+        margin-top: 4px;
+        padding-top: 4px;
+        border-top: 1px solid rgba(255,255,255,0.06);
       }
-      .nav-links li a { padding: 4px 8px; font-size: 0.72rem; }
+      .nav-links li a { padding: 4px 8px; font-size: 0.75rem; }
       .search-input { width: 90px; }
       .search-input:focus { width: 120px; }
       .main-hero-banner { height: 40vh; min-height: 280px; padding: 15px 4%; }
-      .main-hero-title { font-size: 1.6rem !important; }
+      .main-hero-title { font-size: 1.5rem !important; }
       .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .poster-container { height: 190px; }
       .hero-banner { display: none !important; }
@@ -478,13 +479,6 @@
     <div class="nav-pill">
       <a class="logo" onclick="switchTab('movies', event)">XTREAM</a>
 
-      <ul class="nav-links">
-        <li><a id="nav-home" onclick="switchTab('home', event)">🏠 Home</a></li>
-        <li><a id="nav-movies" class="active" onclick="switchTab('movies', event)">🍿 Movies</a></li>
-        <li><a id="nav-shows" onclick="switchTab('shows', event)">📺 Shows</a></li>
-        <li><a id="nav-mylist" onclick="switchTab('mylist', event)">🔖 My List</a></li>
-      </ul>
-
       <div class="nav-right">
         <div class="search-box">
           <input type="text" id="liveSearchInput" class="search-input" placeholder="Search..." oninput="handleLiveSearch(this.value)" autocomplete="off" />
@@ -493,6 +487,13 @@
 
         <button class="report-btn" onclick="openReportModal()">⚠️ Report</button>
       </div>
+
+      <ul class="nav-links">
+        <li><a id="nav-home" onclick="switchTab('home', event)">🏠 Home</a></li>
+        <li><a id="nav-movies" class="active" onclick="switchTab('movies', event)">🍿 Movies</a></li>
+        <li><a id="nav-shows" onclick="switchTab('shows', event)">📺 Shows</a></li>
+        <li><a id="nav-mylist" onclick="switchTab('mylist', event)">🔖 My List</a></li>
+      </ul>
     </div>
   </header>
 
@@ -628,7 +629,6 @@
     let activeHoverMovieId = null;
 
     window.addEventListener('DOMContentLoaded', async () => {
-      renderSkeletonGrid();
       await fetchAllTmdbData();
       renderFilteredCatalog(movieCatalog);
       populateReportList();
@@ -652,19 +652,6 @@
         document.getElementById('mainHeroBg').src = data.backdrop;
       }
       document.getElementById('mainHeroWatchBtn').href = `https://redflix.co/play?id=${movie.redflixId}&type=movie`;
-    }
-
-    function renderSkeletonGrid() {
-      const grid = document.getElementById('catalogGrid');
-      grid.innerHTML = Array(8).fill(0).map(() => `
-        <div class="movie-card">
-          <div class="poster-container skeleton"></div>
-          <div class="card-content">
-            <div style="height:14px; width:75%; margin-bottom:6px;" class="skeleton"></div>
-            <div style="height:10px; width:45%;" class="skeleton"></div>
-          </div>
-        </div>
-      `).join('');
     }
 
     async function fetchAllTmdbData() {
@@ -714,7 +701,6 @@
           };
         } catch(e) {}
       }));
-      initMainHero();
     }
 
     function applyFilters() {
