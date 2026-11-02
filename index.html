@@ -90,7 +90,7 @@
     .dropdown:hover { background: #1f1f28; color: white; border-color: #444; }
 
     /* Movie Grid & Netflix Hover Cards */
-    .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; max-width: 1350px; margin: 0 auto; padding: 0 4% 60px 4%; }
+    .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; max-width: 1350px; margin: 0 auto; padding: 0 4% 40px 4%; }
     
     .movie-card { 
       background: #18181c; 
@@ -148,11 +148,11 @@
       transition: max-height 0.3s ease, opacity 0.3s ease;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .movie-card:hover .hover-details {
-      max-height: 120px;
+      max-height: 150px;
       opacity: 1;
     }
 
@@ -161,7 +161,7 @@
       text-align: center; 
       background: white; 
       color: black; 
-      padding: 7px 0; 
+      padding: 6px 0; 
       border-radius: 4px; 
       text-decoration: none; 
       font-weight: bold; 
@@ -169,6 +169,26 @@
       transition: background 0.2s; 
     }
     .watch-btn:hover { background: #e50914; color: white; }
+
+    /* Site Rating Footer Widget */
+    .site-rating-section {
+      max-width: 1350px;
+      margin: 20px auto 60px auto;
+      padding: 25px 4%;
+      background: #141418;
+      border: 1px solid #262630;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .site-rating-info h3 { margin: 0 0 5px 0; font-size: 1.2rem; }
+    .site-rating-info p { margin: 0; color: #888; font-size: 0.85rem; }
+    .site-stars { font-size: 1.5rem; cursor: pointer; display: flex; gap: 5px; }
+    .site-star { color: #444; transition: color 0.2s; }
+    .site-star.rated { color: #f5c518; }
 
     /* Coming Soon Placeholder View */
     .coming-soon-view {
@@ -276,7 +296,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">A</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Crime</p>
             <a href="https://redflix.co/play?id=1234139&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -293,7 +312,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">A</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Thriller</p>
             <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -310,7 +328,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
             <a href="https://redflix.co/play?id=1213243&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -327,7 +344,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
             <a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -344,7 +360,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
             <a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -361,7 +376,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
             <a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -378,7 +392,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Thriller</p>
             <a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -395,7 +408,6 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
             <a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
@@ -412,12 +424,26 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
           </div>
           <div class="hover-details">
-            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Comedy | Drama</p>
             <a href="https://redflix.co/play?id=3idiots&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
 
+    </div>
+
+    <!-- Site Rating Section -->
+    <div class="site-rating-section">
+      <div class="site-rating-info">
+        <h3 id="siteRatingTitle">Rate XTREAM</h3>
+        <p id="siteRatingStats">Average: <span id="avgRating">4.8</span> / 5 (<span id="totalVotes">124</span> votes)</p>
+      </div>
+      <div class="site-stars" id="siteStars">
+        <span class="site-star" onclick="rateSite(1)">★</span>
+        <span class="site-star" onclick="rateSite(2)">★</span>
+        <span class="site-star" onclick="rateSite(3)">★</span>
+        <span class="site-star" onclick="rateSite(4)">★</span>
+        <span class="site-star" onclick="rateSite(5)">★</span>
+      </div>
     </div>
   </div>
 
@@ -442,7 +468,6 @@
     function switchTab(tabName, event) {
       if (event) event.preventDefault();
       
-      // Update active navbar styling
       document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
       
       let mainContent = document.getElementById('mainContent');
@@ -463,6 +488,29 @@
       }
     }
 
+    // Site Rating Logic
+    let currentTotalScore = 595; // 124 votes * ~4.8 average
+    let currentVoteCount = 124;
+
+    function rateSite(stars) {
+      currentTotalScore += stars;
+      currentVoteCount += 1;
+      let newAvg = (currentTotalScore / currentVoteCount).toFixed(1);
+
+      document.getElementById('avgRating').innerText = newAvg;
+      document.getElementById('totalVotes').innerText = currentVoteCount;
+      document.getElementById('siteRatingTitle').innerText = "Thank you for rating XTREAM!";
+
+      let starElements = document.querySelectorAll('.site-star');
+      starElements.forEach((el, index) => {
+        if (index < stars) {
+          el.classList.add('rated');
+        } else {
+          el.classList.remove('rated');
+        }
+      });
+    }
+
     function applyFilters() {
       let searchInput = document.getElementById('searchInput').value.toLowerCase();
       let genreVal = document.getElementById('genreFilter').value;
@@ -474,7 +522,6 @@
       let grid = document.getElementById('moviesGrid');
       let cardsArray = Array.from(grid.getElementsByClassName('movie-card'));
 
-      // 1. Filtering Logic
       cardsArray.forEach(card => {
         let title = card.getAttribute('data-title');
         let genre = card.getAttribute('data-genre');
@@ -495,7 +542,6 @@
         }
       });
 
-      // 2. Sorting Logic
       cardsArray.sort((a, b) => {
         if (sortVal === 'rating') {
           return parseFloat(b.getAttribute('data-rating')) - parseFloat(a.getAttribute('data-rating'));
