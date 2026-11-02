@@ -55,26 +55,13 @@
       overflow: hidden; 
       position: relative; 
     }
-    .poster-container img, 
-    .poster-container iframe { 
+    .poster-container img { 
       width: 100%; 
       height: 100%; 
       object-fit: cover; 
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: opacity 0.3s ease;
+      transition: transform 0.4s ease; 
     }
-    
-    .poster-container iframe {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .movie-card:hover .poster-container iframe {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .movie-card:hover .poster-container img { transform: scale(1.08); }
 
     .movie-info { padding: 10px 12px 2px 12px; }
     .movie-title { margin: 0 0 3px 0; font-size: 0.9rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -119,7 +106,6 @@
           <div>
             <div class="poster-container">
               <img src="jailer2.webp" alt="Jailer 2" />
-              <iframe src="https://www.youtube.com/embed/1omgqgOt59o?autoplay=1&mute=1&controls=0&loop=1" title="Jailer 2 Trailer" frameborder="0"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jailer 2</h3>
@@ -135,8 +121,7 @@
         <div class="movie-card" data-title="mirzapur the movie">
           <div>
             <div class="poster-container">
-              <img src="mirzapur movie .webp" alt="Mirzapur: The Movie" />
-              <iframe src="https://www.youtube.com/embed/gL2a6e7jV90?autoplay=1&mute=1&controls=0&loop=1" title="Mirzapur Trailer" frameborder="0"></iframe>
+              <img src="mirzapur.webp" alt="Mirzapur: The Movie" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Mirzapur: The Movie</h3>
@@ -153,7 +138,6 @@
           <div>
             <div class="poster-container">
               <img src="toxic.webp" alt="Toxic" />
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1" title="Toxic Trailer" frameborder="0"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Toxic</h3>
@@ -169,8 +153,7 @@
         <div class="movie-card" data-title="jana nayagan">
           <div>
             <div class="poster-container">
-              <img src="jana nayagan.webp" alt="Jana Nayagan" />
-              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1" title="Jana Nayagan Trailer" frameborder="0"></iframe>
+              <img src="jananayagan.webp" alt="Jana Nayagan" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jana Nayagan</h3>
@@ -178,4 +161,108 @@
             </div>
           </div>
           <div class="play-btn-container">
-            <a href="
+            <a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a>
+          </div>
+        </div>
+
+        <!-- Movie 5: Peddi -->
+        <div class="movie-card" data-title="peddi">
+          <div>
+            <div class="poster-container">
+              <img src="peddi.webp" alt="Peddi" />
+            </div>
+            <div class="movie-info">
+              <h3 class="movie-title">Peddi</h3>
+              <p class="movie-genre">Action | Drama</p>
+            </div>
+          </div>
+          <div class="play-btn-container">
+            <a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a>
+          </div>
+        </div>
+
+        <!-- Movie 6: Irumudi -->
+        <div class="movie-card" data-title="irumudi">
+          <div>
+            <div class="poster-container">
+              <img src="irumudi.webp" alt="Irumudi" />
+            </div>
+            <div class="movie-info">
+              <h3 class="movie-title">Irumudi</h3>
+              <p class="movie-genre">Action | Drama</p>
+            </div>
+          </div>
+          <div class="play-btn-container">
+            <a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a>
+          </div>
+        </div>
+
+        <!-- Movie 7: Pushpa: The Rise -->
+        <div class="movie-card" data-title="pushpa the rise">
+          <div>
+            <div class="poster-container">
+              <img src="pushpa1.webp" alt="Pushpa: The Rise" />
+            </div>
+            <div class="movie-info">
+              <h3 class="movie-title">Pushpa: The Rise</h3>
+              <p class="movie-genre">Action | Thriller</p>
+            </div>
+          </div>
+          <div class="play-btn-container">
+            <a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a>
+          </div>
+        </div>
+
+        <!-- Movie 8: Pushpa 2: The Rule -->
+        <div class="movie-card" data-title="pushpa 2 the rule">
+          <div>
+            <div class="poster-container">
+              <img src="pushpa2.webp" alt="Pushpa 2: The Rule" />
+            </div>
+            <div class="movie-info">
+              <h3 class="movie-title">Pushpa 2: The Rule</h3>
+              <p class="movie-genre">Action | Drama</p>
+            </div>
+          </div>
+          <div class="play-btn-container">
+            <a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a>
+          </div>
+        </div>
+
+        <!-- Movie 9: 3 Idiots -->
+        <div class="movie-card" data-title="3 idiots">
+          <div>
+            <div class="poster-container">
+              <img src="3idiots.webp" alt="3 Idiots" />
+            </div>
+            <div class="movie-info">
+              <h3 class="movie-title">3 Idiots</h3>
+              <p class="movie-genre">Comedy | Drama</p>
+            </div>
+          </div>
+          <div class="play-btn-container">
+            <a href="https://redflix.co/play?id=3idiots&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function filterMovies() {
+      let input = document.getElementById('searchInput').value.toLowerCase();
+      let cards = document.getElementsByClassName('movie-card');
+
+      for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].getAttribute('data-title');
+        if (title.includes(input)) {
+          cards[i].style.display = "flex";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
