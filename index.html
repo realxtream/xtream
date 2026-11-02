@@ -507,7 +507,7 @@
       </div>
     </div>
 
-    <!-- Movie Cards Grid (Auto-populated by search) -->
+    <!-- Movie Cards Grid -->
     <div class="movies-grid" id="moviesGrid">
       <p style="text-align: center; grid-column: 1/-1; color: #888;">Fetching posters and movie data...</p>
     </div>
@@ -533,11 +533,11 @@
   </div>
 
   <script>
-    // ENTER YOUR TMDB API KEY HERE
-    const TMDB_API_KEY = 'YOUR_TMDB_API_KEY_HERE';
+    // TMDB API Key from your dashboard
+    const TMDB_API_KEY = '4fd0523b9e87572c151c576c214f8735';
     const TMDB_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-    // List movies by their search titles and player links:
+    // Movie search titles and links
     const myMovies = [
       { name: "Jailer 2", defaultYear: "2026", defaultGenre: "action crime", age: "A", country: "india", rating: 8.2, playUrl: "https://redflix.co/play?id=1234139&type=movie" },
       { name: "Mirzapur: The Movie", defaultYear: "2026", defaultGenre: "action thriller", age: "A", country: "india", rating: 8.8, playUrl: "https://redflix.co/play?id=1378537&type=movie" },
@@ -559,7 +559,6 @@
       restoreSavedRating();
     });
 
-    // Auto-search TMDB for each movie title
     async function loadMoviesByName() {
       const grid = document.getElementById('moviesGrid');
       
