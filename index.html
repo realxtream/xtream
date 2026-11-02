@@ -195,8 +195,8 @@
 
     .poster-container { 
       width: 100%; 
-      height: 280px; 
-      background: #101014; 
+      height: 290px; 
+      background: #141418; 
       overflow: hidden; 
       position: relative; 
     }
@@ -277,7 +277,7 @@
     }
     .watch-btn:hover { background: #e50914; color: white; }
 
-    /* Netflix Desktop Hover Animation */
+    /* Netflix Desktop Hover */
     @media (hover: hover) and (pointer: fine) {
       .movie-card:hover {
         transform: scale(1.12) translateY(-10px);
@@ -359,7 +359,7 @@
     .btn-cancel { background: transparent; border: 1px solid #444; color: #aaa; }
     .btn-submit { background: #e50914; border: none; color: white; }
 
-    /* Site Rating Footer Widget */
+    /* Site Rating Widget */
     .site-rating-section {
       max-width: 1350px;
       margin: 20px auto 50px auto;
@@ -379,7 +379,6 @@
     .site-star { color: #444; transition: color 0.2s; }
     .site-star.rated { color: #f5c518; }
 
-    /* Empty / Coming Soon View */
     .coming-soon-view {
       display: none;
       text-align: center;
@@ -389,7 +388,6 @@
       font-weight: 500;
     }
 
-    /* Mobile Responsive */
     @media (max-width: 768px) {
       .nav-pill-container { padding: 6px 12px; gap: 6px; }
       .logo { font-size: 1rem; }
@@ -399,7 +397,7 @@
         gap: 14px;
         padding: 10px 4% 40px 4%;
       }
-      .poster-container { height: 220px; }
+      .poster-container { height: 230px; }
     }
   </style>
 </head>
@@ -440,13 +438,10 @@
   <div id="reportModal" class="modal-overlay">
     <div class="modal-content">
       <h3>Report an Issue</h3>
-      
       <div>
         <label>Search & Select Movie:</label>
         <input type="text" id="reportMovieSearch" class="modal-input" placeholder="Type to filter movies..." onkeyup="filterReportMovies()" style="margin-bottom: 6px;" />
-        <select id="reportMovieSelect" class="modal-select" size="3" style="height: 80px;">
-          <!-- Dynamically filled by JS -->
-        </select>
+        <select id="reportMovieSelect" class="modal-select" size="3" style="height: 80px;"></select>
       </div>
 
       <div>
@@ -512,201 +507,12 @@
       </div>
     </div>
 
-    <!-- Movie Cards Grid -->
+    <!-- Movie Cards Grid (Auto-populated by search) -->
     <div class="movies-grid" id="moviesGrid">
-      
-      <!-- Movie 1 -->
-      <div class="movie-card" data-title="jailer 2" data-genre="action crime" data-year="2026" data-country="india" data-age="a" data-rating="8.2">
-        <div class="poster-container">
-          <img src="https://placehold.co/400x600/18181c/e50914?text=Jailer+2" alt="Jailer 2" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Jailer+2';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Jailer 2</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Jailer 2')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">8.2</span>
-            <span>2026</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">A</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=1234139&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 2 -->
-      <div class="movie-card" data-title="mirzapur: the movie" data-genre="action thriller crime" data-year="2026" data-country="india" data-age="a" data-rating="8.8">
-        <div class="poster-container">
-          <img src="https://placehold.co/400x600/18181c/e50914?text=Mirzapur:+The+Movie" alt="Mirzapur: The Movie" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Mirzapur:+The+Movie';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Mirzapur: The Movie</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Mirzapur: The Movie')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">8.8</span>
-            <span>2026</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">A</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 3 -->
-      <div class="movie-card" data-title="toxic: a fairy tale for grown-ups" data-genre="action drama" data-year="2025" data-country="india" data-age="ua" data-rating="8.4">
-        <div class="poster-container">
-          <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Toxic" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Toxic';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Toxic: A Fairy Tale</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Toxic: A Fairy Tale')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">8.4</span>
-            <span>2025</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=1213243&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 4 -->
-      <div class="movie-card" data-title="jana nayagan" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.1">
-        <div class="poster-container">
-          <img src="https://placehold.co/400x600/18181c/e50914?text=Jana+Nayagan" alt="Jana Nayagan" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Jana+Nayagan';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Jana Nayagan</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Jana Nayagan')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">8.1</span>
-            <span>2026</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 5 -->
-      <div class="movie-card" data-title="peddi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.0">
-        <div class="poster-container">
-          <img src="https://placehold.co/400x600/18181c/e50914?text=Peddi" alt="Peddi" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Peddi';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Peddi</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Peddi')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">8.0</span>
-            <span>2026</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 6 -->
-      <div class="movie-card" data-title="irumudi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="7.9">
-        <div class="poster-container">
-          <img src="https://placehold.co/400x600/18181c/e50914?text=Irumudi" alt="Irumudi" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Irumudi';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Irumudi</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Irumudi')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">7.9</span>
-            <span>2026</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 7 -->
-      <div class="movie-card" data-title="pushpa: the rise" data-genre="action thriller" data-year="2021" data-country="india" data-age="ua" data-rating="7.6">
-        <div class="poster-container">
-          <img src="https://image.tmdb.org/t/p/w500/11ii5hyg1YqJb7eNf9d0c6lU64q.jpg" alt="Pushpa: The Rise" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Pushpa:+The+Rise';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Pushpa: The Rise</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Pushpa: The Rise')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">7.6</span>
-            <span>2021</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 8 -->
-      <div class="movie-card" data-title="pushpa 2: the rule" data-genre="action drama" data-year="2024" data-country="india" data-age="ua" data-rating="8.5">
-        <div class="poster-container">
-          <img src="https://image.tmdb.org/t/p/w500/bA4j5bTq3xR7kY1PZkF4z9C6w1B.jpg" alt="Pushpa 2: The Rule" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Pushpa+2:+The+Rule';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">Pushpa 2: The Rule</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Pushpa 2: The Rule')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">8.5</span>
-            <span>2024</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Movie 9 -->
-      <div class="movie-card" data-title="3 idiots" data-genre="comedy drama" data-year="2009" data-country="india" data-age="ua" data-rating="8.4">
-        <div class="poster-container">
-          <img src="https://image.tmdb.org/t/p/w500/66A9MqX3Z3964Q2gq0r1fT3u5d7.jpg" alt="3 Idiots" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=3+Idiots';" />
-        </div>
-        <div class="card-content">
-          <div class="title-row">
-            <h3 class="movie-title">3 Idiots</h3>
-            <button class="bookmark-btn" onclick="toggleBookmark(event, '3 Idiots')" title="Add to My List">🔖</button>
-          </div>
-          <div class="meta-row">
-            <span class="rating">8.4</span>
-            <span>2009</span>
-            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
-          </div>
-          <div class="hover-details">
-            <a href="https://redflix.co/play?id=20453&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
-          </div>
-        </div>
-      </div>
-
+      <p style="text-align: center; grid-column: 1/-1; color: #888;">Fetching posters and movie data...</p>
     </div>
 
-    <!-- Site Rating Section -->
+    <!-- Rating Section -->
     <div class="site-rating-section">
       <div class="site-rating-info">
         <h3 id="siteRatingTitle">Rate XTREAM</h3>
@@ -722,24 +528,101 @@
     </div>
   </div>
 
-  <!-- Placeholder View for Shows/Anime -->
   <div id="comingSoonView" class="coming-soon-view">
     <p>Titles will be added soon!</p>
   </div>
 
   <script>
+    // ENTER YOUR TMDB API KEY HERE
+    const TMDB_API_KEY = 'YOUR_TMDB_API_KEY_HERE';
+    const TMDB_IMG_URL = 'https://image.tmdb.org/t/p/w500';
+
+    // List movies by their search titles and player links:
+    const myMovies = [
+      { name: "Jailer 2", defaultYear: "2026", defaultGenre: "action crime", age: "A", country: "india", rating: 8.2, playUrl: "https://redflix.co/play?id=1234139&type=movie" },
+      { name: "Mirzapur: The Movie", defaultYear: "2026", defaultGenre: "action thriller", age: "A", country: "india", rating: 8.8, playUrl: "https://redflix.co/play?id=1378537&type=movie" },
+      { name: "Toxic", defaultYear: "2025", defaultGenre: "action drama", age: "UA", country: "india", rating: 8.4, playUrl: "https://redflix.co/play?id=1213243&type=movie" },
+      { name: "Jana Nayagan", defaultYear: "2026", defaultGenre: "action drama", age: "UA", country: "india", rating: 8.1, playUrl: "https://redflix.co/play?id=1235877&type=movie" },
+      { name: "Peddi", defaultYear: "2026", defaultGenre: "action drama", age: "UA", country: "india", rating: 8.0, playUrl: "https://redflix.co/play?id=1057265&type=movie" },
+      { name: "Irumudi", defaultYear: "2026", defaultGenre: "action drama", age: "UA", country: "india", rating: 7.9, playUrl: "https://redflix.co/play?id=1441228&type=movie" },
+      { name: "Pushpa: The Rise", defaultYear: "2021", defaultGenre: "action thriller", age: "UA", country: "india", rating: 7.6, playUrl: "https://redflix.co/play?id=690957&type=movie" },
+      { name: "Pushpa 2: The Rule", defaultYear: "2024", defaultGenre: "action drama", age: "UA", country: "india", rating: 8.5, playUrl: "https://redflix.co/play?id=857598&type=movie" },
+      { name: "3 Idiots", defaultYear: "2009", defaultGenre: "comedy drama", age: "UA", country: "india", rating: 8.4, playUrl: "https://redflix.co/play?id=20453&type=movie" }
+    ];
+
     let currentTotalScore = 595;
     let currentVoteCount = 124;
     let myBookmarkedTitles = JSON.parse(localStorage.getItem('xtream_mylist') || '[]');
 
-    // Setup on Page Load
     window.addEventListener('DOMContentLoaded', () => {
-      populateReportDropdown();
+      loadMoviesByName();
       restoreSavedRating();
-      updateBookmarkStyles();
     });
 
-    // Toggle Search Bar
+    // Auto-search TMDB for each movie title
+    async function loadMoviesByName() {
+      const grid = document.getElementById('moviesGrid');
+      
+      const cardsHtml = await Promise.all(myMovies.map(async (movie) => {
+        let posterUrl = `https://placehold.co/400x600/18181c/e50914?text=${encodeURIComponent(movie.name)}`;
+        let year = movie.defaultYear;
+        let rating = movie.rating;
+
+        if (TMDB_API_KEY && TMDB_API_KEY !== 'YOUR_TMDB_API_KEY_HERE') {
+          try {
+            const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(movie.name)}`);
+            const data = await res.json();
+            if (data.results && data.results.length > 0) {
+              const bestMatch = data.results[0];
+              if (bestMatch.poster_path) {
+                posterUrl = `${TMDB_IMG_URL}${bestMatch.poster_path}`;
+              }
+              if (bestMatch.release_date) {
+                year = bestMatch.release_date.split('-')[0];
+              }
+              if (bestMatch.vote_average) {
+                rating = bestMatch.vote_average.toFixed(1);
+              }
+            }
+          } catch (e) {
+            console.warn(`Search failed for ${movie.name}`, e);
+          }
+        }
+
+        return `
+          <div class="movie-card" 
+               data-title="${movie.name.toLowerCase()}" 
+               data-genre="${movie.defaultGenre}" 
+               data-year="${year}" 
+               data-country="${movie.country}" 
+               data-age="${movie.age.toLowerCase()}" 
+               data-rating="${rating}">
+            <div class="poster-container">
+              <img src="${posterUrl}" alt="${movie.name}" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=${encodeURIComponent(movie.name)}';" />
+            </div>
+            <div class="card-content">
+              <div class="title-row">
+                <h3 class="movie-title" title="${movie.name}">${movie.name}</h3>
+                <button class="bookmark-btn" onclick="toggleBookmark(event, '${movie.name}')" title="Add to My List">🔖</button>
+              </div>
+              <div class="meta-row">
+                <span class="rating">${rating}</span>
+                <span>${year}</span>
+                <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">${movie.age}</span>
+              </div>
+              <div class="hover-details">
+                <a href="${movie.playUrl}" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
+              </div>
+            </div>
+          </div>
+        `;
+      }));
+
+      grid.innerHTML = cardsHtml.join('');
+      populateReportDropdown();
+      updateBookmarkStyles();
+    }
+
     function toggleSearchBox() {
       let box = document.getElementById('searchInput');
       if (box.style.display === 'inline-block') {
@@ -752,10 +635,8 @@
       }
     }
 
-    // Switch Top Header Tabs
     function switchTab(tabName, event) {
       if (event) event.preventDefault();
-      
       document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
       
       let mainContent = document.getElementById('mainContent');
@@ -787,7 +668,6 @@
       }
     }
 
-    // Bookmarks Management
     function toggleBookmark(e, title) {
       e.stopPropagation();
       if (myBookmarkedTitles.includes(title)) {
@@ -813,7 +693,6 @@
       });
     }
 
-    // Modal Operations
     function openReportModal() {
       document.getElementById('reportModal').style.display = 'flex';
     }
@@ -857,7 +736,6 @@
       closeReportModal();
     }
 
-    // Close Modal on Outside Click or Escape
     window.addEventListener('click', (e) => {
       let modal = document.getElementById('reportModal');
       if (e.target === modal) closeReportModal();
@@ -866,7 +744,6 @@
       if (e.key === 'Escape') closeReportModal();
     });
 
-    // Rating System with LocalStorage
     function restoreSavedRating() {
       let saved = localStorage.getItem('xtream_site_rating');
       if (saved) {
@@ -894,7 +771,6 @@
       highlightStars(stars);
     }
 
-    // Search, Filter, and Sort System
     function applyFilters() {
       let searchInput = document.getElementById('searchInput').value.toLowerCase();
       let genreVal = document.getElementById('genreFilter').value;
