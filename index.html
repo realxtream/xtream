@@ -151,7 +151,7 @@
     }
     .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Big Main Hero Billboard Banner */
+    /* Big Main Hero Billboard Banner (Updates dynamically on hover) */
     .main-hero-banner {
       position: relative;
       width: 100%;
@@ -164,6 +164,7 @@
       margin-bottom: 25px;
       overflow: hidden;
       background: #111;
+      transition: background-image 0.5s ease;
     }
     .main-hero-bg {
       position: absolute;
@@ -172,6 +173,7 @@
       object-position: center 20%;
       filter: brightness(0.65);
       z-index: 1;
+      transition: opacity 0.5s ease;
     }
     .main-hero-gradient {
       position: absolute;
@@ -540,7 +542,7 @@
     </div>
   </header>
 
-  <!-- Big Main Hero Billboard Banner -->
+  <!-- Big Main Hero Billboard Banner (Updates according to the hovered movie and its name) -->
   <section class="main-hero-banner" id="mainHeroBanner">
     <img src="https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg" id="mainHeroBg" class="main-hero-bg" alt="Featured Backdrop" />
     <div class="main-hero-gradient"></div>
@@ -682,16 +684,20 @@
 
     function initMainHero() {
       const hero = movieCatalog[0];
-      const data = cachedMovieData[hero.id] || {};
-      document.getElementById('mainHeroTitle').innerText = data.title || hero.name;
-      document.getElementById('mainHeroRating').innerText = `★ ${data.rating || hero.rating}`;
-      document.getElementById('mainHeroYear').innerText = data.year || hero.year;
-      document.getElementById('mainHeroAge').innerText = hero.age;
-      document.getElementById('mainHeroOverview').innerText = data.overview || "The saga of power, deceit, and underworld supremacy unfolds on the big screen as the battle for the throne of Mirzapur reaches its final bloody chapter.";
+      updateMainHero(hero);
+    }
+
+    function updateMainHero(movie) {
+      const data = cachedMovieData[movie.id] || {};
+      document.getElementById('mainHeroTitle').innerText = data.title || movie.name;
+      document.getElementById('mainHeroRating').innerText = `★ ${data.rating || movie.rating}`;
+      document.getElementById('mainHeroYear').innerText = data.year || movie.year;
+      document.getElementById('mainHeroAge').innerText = movie.age;
+      document.getElementById('mainHeroOverview').innerText = data.overview || "Explore this exciting title on XTREAM.";
       if (data.backdrop) {
         document.getElementById('mainHeroBg').src = data.backdrop;
       }
-      document.getElementById('mainHeroWatchBtn').href = `https://redflix.co/play?id=${hero.redflixId}&type=movie`;
+      document.getElementById('mainHeroWatchBtn').href = `https://redflix.co/play?id=${movie.redflixId}&type=movie`;
     }
 
     function renderSkeletonGrid() {
@@ -818,8 +824,10 @@
         </div>
       `;
 
-      // X=0, Y=0 coordinate alignment relative to poster container on hover, trailer swaps after 3 seconds from TMDB API data
+      // Updates both the big top Hero Billboard and the floating X=0, Y=0 hover popup dynamically on mouseenter
       div.addEventListener('mouseenter', (e) => {
+        updateMainHero(m); // Updates the big top billboard banner with movie & name
+
         const posterBox = div.querySelector('.poster-container').getBoundingClientRect();
         const hero = document.getElementById('floatingHero');
         
