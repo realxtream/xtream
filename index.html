@@ -20,7 +20,7 @@
     .nav-pill-container {
       background: #141418;
       border: 1px solid #262630;
-      padding: 12px 28px;
+      padding: 12px 30px;
       border-radius: 40px;
       display: flex;
       justify-content: space-between;
@@ -28,19 +28,21 @@
       width: 100%;
       max-width: 1350px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
-    .logo { color: #e50914; font-size: 1.4rem; margin: 0; letter-spacing: 1.5px; font-weight: 900; text-decoration: none; white-space: nowrap; }
+    .logo { color: #e50914; font-size: 1.4rem; margin: 0; letter-spacing: 1.5px; font-weight: 900; text-decoration: none; white-space: nowrap; cursor: pointer; }
     
-    .nav-links { list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; font-size: 0.9rem; align-items: center; }
-    .nav-links a { color: #999; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; padding: 6px 14px; border-radius: 20px; white-space: nowrap; }
-    .nav-links a:hover { color: white; }
-    .nav-links a.active { color: white; background: #22222a; font-weight: 600; }
+    .nav-links { list-style: none; display: flex; gap: 10px; margin: 0; padding: 0; font-size: 0.9rem; align-items: center; flex-wrap: wrap; }
+    .nav-links li a { color: #999; text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; padding: 6px 14px; border-radius: 20px; white-space: nowrap; cursor: pointer; }
+    .nav-links li a:hover { color: white; }
+    .nav-links li a.active { color: white; background: #22222a; font-weight: 600; }
 
     .nav-right { display: flex; align-items: center; gap: 15px; }
     
     .search-container { display: flex; align-items: center; gap: 6px; position: relative; }
-    .nav-search { color: #aaa; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; cursor: pointer; background: transparent; border: none; outline: none; padding: 6px 10px; border-radius: 20px; transition: background 0.2s; }
+    .nav-search { color: #aaa; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; cursor: pointer; background: transparent; border: none; outline: none; padding: 6px 10px; border-radius: 20px; transition: background 0.2s; white-space: nowrap; }
     .nav-search:hover { color: white; background: #1f1f28; }
     
     .search-input-hidden { 
@@ -52,10 +54,10 @@
       border-radius: 20px; 
       outline: none; 
       font-size: 0.85rem; 
-      width: 160px; 
+      width: 150px; 
     }
 
-    .ads-toggle { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #aaa; background: #1a1a22; padding: 6px 14px; border-radius: 20px; border: 1px solid #2a2a35; }
+    .ads-toggle { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #aaa; background: #1a1a22; padding: 6px 14px; border-radius: 20px; border: 1px solid #2a2a35; white-space: nowrap; }
     .switch { position: relative; display: inline-block; width: 34px; height: 18px; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .3s; border-radius: 18px; }
@@ -167,20 +169,31 @@
       transition: background 0.2s; 
     }
     .watch-btn:hover { background: #e50914; color: white; }
+
+    /* Coming Soon Placeholder View */
+    .coming-soon-view {
+      display: none;
+      text-align: center;
+      padding: 100px 20px;
+      color: #888;
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
   </style>
 </head>
 <body>
 
   <header>
     <div class="nav-pill-container">
-      <a href="#" class="logo">XTREAM</a>
+      <a class="logo" onclick="switchTab('movies', event)">XTREAM</a>
       
       <ul class="nav-links">
-        <li><a href="#">🏠 Home</a></li>
-        <li><a href="#" class="active">🍿 Movies</a></li>
-        <li><a href="#">📺 Shows</a></li>
-        <li><a href="#">🎞️ Anime</a></li>
-        <li><a href="#">🔖 My List</a></li>
+        <li><a id="nav-home" onclick="switchTab('home', event)">🏠 Home</a></li>
+        <li><a id="nav-movies" class="active" onclick="switchTab('movies', event)">🍿 Movies</a></li>
+        <li><a id="nav-shows" onclick="switchTab('shows', event)">📺 Shows</a></li>
+        <li><a id="nav-anime" onclick="switchTab('anime', event)">🎞️ Anime</a></li>
+        <li><a id="nav-mylist" onclick="switchTab('mylist', event)">🔖 My List</a></li>
       </ul>
 
       <div class="nav-right">
@@ -202,207 +215,215 @@
     </div>
   </header>
 
-  <div class="filter-section">
-    <h2 class="page-title">Movies</h2>
-    <p class="page-subtitle">Explore movies with genre, year, and country filters. Release-date sorting and TMDB-style scores.</p>
-    
-    <div class="filters-bar">
-      <div class="dropdown-group">
-        <select id="genreFilter" class="dropdown" onchange="applyFilters()">
-          <option value="all">Genre ∨</option>
-          <option value="action">Action</option>
-          <option value="thriller">Thriller</option>
-          <option value="drama">Drama</option>
-          <option value="crime">Crime</option>
-          <option value="comedy">Comedy</option>
-        </select>
-        
-        <select id="yearFilter" class="dropdown" onchange="applyFilters()">
-          <option value="all">Year ∨</option>
-          <option value="2026">2026</option>
-          <option value="2025">2025</option>
-          <option value="2024">2024</option>
-          <option value="2021">2021</option>
-          <option value="2009">2009</option>
-        </select>
+  <!-- Main Content Area -->
+  <div id="mainContent">
+    <div class="filter-section">
+      <h2 class="page-title" id="pageTitle">Movies</h2>
+      <p class="page-subtitle" id="pageSubtitle">Explore movies with genre, year, and country filters. Release-date sorting and TMDB-style scores.</p>
+      
+      <div class="filters-bar" id="filtersBar">
+        <div class="dropdown-group">
+          <select id="genreFilter" class="dropdown" onchange="applyFilters()">
+            <option value="all">Genre ∨</option>
+            <option value="action">Action</option>
+            <option value="thriller">Thriller</option>
+            <option value="drama">Drama</option>
+            <option value="crime">Crime</option>
+            <option value="comedy">Comedy</option>
+          </select>
+          
+          <select id="yearFilter" class="dropdown" onchange="applyFilters()">
+            <option value="all">Year ∨</option>
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2021">2021</option>
+            <option value="2009">2009</option>
+          </select>
 
-        <select id="countryFilter" class="dropdown" onchange="applyFilters()">
-          <option value="all">Country ∨</option>
-          <option value="india">India</option>
-        </select>
+          <select id="countryFilter" class="dropdown" onchange="applyFilters()">
+            <option value="all">Country ∨</option>
+            <option value="india">India</option>
+          </select>
 
-        <select id="ageFilter" class="dropdown" onchange="applyFilters()">
-          <option value="all">Age ∨</option>
-          <option value="a">A</option>
-          <option value="ua">UA</option>
-        </select>
+          <select id="ageFilter" class="dropdown" onchange="applyFilters()">
+            <option value="all">Age ∨</option>
+            <option value="a">A</option>
+            <option value="ua">UA</option>
+          </select>
+        </div>
+
+        <div>
+          <select id="sortFilter" class="dropdown" onchange="applyFilters()">
+            <option value="popular">↕ Most Popular ∨</option>
+            <option value="latest">↕ Latest Release ∨</option>
+            <option value="rating">↕ Highest Rated ∨</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="movies-grid" id="moviesGrid">
+      
+      <!-- Movie 1 -->
+      <div class="movie-card" data-title="jailer 2" data-genre="action crime" data-year="2026" data-country="india" data-age="a" data-rating="8.2">
+        <div class="poster-container"><img src="jailer2.webp" alt="Jailer 2" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Jailer 2</h3>
+          <div class="meta-row">
+            <span class="rating">8.2</span>
+            <span>2026</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">A</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Crime</p>
+            <a href="https://redflix.co/play?id=1234139&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <select id="sortFilter" class="dropdown" onchange="applyFilters()">
-          <option value="popular">↕ Most Popular ∨</option>
-          <option value="latest">↕ Latest Release ∨</option>
-          <option value="rating">↕ Highest Rated ∨</option>
-        </select>
+      <!-- Movie 2 -->
+      <div class="movie-card" data-title="mirzapur the movie" data-genre="action thriller" data-year="2026" data-country="india" data-age="a" data-rating="8.8">
+        <div class="poster-container"><img src="mirzapur.webp" alt="Mirzapur: The Movie" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Mirzapur: The Movie</h3>
+          <div class="meta-row">
+            <span class="rating">8.8</span>
+            <span>2026</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">A</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Thriller</p>
+            <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
       </div>
+
+      <!-- Movie 3 -->
+      <div class="movie-card" data-title="toxic" data-genre="action drama" data-year="2025" data-country="india" data-age="ua" data-rating="8.4">
+        <div class="poster-container"><img src="toxic.webp" alt="Toxic" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Toxic</h3>
+          <div class="meta-row">
+            <span class="rating">8.4</span>
+            <span>2025</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
+            <a href="https://redflix.co/play?id=1213243&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie 4 -->
+      <div class="movie-card" data-title="jana nayagan" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.1">
+        <div class="poster-container"><img src="jananayagan.webp" alt="Jana Nayagan" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Jana Nayagan</h3>
+          <div class="meta-row">
+            <span class="rating">8.1</span>
+            <span>2026</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
+            <a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie 5 -->
+      <div class="movie-card" data-title="peddi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.0">
+        <div class="poster-container"><img src="peddi.webp" alt="Peddi" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Peddi</h3>
+          <div class="meta-row">
+            <span class="rating">8.0</span>
+            <span>2026</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
+            <a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie 6 -->
+      <div class="movie-card" data-title="irumudi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="7.9">
+        <div class="poster-container"><img src="irumudi.webp" alt="Irumudi" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Irumudi</h3>
+          <div class="meta-row">
+            <span class="rating">7.9</span>
+            <span>2026</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
+            <a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie 7 -->
+      <div class="movie-card" data-title="pushpa the rise" data-genre="action thriller" data-year="2021" data-country="india" data-age="ua" data-rating="7.6">
+        <div class="poster-container"><img src="pushpa1.webp" alt="Pushpa: The Rise" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Pushpa: The Rise</h3>
+          <div class="meta-row">
+            <span class="rating">7.6</span>
+            <span>2021</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Thriller</p>
+            <a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie 8 -->
+      <div class="movie-card" data-title="pushpa 2 the rule" data-genre="action drama" data-year="2024" data-country="india" data-age="ua" data-rating="8.5">
+        <div class="poster-container"><img src="pushpa2.webp" alt="Pushpa 2: The Rule" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">Pushpa 2: The Rule</h3>
+          <div class="meta-row">
+            <span class="rating">8.5</span>
+            <span>2024</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
+            <a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Movie 9 -->
+      <div class="movie-card" data-title="3 idiots" data-genre="comedy drama" data-year="2009" data-country="india" data-age="ua" data-rating="8.4">
+        <div class="poster-container"><img src="3idiots.webp" alt="3 Idiots" /></div>
+        <div class="card-content">
+          <h3 class="movie-title">3 Idiots</h3>
+          <div class="meta-row">
+            <span class="rating">8.4</span>
+            <span>2009</span>
+            <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
+          </div>
+          <div class="hover-details">
+            <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Comedy | Drama</p>
+            <a href="https://redflix.co/play?id=3idiots&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="movies-grid" id="moviesGrid">
-    
-    <!-- Movie 1 -->
-    <div class="movie-card" data-title="jailer 2" data-genre="action crime" data-year="2026" data-country="india" data-age="a" data-rating="8.2">
-      <div class="poster-container"><img src="jailer2.webp" alt="Jailer 2" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Jailer 2</h3>
-        <div class="meta-row">
-          <span class="rating">8.2</span>
-          <span>2026</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">A</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Crime</p>
-          <a href="https://redflix.co/play?id=1234139&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 2 -->
-    <div class="movie-card" data-title="mirzapur the movie" data-genre="action thriller" data-year="2026" data-country="india" data-age="a" data-rating="8.8">
-      <div class="poster-container"><img src="mirzapur.webp" alt="Mirzapur: The Movie" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Mirzapur: The Movie</h3>
-        <div class="meta-row">
-          <span class="rating">8.8</span>
-          <span>2026</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">A</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Thriller</p>
-          <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 3 -->
-    <div class="movie-card" data-title="toxic" data-genre="action drama" data-year="2025" data-country="india" data-age="ua" data-rating="8.4">
-      <div class="poster-container"><img src="toxic.webp" alt="Toxic" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Toxic</h3>
-        <div class="meta-row">
-          <span class="rating">8.4</span>
-          <span>2025</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
-          <a href="https://redflix.co/play?id=1213243&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 4 -->
-    <div class="movie-card" data-title="jana nayagan" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.1">
-      <div class="poster-container"><img src="jananayagan.webp" alt="Jana Nayagan" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Jana Nayagan</h3>
-        <div class="meta-row">
-          <span class="rating">8.1</span>
-          <span>2026</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
-          <a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 5 -->
-    <div class="movie-card" data-title="peddi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.0">
-      <div class="poster-container"><img src="peddi.webp" alt="Peddi" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Peddi</h3>
-        <div class="meta-row">
-          <span class="rating">8.0</span>
-          <span>2026</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
-          <a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 6 -->
-    <div class="movie-card" data-title="irumudi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="7.9">
-      <div class="poster-container"><img src="irumudi.webp" alt="Irumudi" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Irumudi</h3>
-        <div class="meta-row">
-          <span class="rating">7.9</span>
-          <span>2026</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
-          <a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 7 -->
-    <div class="movie-card" data-title="pushpa the rise" data-genre="action thriller" data-year="2021" data-country="india" data-age="ua" data-rating="7.6">
-      <div class="poster-container"><img src="pushpa1.webp" alt="Pushpa: The Rise" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Pushpa: The Rise</h3>
-        <div class="meta-row">
-          <span class="rating">7.6</span>
-          <span>2021</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Thriller</p>
-          <a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 8 -->
-    <div class="movie-card" data-title="pushpa 2 the rule" data-genre="action drama" data-year="2024" data-country="india" data-age="ua" data-rating="8.5">
-      <div class="poster-container"><img src="pushpa2.webp" alt="Pushpa 2: The Rule" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">Pushpa 2: The Rule</h3>
-        <div class="meta-row">
-          <span class="rating">8.5</span>
-          <span>2024</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Action | Drama</p>
-          <a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Movie 9 -->
-    <div class="movie-card" data-title="3 idiots" data-genre="comedy drama" data-year="2009" data-country="india" data-age="ua" data-rating="8.4">
-      <div class="poster-container"><img src="3idiots.webp" alt="3 Idiots" /></div>
-      <div class="card-content">
-        <h3 class="movie-title">3 Idiots</h3>
-        <div class="meta-row">
-          <span class="rating">8.4</span>
-          <span>2009</span>
-          <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.65rem;">UA</span>
-        </div>
-        <div class="hover-details">
-          <p style="margin: 0; font-size: 0.75rem; color: #ccc;">Comedy | Drama</p>
-          <a href="https://redflix.co/play?id=3idiots&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
-        </div>
-      </div>
-    </div>
-
+  <!-- Coming Soon View -->
+  <div id="comingSoonView" class="coming-soon-view">
+    <p>----- will be added soon</p>
   </div>
 
   <script>
@@ -415,6 +436,30 @@
       } else {
         box.style.display = 'inline-block';
         box.focus();
+      }
+    }
+
+    function switchTab(tabName, event) {
+      if (event) event.preventDefault();
+      
+      // Update active navbar styling
+      document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
+      
+      let mainContent = document.getElementById('mainContent');
+      let comingSoon = document.getElementById('comingSoonView');
+
+      if (tabName === 'movies' || tabName === 'home') {
+        document.getElementById(tabName === 'movies' ? 'nav-movies' : 'nav-home').classList.add('active');
+        mainContent.style.display = 'block';
+        comingSoon.style.display = 'none';
+        document.getElementById('pageTitle').innerText = tabName === 'movies' ? 'Movies' : 'Home';
+      } else {
+        if (tabName === 'shows') document.getElementById('nav-shows').classList.add('active');
+        if (tabName === 'anime') document.getElementById('nav-anime').classList.add('active');
+        if (tabName === 'mylist') document.getElementById('nav-mylist').classList.add('active');
+        
+        mainContent.style.display = 'none';
+        comingSoon.style.display = 'block';
       }
     }
 
@@ -457,11 +502,10 @@
         } else if (sortVal === 'latest') {
           return parseInt(b.getAttribute('data-year')) - parseInt(a.getAttribute('data-year'));
         } else {
-          return 0; // Popular / Default
+          return 0;
         }
       });
 
-      // Re-append sorted cards to grid
       cardsArray.forEach(card => grid.appendChild(card));
     }
   </script>
