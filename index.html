@@ -28,7 +28,7 @@
     }
     .search-box:focus { border-color: #e50914; }
 
-    /* Filter Bar (matching video reference) */
+    /* Filter Bar */
     .filter-section { padding: 30px 4% 10px 4%; }
     .page-title { font-size: 1.8rem; font-weight: 700; margin: 0 0 8px 0; }
     .page-subtitle { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; }
@@ -155,13 +155,42 @@
     
     <div class="filters-bar">
       <div class="dropdown-group">
-        <select class="dropdown"><option>Genre</option></select>
-        <select class="dropdown"><option>Year</option></select>
-        <select class="dropdown"><option>Country</option></select>
-        <select class="dropdown"><option>Age</option></select>
+        <select class="dropdown">
+          <option value="" disabled selected>Genre</option>
+          <option value="action">Action</option>
+          <option value="thriller">Thriller</option>
+          <option value="drama">Drama</option>
+          <option value="crime">Crime</option>
+          <option value="comedy">Comedy</option>
+        </select>
+        
+        <select class="dropdown">
+          <option value="" disabled selected>Year</option>
+          <option value="2026">2026</option>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2021">2021</option>
+          <option value="2009">2009</option>
+        </select>
+
+        <select class="dropdown">
+          <option value="" disabled selected>Country</option>
+          <option value="india">India</option>
+        </select>
+
+        <select class="dropdown">
+          <option value="" disabled selected>Age</option>
+          <option value="a">A (Adults)</option>
+          <option value="ua">UA (Parental Guidance)</option>
+        </select>
       </div>
+
       <div>
-        <select class="dropdown"><option>Most Popular</option></select>
+        <select class="dropdown">
+          <option value="popular" selected>Most Popular</option>
+          <option value="latest">Latest Release</option>
+          <option value="rating">Highest Rated</option>
+        </select>
       </div>
     </div>
   </div>
