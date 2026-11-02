@@ -160,7 +160,7 @@
       padding: 40px 5%;
       margin-bottom: 20px;
       overflow: hidden;
-      background: #111; /* fallback color */
+      background: #111;
     }
     .hero-bg {
       position: absolute;
@@ -169,6 +169,7 @@
       object-position: center 20%;
       filter: brightness(0.65);
       z-index: 1;
+      transition: opacity 0.4s ease;
     }
     .hero-gradient {
       position: absolute;
@@ -582,15 +583,15 @@
     <img src="" id="heroBackdrop" class="hero-bg" alt="Featured Backdrop" />
     <div class="hero-gradient"></div>
     <div class="hero-content">
-      <div class="hero-badge">🔥 Featured Today</div>
+      <div class="hero-badge" id="heroBadge">🔥 Featured Today</div>
       <h1 class="hero-title" id="heroTitle">Loading...</h1>
       <div class="hero-meta">
         <span class="hero-rating" id="heroRating">★ --</span>
         <span id="heroYear">----</span>
-        <span style="border: 1px solid #777; padding: 0 4px; font-size: 0.65rem; border-radius: 3px;">A</span>
+        <span style="border: 1px solid #777; padding: 0 4px; font-size: 0.65rem; border-radius: 3px;" id="heroAge">A</span>
         <span>India</span>
       </div>
-      <p class="hero-overview" id="heroOverview">Fetching featured movie details from database...</p>
+      <p class="hero-overview" id="heroOverview">Hover over any movie poster to preview its details here.</p>
       <div class="hero-actions">
         <a href="#" target="_blank" rel="noopener" class="btn-hero-watch" id="heroWatchBtn">▶ Watch Now</a>
         <button class="btn-hero-trailer" id="heroTrailerBtn">🎬 Trailer</button>
@@ -614,7 +615,7 @@
     </div>
   </main>
 
-  <!-- Trailer Player Modal -->
+  <!-- Trailer Modal -->
   <div id="trailerModal" class="player-modal">
     <div class="player-dialog">
       <div class="player-topbar">
@@ -687,20 +688,20 @@
     window.addEventListener('DOMContentLoaded', async () => {
       renderSkeletonShelves();
       await fetchAllTmdbData();
-      initHeroBillboard();
+      updateHeroBanner(movieCatalog[0]); // Default to first movie
       renderShelves();
       populateReportList();
       restoreRating();
     });
 
-    function initHeroBillboard() {
-      const hero = movieCatalog[0];
-      const data = cachedMovieData[hero.id] || {};
+    function updateHeroBanner(movie) {
+      const data = cachedMovieData[movie.id] || {};
       
-      document.getElementById('heroTitle').innerText = data.title || hero.name;
-      document.getElementById('heroRating').innerText = `★ ${data.rating || hero.rating}`;
-      document.getElementById('heroYear').innerText = data.year || hero.year;
-      document.getElementById('heroOverview').innerText = data.overview || "The saga of power, deceit, and underworld supremacy unfolds on the big screen.";
+      document.getElementById('heroTitle').innerText = data.title || movie.name;
+      document.getElementById('heroRating').innerText = `★ ${data.rating || movie.rating}`;
+      document.getElementById('heroYear').innerText = data.year || movie.year;
+      document.getElementById('heroAge').innerText = movie.age;
+      document.getElementById('heroOverview').innerText = data.overview || "Explore this title on XTREAM.";
       
       if (data.backdrop) {
         document.getElementById('heroBackdrop').src = data.backdrop;
@@ -708,8 +709,8 @@
         document.getElementById('heroBackdrop').src = "https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg";
       }
 
-      document.getElementById('heroWatchBtn').href = `https://redflix.co/play?id=${hero.redflixId}&type=movie`;
-      document.getElementById('heroTrailerBtn').onclick = () => openTrailerModal(hero);
+      document.getElementById('heroWatchBtn').href = `https://redflix.co/play?id=${movie.redflixId}&type=movie`;
+      document.getElementById('heroTrailerBtn').onclick = () => openTrailerModal(movie);
     }
 
     function renderSkeletonShelves() {
@@ -795,6 +796,11 @@
         </div>
       `;
 
+      // Hover event to dynamically update the hero banner
+      div.addEventListener('mouseenter', () => {
+        updateHeroBanner(m);
+      });
+
       div.querySelector('.btn-overlay-trailer').onclick = (e) => { e.stopPropagation(); openTrailerModal(m); };
       div.querySelector('.bookmark-btn').onclick = (e) => { e.stopPropagation(); toggleBookmark(m.id, e.target); };
       div.onclick = () => window.open(watchUrl, '_blank', 'noopener');
@@ -831,7 +837,7 @@
           const poster = data.poster || `https://placehold.co/100x150/141418/e50914?text=${encodeURIComponent(m.name)}`;
           const watchUrl = `https://redflix.co/play?id=${m.redflixId}&type=movie`;
           return `
-            <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item">
+            <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item" onmouseenter="updateHeroBanner(movieCatalog.find(x => x.id === ${m.id}))">
               <img src="${poster}" class="search-thumb" alt="${m.name}" />
               <div class="search-item-info">
                 <h4>${m.name}</h4>
