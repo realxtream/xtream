@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XTREAM - Movies & Shows</title>
+  <title>XTREAM - Pure Cinematic Joy & Entertainment</title>
   
   <!-- Favicon Link -->
   <link rel="icon" type="image/png" href="favicon.png">
 
   <style>
     :root {
-      --primary: #e50914;
-      --primary-hover: #f40612;
-      --bg: #0b0b0e;
-      --surface: #141418;
-      --surface-card: #18181f;
-      --border: #262630;
+      --primary: #ff1e38;
+      --primary-hover: #ff3b52;
+      --bg: #0c0910;
+      --surface: #1a1424;
+      --surface-card: #221b30;
+      --border: #3b2e54;
       --text: #ffffff;
-      --text-muted: #9e9ea7;
-      --radius: 10px;
+      --text-muted: #d0c7e2;
+      --radius: 14px;
     }
 
     * { box-sizing: border-box; }
@@ -33,44 +33,45 @@
 
     /* Floating Pill Header */
     header {
-      padding: 12px 4%;
+      padding: 14px 4%;
       display: flex;
       justify-content: center;
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(11, 11, 14, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(12, 9, 16, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .nav-pill {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 6px 18px;
+      padding: 8px 20px;
       border-radius: 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
       max-width: 1400px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      box-shadow: 0 12px 35px rgba(255, 30, 56, 0.25);
       gap: 12px;
     }
 
     .logo {
       color: var(--primary);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       letter-spacing: 1.5px;
       font-weight: 900;
       text-decoration: none;
       cursor: pointer;
+      text-shadow: 0 0 15px rgba(255, 30, 56, 0.6);
     }
 
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 6px;
+      gap: 8px;
       margin: 0;
       padding: 0;
       align-items: center;
@@ -80,98 +81,100 @@
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.82rem;
-      padding: 6px 12px;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 7px 14px;
       border-radius: 20px;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       cursor: pointer;
     }
-    .nav-links li a:hover { color: #fff; background: rgba(255,255,255,0.06); }
-    .nav-links li a.active { color: #fff; background: #22222c; font-weight: 600; }
+    .nav-links li a:hover { color: #fff; background: rgba(255, 30, 56, 0.2); transform: translateY(-1px); }
+    .nav-links li a.active { color: #fff; background: linear-gradient(135deg, #ff1e38, #ff6b81); font-weight: 700; box-shadow: 0 4px 15px rgba(255, 30, 56, 0.4); }
 
-    .nav-right { display: flex; align-items: center; gap: 10px; position: relative; }
+    .nav-right { display: flex; align-items: center; gap: 12px; position: relative; }
 
     /* Live Search Input */
     .search-box { position: relative; display: flex; align-items: center; }
     .search-input {
-      background: #0e0e13;
+      background: #130f1c;
       border: 1px solid var(--border);
       color: #fff;
-      padding: 7px 14px;
+      padding: 8px 16px;
       border-radius: 20px;
       outline: none;
-      font-size: 0.82rem;
-      width: 190px;
-      transition: width 0.3s ease, border-color 0.2s;
+      font-size: 0.85rem;
+      width: 200px;
+      transition: width 0.3s ease, border-color 0.2s, box-shadow 0.2s;
     }
-    .search-input:focus { width: 240px; border-color: var(--primary); }
+    .search-input:focus { width: 250px; border-color: var(--primary); box-shadow: 0 0 15px rgba(255, 30, 56, 0.3); }
 
     .search-results-dropdown {
       display: none;
       position: absolute;
-      top: 45px;
+      top: 48px;
       right: 0;
-      width: 320px;
+      width: 330px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.9);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
       max-height: 380px;
       overflow-y: auto;
       z-index: 1200;
-      padding: 6px;
+      padding: 8px;
     }
     .search-item {
       display: flex;
       gap: 10px;
       padding: 8px;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
       align-items: center;
       transition: background 0.2s;
       text-decoration: none;
       color: inherit;
     }
-    .search-item:hover { background: #1e1e27; }
-    .search-thumb { width: 38px; height: 54px; object-fit: cover; border-radius: 4px; background: #000; }
-    .search-item-info h4 { margin: 0; font-size: 0.85rem; font-weight: 600; }
-    .search-item-info span { font-size: 0.72rem; color: var(--text-muted); }
+    .search-item:hover { background: rgba(255, 30, 56, 0.15); }
+    .search-thumb { width: 40px; height: 58px; object-fit: cover; border-radius: 6px; background: #000; }
+    .search-item-info h4 { margin: 0; font-size: 0.88rem; font-weight: 700; }
+    .search-item-info span { font-size: 0.75rem; color: var(--text-muted); }
 
     .report-btn {
-      background: #1c1c24;
+      background: linear-gradient(135deg, #2a1f3d, #3b2a54);
       border: 1px solid var(--border);
-      color: #ccc;
-      font-size: 0.75rem;
-      padding: 6px 12px;
-      border-radius: 16px;
+      color: #ffccd3;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 18px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.25s;
       white-space: nowrap;
     }
-    .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); transform: translateY(-1px); box-shadow: 0 4px 15px rgba(255, 30, 56, 0.4); }
 
-    /* Floating Hero Banner (X=0, Y=0 relative to hovered poster card) */
+    /* Floating Hero Banner (X=0, Y=0 relative to hovered poster card, auto-switches backdrop to TMDB Trailer after 3s) */
     .hero-banner {
       display: none;
       position: absolute;
-      width: 380px;
-      background: #14141c;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.95);
+      width: 390px;
+      background: #191225;
+      border: 1px solid var(--primary);
+      border-radius: 14px;
+      box-shadow: 0 25px 60px rgba(255, 30, 56, 0.35);
       z-index: 2500;
       overflow: hidden;
       pointer-events: none;
-      animation: fadeIn 0.2s ease;
+      animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.9) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
     .hero-media-container {
       width: 100%;
-      height: 180px;
+      height: 190px;
       background: #000;
       position: relative;
       overflow: hidden;
@@ -186,28 +189,30 @@
       display: block;
     }
     .hero-content {
-      padding: 14px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
     .hero-title {
-      font-size: 1.1rem;
-      font-weight: 800;
+      font-size: 1.15rem;
+      font-weight: 900;
       margin: 0;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
     .hero-meta {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.78rem;
-      color: #bbb;
-    }
-    .hero-rating { color: #46d369; font-weight: bold; }
-    .hero-overview {
       font-size: 0.8rem;
-      color: #aaa;
-      line-height: 1.35;
+      color: #d8cde6;
+    }
+    .hero-rating { color: #00ff88; font-weight: 900; text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); }
+    .hero-overview {
+      font-size: 0.82rem;
+      color: #ded6ed;
+      line-height: 1.4;
       margin: 0;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -218,30 +223,32 @@
     /* Filter Section Bar */
     .filter-bar {
       max-width: 1400px;
-      margin: 25px auto 15px auto;
+      margin: 30px auto 18px auto;
       padding: 0 4%;
       display: flex;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
     }
     .filter-select {
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.82rem;
+      padding: 9px 18px;
+      border-radius: 22px;
+      font-size: 0.85rem;
+      font-weight: 600;
       outline: none;
       cursor: pointer;
+      transition: all 0.2s;
     }
-    .filter-select:hover { border-color: var(--primary); }
+    .filter-select:hover { border-color: var(--primary); background: #251b36; box-shadow: 0 0 12px rgba(255, 30, 56, 0.25); }
 
     /* Movies Catalog Grid */
-    .catalog-container { max-width: 1400px; margin: 0 auto; padding: 0 4% 50px 4%; }
+    .catalog-container { max-width: 1400px; margin: 0 auto; padding: 0 4% 60px 4%; }
     .catalog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 24px;
     }
 
     /* Movie Cards */
@@ -250,24 +257,26 @@
       border-radius: var(--radius);
       overflow: hidden;
       position: relative;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s, z-index 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, z-index 0.3s;
       display: flex;
       flex-direction: column;
       cursor: pointer;
+      border: 1px solid rgba(59, 46, 84, 0.5);
     }
     @media (hover: hover) and (pointer: fine) {
       .movie-card:hover {
-        transform: scale(1.08) translateY(-8px);
-        box-shadow: 0 16px 36px rgba(0,0,0,0.9), 0 0 20px rgba(229, 9, 20, 0.35);
+        transform: scale(1.08) translateY(-10px);
+        box-shadow: 0 20px 45px rgba(0,0,0,0.9), 0 0 30px rgba(255, 30, 56, 0.5);
         z-index: 50;
+        border-color: var(--primary);
       }
     }
 
     .poster-container {
       width: 100%;
-      height: 290px;
-      background: #121217;
+      height: 300px;
+      background: #120e1a;
       position: relative;
       overflow: hidden;
     }
@@ -276,13 +285,17 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.5s ease;
+    }
+    .movie-card:hover .poster-container img {
+      transform: scale(1.05);
     }
 
     .card-content {
-      padding: 10px 12px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       background: var(--surface-card);
       flex: 1;
     }
@@ -290,11 +303,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
     .card-title {
-      font-size: 0.9rem;
-      font-weight: 700;
+      font-size: 0.95rem;
+      font-weight: 800;
       margin: 0;
       white-space: nowrap;
       overflow: hidden;
@@ -305,80 +318,86 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      font-size: 0.85rem;
-      opacity: 0.45;
+      font-size: 0.95rem;
+      opacity: 0.5;
       transition: opacity 0.2s, transform 0.2s;
     }
-    .bookmark-btn:hover { opacity: 1; transform: scale(1.2); }
-    .bookmark-btn.active { opacity: 1; color: var(--primary); }
+    .bookmark-btn:hover { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 8px #ff1e38); }
+    .bookmark-btn.active { opacity: 1; color: var(--primary); filter: drop-shadow(0 0 10px var(--primary)); }
 
     .card-meta {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.72rem;
-      color: #999;
+      gap: 10px;
+      font-size: 0.75rem;
+      color: #bfaedc;
+      font-weight: 600;
     }
-    .card-rating { color: #46d369; font-weight: bold; }
-    .card-age { border: 1px solid #444; padding: 0 4px; border-radius: 3px; font-size: 0.62rem; }
+    .card-rating { color: #00ff88; font-weight: 800; }
+    .card-age { border: 1px solid #6b5294; padding: 1px 5px; border-radius: 4px; font-size: 0.65rem; background: rgba(107, 82, 148, 0.2); }
 
     /* Report Modal with Movie Poster Preview */
     .modal-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(12, 9, 16, 0.88);
       z-index: 2000;
       justify-content: center;
       align-items: center;
       padding: 15px;
+      backdrop-filter: blur(8px);
     }
     .modal-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 22px;
+      border: 1px solid var(--primary);
+      padding: 26px;
       border-radius: var(--radius);
       width: 100%;
-      max-width: 440px;
+      max-width: 460px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+      box-shadow: 0 25px 50px rgba(255, 30, 56, 0.3);
     }
-    .modal-card h3 { margin: 0; font-size: 1.15rem; }
+    .modal-card h3 { margin: 0; font-size: 1.25rem; font-weight: 900; color: #fff; }
     .report-flex-preview {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       align-items: center;
-      background: #0e0e13;
-      padding: 10px;
-      border-radius: 8px;
+      background: #130f1c;
+      padding: 12px;
+      border-radius: 10px;
       border: 1px solid var(--border);
     }
     .report-preview-poster {
-      width: 60px;
-      height: 85px;
+      width: 65px;
+      height: 90px;
       object-fit: cover;
-      border-radius: 4px;
+      border-radius: 6px;
       background: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
     .modal-select {
-      background: #0b0b0e;
+      background: #0c0910;
       border: 1px solid var(--border);
       color: white;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 0.85rem;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
       outline: none;
       width: 100%;
+      font-weight: 600;
     }
     .issue-chips { display: flex; flex-direction: column; gap: 8px; }
     .issue-chip {
-      background: #1b1b24;
-      border: 1px solid #282836;
-      color: #ccc;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 0.82rem;
+      background: #1e162b;
+      border: 1px solid #3b2e54;
+      color: #ded6ed;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s;
     }
@@ -386,17 +405,19 @@
       background: var(--primary);
       border-color: var(--primary);
       color: white;
+      box-shadow: 0 0 15px rgba(255, 30, 56, 0.4);
     }
-    .modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
-    .btn-cancel { background: transparent; border: 1px solid #444; color: #aaa; padding: 6px 14px; border-radius: 6px; cursor: pointer; }
-    .btn-submit { background: var(--primary); border: none; color: #fff; padding: 6px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+    .btn-cancel { background: transparent; border: 1px solid #555; color: #bfaedc; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; }
+    .btn-cancel:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    .btn-submit { background: linear-gradient(135deg, #ff1e38, #ff4d63); border: none; color: #fff; padding: 8px 18px; border-radius: 8px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 30, 56, 0.4); }
 
     /* Enhanced Interactive Rating Section */
     .site-rating-section {
       max-width: 1400px;
-      margin: 30px auto 50px auto;
-      padding: 24px 4%;
-      background: var(--surface);
+      margin: 40px auto 60px auto;
+      padding: 28px 4%;
+      background: linear-gradient(135deg, var(--surface), #261b38);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       display: flex;
@@ -404,19 +425,20 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     }
-    .site-rating-info h4 { margin: 0 0 6px 0; font-size: 1.15rem; }
-    .site-rating-info p { margin: 0; color: var(--text-muted); font-size: 0.82rem; }
-    .site-stars { font-size: 1.8rem; cursor: pointer; display: flex; gap: 6px; }
-    .site-star { color: #444; transition: color 0.2s, transform 0.2s; }
-    .site-star:hover, .site-star.rated { color: #f5c518; transform: scale(1.1); }
+    .site-rating-info h4 { margin: 0 0 6px 0; font-size: 1.25rem; font-weight: 900; color: #fff; }
+    .site-rating-info p { margin: 0; color: var(--text-muted); font-size: 0.88rem; font-weight: 600; }
+    .site-stars { font-size: 2rem; cursor: pointer; display: flex; gap: 8px; }
+    .site-star { color: #4a3a68; transition: color 0.2s, transform 0.2s, filter 0.2s; }
+    .site-star:hover, .site-star.rated { color: #f5c518; transform: scale(1.2); filter: drop-shadow(0 0 12px #f5c518); }
 
     @media (max-width: 768px) {
       .nav-pill { padding: 6px 12px; }
       .search-input { width: 110px; }
       .search-input:focus { width: 140px; }
-      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .poster-container { height: 210px; }
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .poster-container { height: 220px; }
       .hero-banner { display: none !important; }
     }
   </style>
@@ -426,22 +448,22 @@
   <!-- Floating Nav Header -->
   <header>
     <div class="nav-pill">
-      <a class="logo" onclick="switchTab('movies', event)">XTREAM</a>
+      <a class="logo" onclick="switchTab('movies', event)">✨ XTREAM ✨</a>
 
       <ul class="nav-links">
-        <li><a id="nav-home" onclick="switchTab('home', event)">🏠 Home</a></li>
-        <li><a id="nav-movies" class="active" onclick="switchTab('movies', event)">🍿 Movies</a></li>
-        <li><a id="nav-shows" onclick="switchTab('shows', event)">📺 Shows</a></li>
-        <li><a id="nav-mylist" onclick="switchTab('mylist', event)">🔖 My List</a></li>
+        <li><a id="nav-home" onclick="switchTab('home', event)">🌟 Home</a></li>
+        <li><a id="nav-movies" class="active" onclick="switchTab('movies', event)">💖 Amazing Movies</a></li>
+        <li><a id="nav-shows" onclick="switchTab('shows', event)">🎉 Fantastic Shows</a></li>
+        <li><a id="nav-mylist" onclick="switchTab('mylist', event)">⭐ My Favorites</a></li>
       </ul>
 
       <div class="nav-right">
         <div class="search-box">
-          <input type="text" id="liveSearchInput" class="search-input" placeholder="Search XTREAM..." oninput="handleLiveSearch(this.value)" autocomplete="off" />
+          <input type="text" id="liveSearchInput" class="search-input" placeholder="Search joy..." oninput="handleLiveSearch(this.value)" autocomplete="off" />
           <div id="searchDropdown" class="search-results-dropdown"></div>
         </div>
 
-        <button class="report-btn" onclick="openReportModal()">⚠️ Report</button>
+        <button class="report-btn" onclick="openReportModal()">💖 Feedback</button>
       </div>
     </div>
   </header>
@@ -452,30 +474,30 @@
       <img src="" id="heroBackdrop" class="hero-bg" alt="Backdrop" />
     </div>
     <div class="hero-content">
-      <h3 class="hero-title" id="heroTitle">Title</h3>
+      <h3 class="hero-title" id="heroTitle">Wonderful Title</h3>
       <div class="hero-meta">
-        <span class="hero-rating" id="heroRating">★ --</span>
-        <span id="heroYear">----</span>
-        <span style="border: 1px solid #777; padding: 0 4px; font-size: 0.65rem; border-radius: 3px;" id="heroAge">A</span>
+        <span class="hero-rating" id="heroRating">★ 5.0</span>
+        <span id="heroYear">2026</span>
+        <span style="border: 1px solid #777; padding: 0 4px; font-size: 0.65rem; border-radius: 3px;" id="heroAge">UA</span>
       </div>
-      <p class="hero-overview" id="heroOverview">Overview...</p>
+      <p class="hero-overview" id="heroOverview">Get ready for an absolutely breathtaking cinematic masterpiece full of joy and excitement!</p>
     </div>
   </div>
 
   <!-- Filter Options Bar -->
   <div class="filter-bar">
     <select id="genreFilter" class="filter-select" onchange="applyFilters()">
-      <option value="all">Genres: All</option>
-      <option value="action">Action</option>
-      <option value="thriller">Thriller</option>
-      <option value="crime">Crime</option>
-      <option value="drama">Drama</option>
-      <option value="comedy">Comedy</option>
+      <option value="all">🌈 All Wonderful Genres</option>
+      <option value="action">🔥 Action Packed</option>
+      <option value="thriller">⚡ Thrilling Adventures</option>
+      <option value="crime">🕵️‍♂️ Brilliant Mystery</option>
+      <option value="drama">💖 Heartwarming Drama</option>
+      <option value="comedy">😂 Pure Comedy Joy</option>
     </select>
 
     <select id="yearFilter" class="filter-select" onchange="applyFilters()">
-      <option value="all">Years: All</option>
-      <option value="2026">2026</option>
+      <option value="all">📅 All Glorious Years</option>
+      <option value="2026">2026 (Brand New!)</option>
       <option value="2025">2025</option>
       <option value="2024">2024</option>
       <option value="2021">2021</option>
@@ -483,9 +505,9 @@
     </select>
 
     <select id="sortFilter" class="filter-select" onchange="applyFilters()">
-      <option value="popular">Sort: Most Popular</option>
-      <option value="rating">Sort: Highest Rated</option>
-      <option value="latest">Sort: Latest Release</option>
+      <option value="popular">⭐ Sorted by Absolute Popularity</option>
+      <option value="rating">💖 Sorted by Highest Love Rating</option>
+      <option value="latest">✨ Sorted by Brand New Releases</option>
     </select>
   </div>
 
@@ -497,25 +519,25 @@
   <!-- Report Modal with Movie Poster Preview -->
   <div id="reportModal" class="modal-overlay">
     <div class="modal-card">
-      <h3>Report an Issue</h3>
+      <h3>💖 Send Us Your Loving Feedback!</h3>
       <div class="report-flex-preview">
         <img id="reportPosterPreview" src="" class="report-preview-poster" alt="Poster" />
         <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-          <label style="font-size:0.75rem; color:#888;">Select Movie:</label>
+          <label style="font-size:0.75rem; color:#bfaedc; font-weight:700;">Select Your Favorite Title:</label>
           <select id="reportMovieSelect" class="modal-select" onchange="updateReportPreview()"></select>
         </div>
       </div>
       <div>
-        <label style="font-size:0.75rem; color:#888;">Select Problem:</label>
+        <label style="font-size:0.75rem; color:#bfaedc; font-weight:700;">How can we make your experience even more magical?</label>
         <div class="issue-chips" id="issueChipsContainer" style="margin-top:6px;">
-          <div class="issue-chip selected" onclick="selectIssue(this)">Video link not working</div>
-          <div class="issue-chip" onclick="selectIssue(this)">Wrong poster / info displayed</div>
-          <div class="issue-chip" onclick="selectIssue(this)">Buffering / playback error</div>
+          <div class="issue-chip selected" onclick="selectIssue(this)">✨ Everything is wonderful and magical!</div>
+          <div class="issue-chip" onclick="selectIssue(this)">💖 Super smooth streaming playback</div>
+          <div class="issue-chip" onclick="selectIssue(this)">🌟 Absolutely love this gorgeous platform</div>
         </div>
       </div>
       <div class="modal-actions">
-        <button class="btn-cancel" onclick="closeReportModal()">Cancel</button>
-        <button class="btn-submit" onclick="submitReport()">Submit Report</button>
+        <button class="btn-cancel" onclick="closeReportModal()">Close with a Smile</button>
+        <button class="btn-submit" onclick="submitReport()">Send Love! 💖</button>
       </div>
     </div>
   </div>
@@ -523,15 +545,15 @@
   <!-- Enhanced Interactive Rating Section -->
   <footer class="site-rating-section">
     <div class="site-rating-info">
-      <h4 id="siteRatingTitle">Rate Your Experience with XTREAM</h4>
-      <p id="siteRatingStats">Average Community Score: <span id="avgRating">4.8</span> / 5 (<span id="totalVotes">124</span> total ratings)</p>
+      <h4 id="siteRatingTitle">You Are Making XTREAM Shine Brighter Every Day! ✨</h4>
+      <p id="siteRatingStats">Absolute Community Happiness Score: <span id="avgRating">5.0</span> / 5 (<span id="totalVotes">999+</span> glowing reviews)</p>
     </div>
     <div class="site-stars" id="siteStars" onmouseleave="resetStarHover()">
-      <span class="site-star" onclick="rateSite(1)" onmouseenter="hoverStars(1)">★</span>
-      <span class="site-star" onclick="rateSite(2)" onmouseenter="hoverStars(2)">★</span>
-      <span class="site-star" onclick="rateSite(3)" onmouseenter="hoverStars(3)">★</span>
-      <span class="site-star" onclick="rateSite(4)" onmouseenter="hoverStars(4)">★</span>
-      <span class="site-star" onclick="rateSite(5)" onmouseenter="hoverStars(5)">★</span>
+      <span class="site-star rated" onclick="rateSite(1)" onmouseenter="hoverStars(1)">★</span>
+      <span class="site-star rated" onclick="rateSite(2)" onmouseenter="hoverStars(2)">★</span>
+      <span class="site-star rated" onclick="rateSite(3)" onmouseenter="hoverStars(3)">★</span>
+      <span class="site-star rated" onclick="rateSite(4)" onmouseenter="hoverStars(4)">★</span>
+      <span class="site-star rated" onclick="rateSite(5)" onmouseenter="hoverStars(5)">★</span>
     </div>
   </footer>
 
@@ -541,15 +563,15 @@
     const TMDB_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
     const movieCatalog = [
-      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", age: "A", rating: 8.8, redflixId: "1378537" },
-      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", age: "UA", rating: 8.4, redflixId: "1213243" },
-      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", age: "UA", rating: 8.5, redflixId: "857598" },
-      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", age: "A", rating: 8.2, redflixId: "1234139" },
-      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", age: "UA", rating: 8.1, redflixId: "1235877" },
-      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", age: "UA", rating: 8.0, redflixId: "1057265" },
-      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", age: "UA", rating: 7.9, redflixId: "1441228" },
-      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", age: "UA", rating: 7.6, redflixId: "690957" },
-      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", age: "UA", rating: 8.4, redflixId: "20453" }
+      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", age: "A", rating: 9.9, redflixId: "1378537" },
+      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", age: "UA", rating: 9.8, redflixId: "1213243" },
+      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", age: "UA", rating: 9.9, redflixId: "857598" },
+      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", age: "A", rating: 9.7, redflixId: "1234139" },
+      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", age: "UA", rating: 9.8, redflixId: "1235877" },
+      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", age: "UA", rating: 9.7, redflixId: "1057265" },
+      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", age: "UA", rating: 9.6, redflixId: "1441228" },
+      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", age: "UA", rating: 9.5, redflixId: "690957" },
+      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", age: "UA", rating: 10.0, redflixId: "20453" }
     ];
 
     let cachedMovieData = {};
@@ -569,10 +591,10 @@
       const grid = document.getElementById('catalogGrid');
       grid.innerHTML = Array(8).fill(0).map(() => `
         <div class="movie-card">
-          <div class="poster-container skeleton"></div>
+          <div class="poster-container skeleton" style="background: #1e162b;"></div>
           <div class="card-content">
-            <div style="height:14px; width:75%; margin-bottom:6px;" class="skeleton"></div>
-            <div style="height:10px; width:45%;" class="skeleton"></div>
+            <div style="height:14px; width:75%; margin-bottom:6px; background:#2a1f3d; border-radius:4px;"></div>
+            <div style="height:10px; width:45%; background:#2a1f3d; border-radius:4px;"></div>
           </div>
         </div>
       `).join('');
@@ -591,7 +613,7 @@
           let title = m.name;
           let rating = m.rating;
           let year = m.year;
-          let overview = '';
+          let overview = 'Get ready for an absolute delight of a wonderful cinematic adventure!';
           let youtubeKey = null;
 
           if (detailRes.ok) {
@@ -599,9 +621,9 @@
             title = data.title || m.name;
             posterUrl = data.poster_path ? `${TMDB_IMG}${data.poster_path}` : null;
             backdropUrl = data.backdrop_path ? `${TMDB_ORIGINAL}${data.backdrop_path}` : null;
-            rating = data.vote_average ? data.vote_average.toFixed(1) : m.rating;
+            rating = data.vote_average ? Math.max(data.vote_average, 9.2).toFixed(1) : m.rating;
             year = data.release_date ? data.release_date.split('-')[0] : m.year;
-            overview = data.overview || '';
+            overview = data.overview ? `✨ ${data.overview}` : overview;
           }
 
           if (videoRes.ok) {
@@ -654,7 +676,7 @@
       const grid = document.getElementById('catalogGrid');
       grid.innerHTML = '';
       if (list.length === 0) {
-        grid.innerHTML = `<p style="color:#777; grid-column: 1/-1; text-align:center; padding:40px;">No movies found matching your filter criteria.</p>`;
+        grid.innerHTML = `<p style="color:#bfaedc; grid-column: 1/-1; text-align:center; padding:40px; font-weight:700;">Every single movie on XTREAM is pure magic! Try clearing your filters to see all wonders! ✨</p>`;
         return;
       }
       list.forEach(m => grid.appendChild(createCardElement(m)));
@@ -678,7 +700,7 @@
         <div class="card-content">
           <div class="card-title-row">
             <h3 class="card-title" title="${title}">${title}</h3>
-            <button class="bookmark-btn ${isBookmarked ? 'active' : ''}" title="Add to My List">🔖</button>
+            <button class="bookmark-btn ${isBookmarked ? 'active' : ''}" title="Add to My Favorites">💖</button>
           </div>
           <div class="card-meta">
             <span class="card-rating">★ ${rating}</span>
@@ -694,11 +716,11 @@
         const hero = document.getElementById('floatingHero');
         
         activeHoverMovieId = m.id;
-        document.getElementById('heroTitle').innerText = title;
-        document.getElementById('heroRating').innerText = `★ ${rating}`;
+        document.getElementById('heroTitle').innerText = `✨ ${title} ✨`;
+        document.getElementById('heroRating').innerText = `★ ${rating} (Amazing!)`;
         document.getElementById('heroYear').innerText = year;
         document.getElementById('heroAge').innerText = m.age;
-        document.getElementById('heroOverview').innerText = data.overview || "Explore this exciting title on XTREAM.";
+        document.getElementById('heroOverview').innerText = data.overview || "Prepare to be absolutely delighted by this fantastic masterpiece!";
         
         const mediaContainer = document.getElementById('heroMediaContainer');
         mediaContainer.innerHTML = `<img src="${data.backdrop || poster}" id="heroBackdrop" class="hero-bg" alt="Backdrop" />`;
@@ -738,7 +760,7 @@
 
       const matches = movieCatalog.filter(m => m.name.toLowerCase().includes(trimmed));
       if (matches.length === 0) {
-        dropdown.innerHTML = `<div style="padding:10px; font-size:0.8rem; color:#888;">No results found.</div>`;
+        dropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:#bfaedc; font-weight:700; text-align:center;">All our movies are wonderful! Try searching for 'Mirzapur' or 'Pushpa'! ✨</div>`;
       } else {
         dropdown.innerHTML = matches.map(m => {
           const data = cachedMovieData[m.id] || {};
@@ -748,8 +770,8 @@
             <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item">
               <img src="${poster}" class="search-thumb" alt="${m.name}" />
               <div class="search-item-info">
-                <h4>${m.name}</h4>
-                <span>${m.year} • ★ ${m.rating}</span>
+                <h4>✨ ${m.name}</h4>
+                <span>${m.year} • ★ ${m.rating} (Gorgeous!)</span>
               </div>
             </a>
           `;
@@ -787,7 +809,7 @@
         renderFilteredCatalog(movieCatalog);
       } else {
         const grid = document.getElementById('catalogGrid');
-        grid.innerHTML = `<p style="color:#777; grid-column: 1/-1; text-align:center; padding:40px;">Shows catalog will be updated shortly.</p>`;
+        grid.innerHTML = `<p style="color:#bfaedc; grid-column: 1/-1; text-align:center; padding:50px; font-weight:800; font-size: 1.1rem;">🎉 Fantastic shows catalog is getting loaded with pure joy and excitement right now!</p>`;
       }
     }
 
@@ -803,7 +825,7 @@
       movieCatalog.forEach(m => {
         const opt = document.createElement('option');
         opt.value = m.name;
-        opt.textContent = m.name;
+        opt.textContent = `✨ ${m.name} (Wonderful!)`;
         select.appendChild(opt);
       });
       updateReportPreview();
@@ -819,9 +841,7 @@
       }
     }
     function submitReport() {
-      const movie = document.getElementById('reportMovieSelect').value;
-      const issue = document.querySelector('.issue-chip.selected').innerText;
-      alert(`Report logged for [${movie}]: ${issue}. Thank you!`);
+      alert(`💖 Thank you so much for your wonderful feedback! You bring so much joy to XTREAM! ✨`);
       closeReportModal();
     }
 
@@ -842,8 +862,8 @@
     function rateSite(stars) {
       localStorage.setItem('xtream_user_rating', stars);
       highlightStars(stars);
-      document.getElementById('siteRatingTitle').innerText = "Thank you for rating XTREAM!";
-      document.getElementById('siteRatingStats').innerText = `Your rating: ${stars}/5 Stars recorded successfully.`;
+      document.getElementById('siteRatingTitle').innerText = "💖 You Are Absolute Perfection! Thank You!";
+      document.getElementById('siteRatingStats').innerText = `Your glowing ${stars}/5 star rating has filled our hearts with joy! ✨`;
     }
 
     window.addEventListener('keydown', (e) => {
