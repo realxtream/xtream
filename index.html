@@ -29,6 +29,7 @@
       color: var(--text);
       overflow-x: hidden;
       min-height: 100vh;
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* Floating Pill Header */
@@ -151,7 +152,7 @@
     }
     .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Big Main Hero Billboard Banner (Updates dynamically on hover) */
+    /* Big Main Hero Billboard Banner */
     .main-hero-banner {
       position: relative;
       width: 100%;
@@ -247,7 +248,7 @@
     }
     .btn-main-hero-watch:hover { background: var(--primary); color: #fff; transform: scale(1.03); }
 
-    /* Floating Hover Hero Banner (X=0, Y=0 relative to hovered poster card) */
+    /* Floating Hover Hero Banner (Desktop Only) */
     .hero-banner {
       display: none;
       position: absolute;
@@ -507,13 +508,18 @@
     .site-star { color: #444; transition: color 0.2s, transform 0.2s; }
     .site-star:hover, .site-star.rated { color: #f5c518; transform: scale(1.1); }
 
+    /* Mobile Responsive Optimizations */
     @media (max-width: 768px) {
-      .nav-pill { padding: 6px 12px; }
-      .search-input { width: 110px; }
-      .search-input:focus { width: 140px; }
+      .nav-pill { padding: 6px 12px; gap: 6px; }
+      .logo { font-size: 1.1rem; }
+      .nav-links li a { padding: 5px 8px; font-size: 0.75rem; }
+      .search-input { width: 95px; }
+      .search-input:focus { width: 120px; }
+      .main-hero-banner { height: 45vh; min-height: 300px; padding: 20px 4%; }
+      .main-hero-title { font-size: 1.8rem; }
       .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .poster-container { height: 210px; }
-      .hero-banner { display: none !important; }
+      .hero-banner { display: none !important; } /* Hide floating popup on mobile to allow seamless touch scrolling/tapping */
     }
   </style>
 </head>
@@ -542,7 +548,7 @@
     </div>
   </header>
 
-  <!-- Big Main Hero Billboard Banner (Updates according to the hovered movie and its name) -->
+  <!-- Big Main Hero Billboard Banner -->
   <section class="main-hero-banner" id="mainHeroBanner">
     <img src="https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg" id="mainHeroBg" class="main-hero-bg" alt="Featured Backdrop" />
     <div class="main-hero-gradient"></div>
@@ -562,7 +568,7 @@
     </div>
   </section>
 
-  <!-- Floating Hover Hero Banner (X=0, Y=0 relative to hovered poster card, auto-switches backdrop to TMDB Trailer after 3s) -->
+  <!-- Floating Hover Hero Banner (Desktop Only) -->
   <div id="floatingHero" class="hero-banner">
     <div class="hero-media-container" id="heroMediaContainer">
       <img src="" id="heroBackdrop" class="hero-bg" alt="Backdrop" />
@@ -824,9 +830,10 @@
         </div>
       `;
 
-      // Updates both the big top Hero Billboard and the floating X=0, Y=0 hover popup dynamically on mouseenter
+      // Desktop Hover Events (Updates big top billboard and X=0,Y=0 popup, handles 3s trailer swap)
       div.addEventListener('mouseenter', (e) => {
-        updateMainHero(m); // Updates the big top billboard banner with movie & name
+        if (window.innerWidth <= 768) return; // Skip hover effects on mobile
+        updateMainHero(m);
 
         const posterBox = div.querySelector('.poster-container').getBoundingClientRect();
         const hero = document.getElementById('floatingHero');
@@ -860,7 +867,11 @@
       });
 
       div.querySelector('.bookmark-btn').onclick = (e) => { e.stopPropagation(); toggleBookmark(m.id, e.target); };
-      div.onclick = () => window.open(watchUrl, '_blank', 'noopener');
+      
+      // Direct mobile/desktop redirection on click
+      div.onclick = () => {
+        window.open(watchUrl, '_blank', 'noopener');
+      };
 
       return div;
     }
