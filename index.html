@@ -145,7 +145,7 @@
       </ul>
     </div>
     <div>
-      <input type="text" id="searchInput" class="search-box" placeholder="Search movies..." onkeyup="filterMovies()" />
+      <input type="text" id="searchInput" class="search-box" placeholder="Search movies..." onkeyup="applyFilters()" />
     </div>
   </header>
 
@@ -155,8 +155,8 @@
     
     <div class="filters-bar">
       <div class="dropdown-group">
-        <select class="dropdown">
-          <option value="" disabled selected>Genre</option>
+        <select id="genreFilter" class="dropdown" onchange="applyFilters()">
+          <option value="all">All Genres</option>
           <option value="action">Action</option>
           <option value="thriller">Thriller</option>
           <option value="drama">Drama</option>
@@ -164,8 +164,8 @@
           <option value="comedy">Comedy</option>
         </select>
         
-        <select class="dropdown">
-          <option value="" disabled selected>Year</option>
+        <select id="yearFilter" class="dropdown" onchange="applyFilters()">
+          <option value="all">All Years</option>
           <option value="2026">2026</option>
           <option value="2025">2025</option>
           <option value="2024">2024</option>
@@ -173,21 +173,21 @@
           <option value="2009">2009</option>
         </select>
 
-        <select class="dropdown">
-          <option value="" disabled selected>Country</option>
+        <select id="countryFilter" class="dropdown" onchange="applyFilters()">
+          <option value="all">All Countries</option>
           <option value="india">India</option>
         </select>
 
-        <select class="dropdown">
-          <option value="" disabled selected>Age</option>
-          <option value="a">A (Adults)</option>
-          <option value="ua">UA (Parental Guidance)</option>
+        <select id="ageFilter" class="dropdown" onchange="applyFilters()">
+          <option value="all">All Age Ratings</option>
+          <option value="a">A</option>
+          <option value="ua">UA</option>
         </select>
       </div>
 
       <div>
-        <select class="dropdown">
-          <option value="popular" selected>Most Popular</option>
+        <select id="sortFilter" class="dropdown" onchange="applyFilters()">
+          <option value="popular">Most Popular</option>
           <option value="latest">Latest Release</option>
           <option value="rating">Highest Rated</option>
         </select>
@@ -198,7 +198,7 @@
   <div class="movies-grid" id="moviesGrid">
     
     <!-- Movie 1 -->
-    <div class="movie-card" data-title="jailer 2">
+    <div class="movie-card" data-title="jailer 2" data-genre="action crime" data-year="2026" data-country="india" data-age="a" data-rating="8.2">
       <div class="poster-container"><img src="jailer2.webp" alt="Jailer 2" /></div>
       <div class="card-content">
         <h3 class="movie-title">Jailer 2</h3>
@@ -215,7 +215,7 @@
     </div>
 
     <!-- Movie 2 -->
-    <div class="movie-card" data-title="mirzapur the movie">
+    <div class="movie-card" data-title="mirzapur the movie" data-genre="action thriller" data-year="2026" data-country="india" data-age="a" data-rating="8.8">
       <div class="poster-container"><img src="mirzapur.webp" alt="Mirzapur: The Movie" /></div>
       <div class="card-content">
         <h3 class="movie-title">Mirzapur: The Movie</h3>
@@ -232,7 +232,7 @@
     </div>
 
     <!-- Movie 3 -->
-    <div class="movie-card" data-title="toxic">
+    <div class="movie-card" data-title="toxic" data-genre="action drama" data-year="2025" data-country="india" data-age="ua" data-rating="8.4">
       <div class="poster-container"><img src="toxic.webp" alt="Toxic" /></div>
       <div class="card-content">
         <h3 class="movie-title">Toxic</h3>
@@ -249,7 +249,7 @@
     </div>
 
     <!-- Movie 4 -->
-    <div class="movie-card" data-title="jana nayagan">
+    <div class="movie-card" data-title="jana nayagan" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.1">
       <div class="poster-container"><img src="jananayagan.webp" alt="Jana Nayagan" /></div>
       <div class="card-content">
         <h3 class="movie-title">Jana Nayagan</h3>
@@ -266,7 +266,7 @@
     </div>
 
     <!-- Movie 5 -->
-    <div class="movie-card" data-title="peddi">
+    <div class="movie-card" data-title="peddi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.0">
       <div class="poster-container"><img src="peddi.webp" alt="Peddi" /></div>
       <div class="card-content">
         <h3 class="movie-title">Peddi</h3>
@@ -283,7 +283,7 @@
     </div>
 
     <!-- Movie 6 -->
-    <div class="movie-card" data-title="irumudi">
+    <div class="movie-card" data-title="irumudi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="7.9">
       <div class="poster-container"><img src="irumudi.webp" alt="Irumudi" /></div>
       <div class="card-content">
         <h3 class="movie-title">Irumudi</h3>
@@ -300,7 +300,7 @@
     </div>
 
     <!-- Movie 7 -->
-    <div class="movie-card" data-title="pushpa the rise">
+    <div class="movie-card" data-title="pushpa the rise" data-genre="action thriller" data-year="2021" data-country="india" data-age="ua" data-rating="7.6">
       <div class="poster-container"><img src="pushpa1.webp" alt="Pushpa: The Rise" /></div>
       <div class="card-content">
         <h3 class="movie-title">Pushpa: The Rise</h3>
@@ -317,7 +317,7 @@
     </div>
 
     <!-- Movie 8 -->
-    <div class="movie-card" data-title="pushpa 2 the rule">
+    <div class="movie-card" data-title="pushpa 2 the rule" data-genre="action drama" data-year="2024" data-country="india" data-age="ua" data-rating="8.5">
       <div class="poster-container"><img src="pushpa2.webp" alt="Pushpa 2: The Rule" /></div>
       <div class="card-content">
         <h3 class="movie-title">Pushpa 2: The Rule</h3>
@@ -334,7 +334,7 @@
     </div>
 
     <!-- Movie 9 -->
-    <div class="movie-card" data-title="3 idiots">
+    <div class="movie-card" data-title="3 idiots" data-genre="comedy drama" data-year="2009" data-country="india" data-age="ua" data-rating="8.4">
       <div class="poster-container"><img src="3idiots.webp" alt="3 Idiots" /></div>
       <div class="card-content">
         <h3 class="movie-title">3 Idiots</h3>
@@ -353,18 +353,52 @@
   </div>
 
   <script>
-    function filterMovies() {
-      let input = document.getElementById('searchInput').value.toLowerCase();
-      let cards = document.getElementsByClassName('movie-card');
+    function applyFilters() {
+      let searchInput = document.getElementById('searchInput').value.toLowerCase();
+      let genreVal = document.getElementById('genreFilter').value;
+      let yearVal = document.getElementById('yearFilter').value;
+      let countryVal = document.getElementById('countryFilter').value;
+      let ageVal = document.getElementById('ageFilter').value;
+      let sortVal = document.getElementById('sortFilter').value;
 
-      for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getAttribute('data-title');
-        if (title.includes(input)) {
-          cards[i].style.display = "flex";
+      let grid = document.getElementById('moviesGrid');
+      let cardsArray = Array.from(grid.getElementsByClassName('movie-card'));
+
+      // 1. Filtering Logic
+      cardsArray.forEach(card => {
+        let title = card.getAttribute('data-title');
+        let genre = card.getAttribute('data-genre');
+        let year = card.getAttribute('data-year');
+        let country = card.getAttribute('data-country');
+        let age = card.getAttribute('data-age');
+
+        let matchesSearch = title.includes(searchInput);
+        let matchesGenre = (genreVal === 'all' || genre.includes(genreVal));
+        let matchesYear = (yearVal === 'all' || year === yearVal);
+        let matchesCountry = (countryVal === 'all' || country === countryVal);
+        let matchesAge = (ageVal === 'all' || age === ageVal);
+
+        if (matchesSearch && matchesGenre && matchesYear && matchesCountry && matchesAge) {
+          card.style.display = "flex";
         } else {
-          cards[i].style.display = "none";
+          card.style.display = "none";
         }
-      }
+      });
+
+      // 2. Sorting Logic
+      cardsArray.sort((a, b) => {
+        if (sortVal === 'rating') {
+          return parseFloat(b.getAttribute('data-rating')) - parseFloat(a.getAttribute('data-rating'));
+        } else if (sortVal === 'latest') {
+          return parseInt(b.getAttribute('data-year')) - parseInt(a.getAttribute('data-year'));
+        } else {
+          // Default / Popular: Keep original or sort by rating fallback
+          return 0;
+        }
+      });
+
+      // Re-append sorted cards to grid
+      cardsArray.forEach(card => grid.appendChild(card));
     }
   </script>
 </body>
