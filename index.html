@@ -12,4 +12,80 @@
     .nav-links a { color: #b3b3b3; text-decoration: none; }
     .nav-links a.active { color: white; font-weight: bold; }
     .hero { padding: 50px 4%; background: linear-gradient(to bottom, rgba(20,20,20,0.8), #141414); }
-    .
+    .hero-title { font-size: 2.5rem; margin: 10px 0; font-weight: 800; }
+    .hero-btn { background: white; color: black; padding: 10px 24px; border-radius: 4px; font-weight: bold; font-size: 0.95rem; display: inline-block; text-decoration: none; }
+    .movies-section { padding: 30px 4%; }
+    .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; max-width: 1200px; }
+    .movie-card { background: #1f1f1f; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: space-between; }
+    .poster-container { width: 100%; height: 250px; background: #000; overflow: hidden; }
+    .poster-container img { width: 100%; height: 100%; object-fit: cover; }
+    .movie-info { padding: 10px 12px 2px 12px; }
+    .movie-title { margin: 0 0 3px 0; font-size: 0.9rem; color: white; }
+    .movie-genre { margin: 0; font-size: 0.75rem; color: #aaa; }
+    .play-btn-container { padding: 10px 12px 12px 12px; }
+    .play-btn { display: block; text-align: center; background: #e50914; color: white; padding: 8px 0; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center; gap: 30px;">
+      <h1 class="logo">XTREAM</h1>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#movies">Movies</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div style="max-width: 600px;">
+        <span style="color: #e50914; font-weight: bold; letter-spacing: 2px; font-size: 0.8rem;">FEATURED MOVIE</span>
+        <h1 class="hero-title">DHURANDHER</h1>
+        <p style="color: #46d369; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px;">8.5 &nbsp;|&nbsp; 2025 &nbsp;|&nbsp; Action &nbsp;|&nbsp; Thriller</p>
+        <div>
+          <a href="https://redflix.co/play?id=1291608&type=movie&season=1&episode=1&server=vidbolt" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="hero-btn">&#9654; Watch Now</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="movies" class="movies-section">
+      <h2 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 500; color: white;">Trending Movies</h2>
+      <div class="movies-grid">
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+1" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 1</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=1234139&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+2" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 2</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+3" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 3</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=1213243&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+4" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 4</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+5" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 5</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+6" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 6</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+7" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 7</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+        <div class="movie-card">
+          <div><div class="poster-container"><img src="https://via.placeholder.com/180x250/1f1f1f/ffffff?text=Movie+8" alt="Poster" /></div><div class="movie-info"><h3 class="movie-title">Movie 8</h3></div></div>
+          <div class="play-btn-container"><a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="play-btn">Play Movie</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
