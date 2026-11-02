@@ -4,6 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XTREAM - Movies & Shows</title>
+  
+  <!-- Favicon Link -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
   <style>
     :root {
       --primary: #e50914;
@@ -147,7 +151,7 @@
     }
     .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Floating Hero Banner (X=0, Y=0 relative to hovered poster) */
+    /* Floating Hero Banner (X=0, Y=0 relative to hovered poster card) */
     .hero-banner {
       display: none;
       position: absolute;
@@ -165,10 +169,20 @@
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
-    .hero-bg {
+    .hero-media-container {
       width: 100%;
       height: 180px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg, .hero-iframe {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      position: absolute;
+      top: 0; left: 0;
+      border: none;
       display: block;
     }
     .hero-content {
@@ -248,10 +262,6 @@
         box-shadow: 0 16px 36px rgba(0,0,0,0.9), 0 0 20px rgba(229, 9, 20, 0.35);
         z-index: 50;
       }
-      .movie-card:hover .hover-overlay {
-        opacity: 1;
-        pointer-events: auto;
-      }
     }
 
     .poster-container {
@@ -312,89 +322,7 @@
     .card-rating { color: #46d369; font-weight: bold; }
     .card-age { border: 1px solid #444; padding: 0 4px; border-radius: 3px; font-size: 0.62rem; }
 
-    .hover-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(14,14,18,0.95) 80%);
-      opacity: 0;
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 12px;
-      gap: 8px;
-      transition: opacity 0.3s ease;
-      z-index: 10;
-    }
-    .btn-overlay-play {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 7px 0;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      display: block;
-      transition: background 0.2s;
-    }
-    .btn-overlay-play:hover { background: var(--primary-hover); color: #fff; }
-
-    /* Trailer Modal */
-    .player-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.92);
-      z-index: 3000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .player-dialog {
-      background: #111116;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      width: 100%;
-      max-width: 850px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
-    }
-    .player-topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 18px;
-      background: #181820;
-      border-bottom: 1px solid var(--border);
-    }
-    .player-title { margin: 0; font-size: 1rem; font-weight: 700; }
-    .btn-close-player {
-      background: transparent;
-      border: none;
-      color: #aaa;
-      font-size: 1.3rem;
-      cursor: pointer;
-      line-height: 1;
-    }
-    .btn-close-player:hover { color: #fff; }
-    .player-frame-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
-      background: #000;
-    }
-    .player-frame-wrapper iframe {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      border: none;
-    }
-
-    /* Report Modal with Poster Preview */
+    /* Report Modal with Movie Poster Preview */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -489,7 +417,7 @@
       .search-input:focus { width: 140px; }
       .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .poster-container { height: 210px; }
-      .hero-banner { display: none !important; } /* Disable floating hover popup on small touch devices */
+      .hero-banner { display: none !important; }
     }
   </style>
 </head>
@@ -518,9 +446,11 @@
     </div>
   </header>
 
-  <!-- Floating Hero Banner (Positioned at X=0, Y=0 relative to hovered poster card) -->
+  <!-- Floating Hero Banner (X=0, Y=0 relative to hovered poster card, auto-switches backdrop to TMDB Trailer after 3s) -->
   <div id="floatingHero" class="hero-banner">
-    <img src="" id="heroBackdrop" class="hero-bg" alt="Backdrop" />
+    <div class="hero-media-container" id="heroMediaContainer">
+      <img src="" id="heroBackdrop" class="hero-bg" alt="Backdrop" />
+    </div>
     <div class="hero-content">
       <h3 class="hero-title" id="heroTitle">Title</h3>
       <div class="hero-meta">
@@ -563,19 +493,6 @@
   <main class="catalog-container">
     <div class="catalog-grid" id="catalogGrid"></div>
   </main>
-
-  <!-- Trailer Modal -->
-  <div id="trailerModal" class="player-modal">
-    <div class="player-dialog">
-      <div class="player-topbar">
-        <h3 class="player-title" id="trailerModalTitle">Official Trailer</h3>
-        <button class="btn-close-player" onclick="closeTrailerModal()">✕</button>
-      </div>
-      <div class="player-frame-wrapper">
-        <iframe id="trailerPlayerFrame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-      </div>
-    </div>
-  </div>
 
   <!-- Report Modal with Movie Poster Preview -->
   <div id="reportModal" class="modal-overlay">
@@ -624,19 +541,21 @@
     const TMDB_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
     const movieCatalog = [
-      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", age: "A", rating: 8.8, redflixId: "1378537", trailerKey: "qeVjYn_U6Fk" },
-      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", age: "UA", rating: 8.4, redflixId: "1213243", trailerKey: "9bZkp7q19f0" },
-      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", age: "UA", rating: 8.5, redflixId: "857598", trailerKey: "g3JUbgZXBaM" },
-      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", age: "A", rating: 8.2, redflixId: "1234139", trailerKey: "Y5BeWdODPqo" },
-      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", age: "UA", rating: 8.1, redflixId: "1235877", trailerKey: "dQw4w9WgXcQ" },
-      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", age: "UA", rating: 8.0, redflixId: "1057265", trailerKey: "dQw4w9WgXcQ" },
-      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", age: "UA", rating: 7.9, redflixId: "1441228", trailerKey: "dQw4w9WgXcQ" },
-      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", age: "UA", rating: 7.6, redflixId: "690957", trailerKey: "pKctjlpbcdc" },
-      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", age: "UA", rating: 8.4, redflixId: "20453", trailerKey: "K0eDlFX9GMc" }
+      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", age: "A", rating: 8.8, redflixId: "1378537" },
+      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", age: "UA", rating: 8.4, redflixId: "1213243" },
+      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", age: "UA", rating: 8.5, redflixId: "857598" },
+      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", age: "A", rating: 8.2, redflixId: "1234139" },
+      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", age: "UA", rating: 8.1, redflixId: "1235877" },
+      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", age: "UA", rating: 8.0, redflixId: "1057265" },
+      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", age: "UA", rating: 7.9, redflixId: "1441228" },
+      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", age: "UA", rating: 7.6, redflixId: "690957" },
+      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", age: "UA", rating: 8.4, redflixId: "20453" }
     ];
 
     let cachedMovieData = {};
     let bookmarks = JSON.parse(localStorage.getItem('xtream_bookmarks') || '[]');
+    let heroTimer = null;
+    let activeHoverMovieId = null;
 
     window.addEventListener('DOMContentLoaded', async () => {
       renderSkeletonGrid();
@@ -662,18 +581,48 @@
     async function fetchAllTmdbData() {
       await Promise.all(movieCatalog.map(async (m) => {
         try {
-          const res = await fetch(`https://api.themoviedb.org/3/movie/${m.id}?api_key=${TMDB_API_KEY}`);
-          if (res.ok) {
-            const data = await res.json();
-            cachedMovieData[m.id] = {
-              title: data.title || m.name,
-              poster: data.poster_path ? `${TMDB_IMG}${data.poster_path}` : null,
-              backdrop: data.backdrop_path ? `${TMDB_ORIGINAL}${data.backdrop_path}` : null,
-              rating: data.vote_average ? data.vote_average.toFixed(1) : m.rating,
-              year: data.release_date ? data.release_date.split('-')[0] : m.year,
-              overview: data.overview || ''
-            };
+          const [detailRes, videoRes] = await Promise.all([
+            fetch(`https://api.themoviedb.org/3/movie/${m.id}?api_key=${TMDB_API_KEY}`),
+            fetch(`https://api.themoviedb.org/3/movie/${m.id}/videos?api_key=${TMDB_API_KEY}`)
+          ]);
+
+          let backdropUrl = null;
+          let posterUrl = null;
+          let title = m.name;
+          let rating = m.rating;
+          let year = m.year;
+          let overview = '';
+          let youtubeKey = null;
+
+          if (detailRes.ok) {
+            const data = await detailRes.json();
+            title = data.title || m.name;
+            posterUrl = data.poster_path ? `${TMDB_IMG}${data.poster_path}` : null;
+            backdropUrl = data.backdrop_path ? `${TMDB_ORIGINAL}${data.backdrop_path}` : null;
+            rating = data.vote_average ? data.vote_average.toFixed(1) : m.rating;
+            year = data.release_date ? data.release_date.split('-')[0] : m.year;
+            overview = data.overview || '';
           }
+
+          if (videoRes.ok) {
+            const vData = await videoRes.json();
+            if (vData.results && vData.results.length > 0) {
+              const officialTrailer = vData.results.find(v => v.site === 'YouTube' && v.type === 'Trailer') || vData.results.find(v => v.site === 'YouTube');
+              if (officialTrailer) {
+                youtubeKey = officialTrailer.key;
+              }
+            }
+          }
+
+          cachedMovieData[m.id] = {
+            title,
+            poster: posterUrl,
+            backdrop: backdropUrl,
+            rating,
+            year,
+            overview,
+            trailerKey: youtubeKey
+          };
         } catch(e) {}
       }));
     }
@@ -725,9 +674,6 @@
       div.innerHTML = `
         <div class="poster-container">
           <img src="${poster}" alt="${title}" loading="lazy" />
-          <div class="hover-overlay">
-            <a href="${watchUrl}" target="_blank" rel="noopener" class="btn-overlay-play">▶ Play Now</a>
-          </div>
         </div>
         <div class="card-content">
           <div class="card-title-row">
@@ -742,24 +688,36 @@
         </div>
       `;
 
-      // X=0, Y=0 coordinate alignment relative to poster container on hover
+      // X=0, Y=0 coordinate alignment relative to poster container on hover, trailer swaps after 3 seconds from TMDB API data
       div.addEventListener('mouseenter', (e) => {
         const posterBox = div.querySelector('.poster-container').getBoundingClientRect();
         const hero = document.getElementById('floatingHero');
         
+        activeHoverMovieId = m.id;
         document.getElementById('heroTitle').innerText = title;
         document.getElementById('heroRating').innerText = `★ ${rating}`;
         document.getElementById('heroYear').innerText = year;
         document.getElementById('heroAge').innerText = m.age;
         document.getElementById('heroOverview').innerText = data.overview || "Explore this exciting title on XTREAM.";
-        document.getElementById('heroBackdrop').src = data.backdrop || poster;
+        
+        const mediaContainer = document.getElementById('heroMediaContainer');
+        mediaContainer.innerHTML = `<img src="${data.backdrop || poster}" id="heroBackdrop" class="hero-bg" alt="Backdrop" />`;
 
         hero.style.top = (window.scrollY + posterBox.top) + 'px';
         hero.style.left = (window.scrollX + posterBox.left) + 'px';
         hero.style.display = 'block';
+
+        if (heroTimer) clearTimeout(heroTimer);
+        heroTimer = setTimeout(() => {
+          if (activeHoverMovieId === m.id && data.trailerKey) {
+            mediaContainer.innerHTML = `<iframe class="hero-iframe" src="https://www.youtube.com/embed/${data.trailerKey}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${data.trailerKey}" allow="autoplay"></iframe>`;
+          }
+        }, 3000);
       });
 
       div.addEventListener('mouseleave', () => {
+        if (heroTimer) clearTimeout(heroTimer);
+        activeHoverMovieId = null;
         document.getElementById('floatingHero').style.display = 'none';
       });
 
