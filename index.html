@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XTREAM - Movies & Shows</title>
   <style>
-    body { background: #0b0b0e; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: white; }
+    body { background: #0b0b0e; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: white; overflow-x: hidden; }
     
     /* Floating Pill Header */
     header { 
@@ -15,12 +15,14 @@
       position: sticky; 
       top: 0; 
       z-index: 1000; 
+      background: rgba(11, 11, 14, 0.85);
+      backdrop-filter: blur(10px);
     }
     
     .nav-pill-container {
       background: #141418;
       border: 1px solid #262630;
-      padding: 10px 20px;
+      padding: 8px 16px;
       border-radius: 40px;
       display: flex;
       justify-content: space-between;
@@ -28,21 +30,21 @@
       width: 100%;
       max-width: 1350px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-      gap: 15px;
+      gap: 10px;
     }
 
-    .logo { color: #e50914; font-size: 1.2rem; margin: 0; letter-spacing: 1.5px; font-weight: 900; text-decoration: none; white-space: nowrap; cursor: pointer; }
+    .logo { color: #e50914; font-size: 1.2rem; margin: 0; letter-spacing: 1px; font-weight: 900; text-decoration: none; white-space: nowrap; cursor: pointer; }
     
-    .nav-links { list-style: none; display: flex; gap: 5px; margin: 0; padding: 0; font-size: 0.85rem; align-items: center; }
-    .nav-links li a { color: #999; text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.2s; padding: 6px 10px; border-radius: 20px; white-space: nowrap; cursor: pointer; }
+    .nav-links { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; font-size: 0.8rem; align-items: center; }
+    .nav-links li a { color: #999; text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.2s; padding: 5px 8px; border-radius: 20px; white-space: nowrap; cursor: pointer; }
     .nav-links li a:hover { color: white; }
     .nav-links li a.active { color: white; background: #22222a; font-weight: 600; }
 
-    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
     
-    .search-container { display: flex; align-items: center; gap: 5px; position: relative; }
-    .nav-search { color: #aaa; font-size: 0.85rem; display: flex; align-items: center; gap: 4px; cursor: pointer; background: transparent; border: none; outline: none; padding: 6px 8px; border-radius: 20px; white-space: nowrap; }
-    .nav-search:hover { color: white; background: #1f1f28; }
+    .search-container { display: flex; align-items: center; position: relative; }
+    .nav-search-btn { color: #aaa; background: transparent; border: none; outline: none; cursor: pointer; font-size: 1rem; padding: 6px; border-radius: 50%; }
+    .nav-search-btn:hover { color: white; background: #1f1f28; }
     
     .search-input-hidden { 
       display: none; 
@@ -56,16 +58,16 @@
       width: 110px; 
     }
 
-    .ads-toggle { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: #aaa; background: #1a1a22; padding: 5px 8px; border-radius: 20px; border: 1px solid #2a2a35; white-space: nowrap; }
-    .switch { position: relative; display: inline-block; width: 28px; height: 14px; }
+    .ads-toggle { display: flex; align-items: center; gap: 4px; font-size: 0.7rem; color: #aaa; background: #1a1a22; padding: 4px 8px; border-radius: 20px; border: 1px solid #2a2a35; white-space: nowrap; }
+    .switch { position: relative; display: inline-block; width: 26px; height: 14px; }
     .switch input { opacity: 0; width: 0; height: 0; }
     .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .3s; border-radius: 14px; }
     .slider:before { position: absolute; content: ""; height: 10px; width: 10px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; }
     input:checked + .slider { background-color: #e50914; }
-    input:checked + .slider:before { transform: translateX(14px); }
+    input:checked + .slider:before { transform: translateX(12px); }
 
-    .settings-btn { background: none; border: none; color: #aaa; font-size: 0.95rem; cursor: pointer; padding: 4px; }
-    .settings-btn:hover { color: white; }
+    .report-btn { background: #222; border: 1px solid #333; color: #bbb; font-size: 0.75rem; padding: 5px 10px; border-radius: 15px; cursor: pointer; white-space: nowrap; }
+    .report-btn:hover { background: #e50914; color: white; border-color: #e50914; }
 
     /* Filter Section */
     .filter-section { padding: 25px 4% 15px 4%; max-width: 1350px; margin: 0 auto; }
@@ -89,8 +91,15 @@
     }
     .dropdown:hover { background: #1f1f28; color: white; }
 
-    /* Movie Grid */
-    .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; max-width: 1350px; margin: 0 auto; padding: 0 4% 40px 4%; }
+    /* Movie Grid with safe padding to prevent clipping on hover */
+    .movies-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+      gap: 25px; 
+      max-width: 1350px; 
+      margin: 0 auto; 
+      padding: 20px 4% 60px 4%; 
+    }
     
     .movie-card { 
       background: #18181c; 
@@ -101,17 +110,19 @@
       transition: transform 0.3s cubic-bezier(0.5, 0, 0.1, 1), box-shadow 0.3s cubic-bezier(0.5, 0, 0.1, 1), z-index 0.3s;
       display: flex;
       flex-direction: column;
+      transform-origin: center center;
     }
     
+    /* Smart Hover Zoom (Prevents edge clipping) */
     .movie-card:hover {
-      transform: scale(1.08) translateY(-10px);
+      transform: scale(1.15) translateY(-15px);
       box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 25px rgba(229, 9, 20, 0.3);
       z-index: 500;
     }
 
     .poster-container { 
       width: 100%; 
-      height: 230px; 
+      height: 280px; 
       background: #000; 
       overflow: hidden; 
       position: relative; 
@@ -123,20 +134,20 @@
     }
 
     .card-content {
-      padding: 10px;
+      padding: 12px;
       background: #18181c;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
     }
 
-    .movie-title { margin: 0; font-size: 0.9rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; }
+    .movie-title { margin: 0; font-size: 0.95rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; }
     
     .meta-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.7rem;
+      gap: 10px;
+      font-size: 0.75rem;
       color: #aaa;
     }
     .rating { color: #46d369; font-weight: bold; }
@@ -148,7 +159,7 @@
       transition: max-height 0.3s ease, opacity 0.3s ease;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
     }
 
     .movie-card:hover .hover-details {
@@ -161,14 +172,76 @@
       text-align: center; 
       background: white; 
       color: black; 
-      padding: 6px 0; 
+      padding: 7px 0; 
       border-radius: 4px; 
       text-decoration: none; 
       font-weight: bold; 
-      font-size: 0.75rem; 
+      font-size: 0.8rem; 
       transition: background 0.2s; 
     }
     .watch-btn:hover { background: #e50914; color: white; }
+
+    /* Report Issue Modal Overlay */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+    .modal-content {
+      background: #141418;
+      border: 1px solid #262630;
+      padding: 25px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .modal-content h3 { margin: 0; font-size: 1.2rem; }
+    .modal-content label { font-size: 0.85rem; color: #aaa; }
+    .modal-select, .modal-input {
+      background: #0b0b0e;
+      border: 1px solid #333;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+      width: 100%;
+    }
+    .issue-chips { display: flex; flex-direction: column; gap: 8px; }
+    .issue-chip {
+      background: #1c1c24;
+      border: 1px solid #2e2e3a;
+      color: #ddd;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .issue-chip:hover, .issue-chip.selected {
+      background: #e50914;
+      border-color: #e50914;
+      color: white;
+    }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+    .modal-btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-cancel { background: transparent; border: 1px solid #444; color: #aaa; }
+    .btn-submit { background: #e50914; border: none; color: white; }
 
     /* Site Rating Footer Widget */
     .site-rating-section {
@@ -201,25 +274,19 @@
     }
 
     /* Mobile Responsive Optimizations */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       .nav-pill-container {
-        overflow-x: auto;
-        justify-content: flex-start;
-        flex-wrap: nowrap;
-        padding: 8px 15px;
-        scrollbar-width: none; /* Hide scrollbar for clean look */
+        padding: 6px 12px;
+        gap: 6px;
       }
-      .nav-pill-container::-webkit-scrollbar {
-        display: none;
-      }
+      .logo { font-size: 1rem; }
+      .nav-links li a { padding: 4px 6px; font-size: 0.75rem; }
       .movies-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 0 3% 40px 3%;
+        gap: 15px;
+        padding: 10px 4% 40px 4%;
       }
-      .poster-container {
-        height: 200px;
-      }
+      .poster-container { height: 210px; }
     }
   </style>
 </head>
@@ -240,8 +307,10 @@
       <div class="nav-right">
         <div class="search-container">
           <input type="text" id="searchInput" class="search-input-hidden" placeholder="Search..." onkeyup="applyFilters()" />
-          <button class="nav-search" onclick="toggleSearchBox()">🔍 Search</button>
+          <button class="nav-search-btn" onclick="toggleSearchBox()">🔍</button>
         </div>
+
+        <button class="report-btn" onclick="openReportModal()">⚠️ Report</button>
 
         <div class="ads-toggle">
           <span>Ads</span>
@@ -250,11 +319,47 @@
             <span class="slider"></span>
           </label>
         </div>
-
-        <button class="settings-btn" title="Settings">⚙️</button>
       </div>
     </div>
   </header>
+
+  <!-- Report Issue Modal -->
+  <div id="reportModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Report an Issue</h3>
+      
+      <div>
+        <label>Search & Select Movie:</label>
+        <input type="text" id="reportMovieSearch" class="modal-input" placeholder="Type to filter movies..." onkeyup="filterReportMovies()" style="margin-bottom: 6px;" />
+        <select id="reportMovieSelect" class="modal-select" size="3" style="height: 80px;">
+          <option value="Jailer 2">Jailer 2</option>
+          <option value="Mirzapur: The Movie">Mirzapur: The Movie</option>
+          <option value="Toxic">Toxic</option>
+          <option value="Jana Nayagan">Jana Nayagan</option>
+          <option value="Peddi">Peddi</option>
+          <option value="Irumudi">Irumudi</option>
+          <option value="Pushpa: The Rise">Pushpa: The Rise</option>
+          <option value="Pushpa 2: The Rule">Pushpa 2: The Rule</option>
+          <option value="3 Idiots">3 Idiots</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Select Problem:</label>
+        <div class="issue-chips" id="issueChipsContainer" style="margin-top: 5px;">
+          <div class="issue-chip" onclick="selectIssue(this)">Video link not working / broken</div>
+          <div class="issue-chip" onclick="selectIssue(this)">Wrong movie poster or title</div>
+          <div class="issue-chip" onclick="selectIssue(this)">Buffering / playback error</div>
+          <div class="issue-chip" onclick="selectIssue(this)">Incorrect year or genre info</div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn btn-cancel" onclick="closeReportModal()">Cancel</button>
+        <button class="modal-btn btn-submit" onclick="submitReport()">Submit Report</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Main Content Area -->
   <div id="mainContent">
@@ -315,7 +420,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">A</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=1234139&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=1234139&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -331,7 +436,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">A</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -347,7 +452,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=1213243&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=1213243&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -363,7 +468,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=1235877&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -379,7 +484,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=1057265&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -395,7 +500,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=1441228&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -411,7 +516,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=690957&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -427,12 +532,12 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=857598&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
 
-      <!-- Movie 9 -->
+      <!-- Movie 9 (3 Idiots) -->
       <div class="movie-card" data-title="3 idiots" data-genre="comedy drama" data-year="2009" data-country="india" data-age="ua" data-rating="8.4">
         <div class="poster-container"><img src="3idiots.webp" alt="3 Idiots" /></div>
         <div class="card-content">
@@ -443,7 +548,7 @@
             <span style="border: 1px solid #555; padding: 0 3px; font-size: 0.6rem;">UA</span>
           </div>
           <div class="hover-details">
-            <a href="https://redflix.co/play?id=3idiots&type=movie" target="_blank" rel="noopener noreferrer" referrerpolicy="unsafe-url" class="watch-btn">&#9654; Watch Now</a>
+            <a href="https://redflix.co/play?id=3idiots&type=movie" target="_blank" rel="noopener" class="watch-btn">&#9654; Watch Now</a>
           </div>
         </div>
       </div>
@@ -505,6 +610,38 @@
         mainContent.style.display = 'none';
         comingSoon.style.display = 'block';
       }
+    }
+
+    // Report Modal Logic
+    function openReportModal() {
+      document.getElementById('reportModal').style.display = 'flex';
+    }
+    function closeReportModal() {
+      document.getElementById('reportModal').style.display = 'none';
+    }
+    function filterReportMovies() {
+      let filter = document.getElementById('reportMovieSearch').value.toLowerCase();
+      let select = document.getElementById('reportMovieSelect');
+      let options = select.options;
+      for (let i = 0; i < options.length; i++) {
+        let txt = options[i].text.toLowerCase();
+        options[i].style.display = txt.includes(filter) ? '' : 'none';
+      }
+    }
+    function selectIssue(element) {
+      document.querySelectorAll('.issue-chip').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+    function submitReport() {
+      let movie = document.getElementById('reportMovieSelect').value;
+      let selectedChip = document.querySelector('.issue-chip.selected');
+      let issue = selectedChip ? selectedChip.innerText : "General Issue";
+      if (!movie) {
+        alert("Please select a movie.");
+        return;
+      }
+      alert("Report submitted successfully for [" + movie + "]: " + issue);
+      closeReportModal();
     }
 
     let currentTotalScore = 595;
