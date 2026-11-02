@@ -65,15 +65,15 @@
       padding: 30px 4%;
     }
     .movies-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       gap: 20px;
-      flex-wrap: wrap;
+      max-width: 1200px;
     }
     .movie-card {
       background: #1f1f1f;
       border-radius: 6px;
       overflow: hidden;
-      width: 180px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       display: flex;
       flex-direction: column;
@@ -171,4 +171,45 @@
               <img src="https://rukmini1.flixcart.com/image/1500/1500/xif0q/poster/m/p/q/medium-dhurandhar-gritty-cinematic-character-wall-poster-original-imahjmn894rhwqq5.jpeg?q=70" alt="Dhurandher Poster" />
             </div>
             <div class="movie-info">
-              <h
+              <h3 class="movie-title">Dhurandher</h3>
+              <p class="movie-genre">Action | Thriller</p>
+            </div>
+          </div>
+          <div class="play-btn-container">
+            <a href="https://redflix.co/play?id=1291608&type=movie&season=1&episode=1&server=vidbolt" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               referrerpolicy="unsafe-url"
+               class="play-btn">
+              Play Movie
+            </a>
+          </div>
+        </div>
+
+        <!-- Movie Card 2: 3 Idiots -->
+        <div class="movie-card">
+          <div>
+            <div class="poster-container">
+              <img src="https://www.tallengestore.com/cdn/shop/products/3_Idiots_-_Aamir_Khan_Bollywood_Cult_Classic_Hindi_Movie_Poster_f203b140-8e01-4a5c-8c1a-a7819f566e7e.jpg?v=1544769928" alt="3 Idiots Poster" />
+            </div>
+            <div class="movie-info">
+              <h3 class="movie-title">3 Idiots</h3>
+              <p class="movie-genre">Comedy | Drama</p>
+            </div>
+          </div>
+          <div class="play-btn-container">
+            <a href="https://redflix.co/play?id=20453&type=movie&server=vidbolt" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               referrerpolicy="unsafe-url"
+               class="play-btn">
+              Play Movie
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
