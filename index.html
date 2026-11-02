@@ -76,10 +76,7 @@
       margin: 0;
       padding: 0;
       align-items: center;
-      overflow-x: auto;
-      scrollbar-width: none;
     }
-    .nav-links::-webkit-scrollbar { display: none; }
     
     .nav-links li a {
       color: var(--text-muted);
@@ -158,17 +155,17 @@
     }
     .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Big Main Hero Billboard Banner (Made slightly bigger) */
+    /* Big Main Hero Billboard Banner */
     .main-hero-banner {
       position: relative;
       width: 100%;
-      height: 60vh;
-      min-height: 400px;
-      max-height: 600px;
+      height: 50vh;
+      min-height: 340px;
+      max-height: 500px;
       display: flex;
       align-items: flex-end;
-      padding: 45px 5%;
-      margin-bottom: 25px;
+      padding: 30px 4%;
+      margin-bottom: 20px;
       overflow: hidden;
       background: #111;
     }
@@ -193,7 +190,7 @@
       max-width: 650px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .main-hero-badge {
       display: inline-flex;
@@ -202,9 +199,9 @@
       background: rgba(229, 9, 20, 0.2);
       border: 1px solid var(--primary);
       color: #ff5f68;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.68rem;
       font-weight: 700;
       width: fit-content;
       text-transform: uppercase;
@@ -218,13 +215,13 @@
     .main-hero-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 0.85rem;
+      gap: 10px;
+      font-size: 0.8rem;
       color: #bbb;
     }
     .main-hero-rating { color: #46d369; font-weight: bold; }
     .main-hero-overview {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: #ccc;
       line-height: 1.45;
       margin: 0;
@@ -233,19 +230,19 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .main-hero-actions { display: flex; gap: 12px; margin-top: 6px; }
+    .main-hero-actions { display: flex; gap: 10px; margin-top: 4px; }
     .btn-main-hero-watch {
       background: #fff;
       color: #000;
       font-weight: 800;
-      font-size: 0.9rem;
-      padding: 10px 24px;
+      font-size: 0.85rem;
+      padding: 8px 20px;
       border-radius: 6px;
       border: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       text-decoration: none;
       transition: background 0.2s;
     }
@@ -294,7 +291,7 @@
     /* Filter Section Bar */
     .filter-bar {
       max-width: 1400px;
-      margin: 25px auto 12px auto;
+      margin: 20px auto 12px auto;
       padding: 0 4%;
       display: flex;
       gap: 10px;
@@ -450,15 +447,24 @@
     .site-star { color: #444; }
     .site-star.rated { color: #f5c518; }
 
-    /* Mobile Responsive Optimizations */
+    /* Mobile Responsive Fixes */
     @media (max-width: 768px) {
-      .nav-pill { padding: 4px 10px; gap: 4px; }
+      .nav-pill { 
+        padding: 6px 10px; 
+        gap: 6px; 
+        border-radius: 20px;
+      }
       .logo { font-size: 1rem; }
-      .nav-links li a { padding: 4px 6px; font-size: 0.7rem; }
-      .search-input { width: 85px; }
-      .search-input:focus { width: 110px; }
-      .main-hero-banner { height: 45vh; min-height: 300px; padding: 20px 4%; }
-      .main-hero-title { font-size: 1.8rem; }
+      .nav-links { 
+        width: 100%; 
+        justify-content: center; 
+        margin-top: 4px; 
+      }
+      .nav-links li a { padding: 4px 8px; font-size: 0.72rem; }
+      .search-input { width: 90px; }
+      .search-input:focus { width: 120px; }
+      .main-hero-banner { height: 40vh; min-height: 280px; padding: 15px 4%; }
+      .main-hero-title { font-size: 1.6rem !important; }
       .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       .poster-container { height: 190px; }
       .hero-banner { display: none !important; }
