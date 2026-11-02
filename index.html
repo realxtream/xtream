@@ -151,7 +151,101 @@
     }
     .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Floating Hero Banner (X=0, Y=0 relative to hovered poster card) */
+    /* Big Main Hero Billboard Banner */
+    .main-hero-banner {
+      position: relative;
+      width: 100%;
+      height: 55vh;
+      min-height: 380px;
+      max-height: 520px;
+      display: flex;
+      align-items: flex-end;
+      padding: 40px 5%;
+      margin-bottom: 25px;
+      overflow: hidden;
+      background: #111;
+    }
+    .main-hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: brightness(0.65);
+      z-index: 1;
+    }
+    .main-hero-gradient {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(0deg, var(--bg) 5%, rgba(11,11,14,0.4) 60%, rgba(11,11,14,0.8) 100%),
+                  linear-gradient(90deg, var(--bg) 0%, transparent 60%);
+      z-index: 2;
+    }
+    .main-hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .main-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(229, 9, 20, 0.2);
+      border: 1px solid var(--primary);
+      color: #ff5f68;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      width: fit-content;
+      text-transform: uppercase;
+    }
+    .main-hero-title {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin: 0;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+    .main-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #bbb;
+    }
+    .main-hero-rating { color: #46d369; font-weight: bold; }
+    .main-hero-overview {
+      font-size: 0.88rem;
+      color: #ccc;
+      line-height: 1.45;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .main-hero-actions { display: flex; gap: 12px; margin-top: 6px; }
+    .btn-main-hero-watch {
+      background: #fff;
+      color: #000;
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 10px 24px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-main-hero-watch:hover { background: var(--primary); color: #fff; transform: scale(1.03); }
+
+    /* Floating Hover Hero Banner (X=0, Y=0 relative to hovered poster card) */
     .hero-banner {
       display: none;
       position: absolute;
@@ -446,7 +540,27 @@
     </div>
   </header>
 
-  <!-- Floating Hero Banner (X=0, Y=0 relative to hovered poster card, auto-switches backdrop to TMDB Trailer after 3s) -->
+  <!-- Big Main Hero Billboard Banner -->
+  <section class="main-hero-banner" id="mainHeroBanner">
+    <img src="https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg" id="mainHeroBg" class="main-hero-bg" alt="Featured Backdrop" />
+    <div class="main-hero-gradient"></div>
+    <div class="main-hero-content">
+      <div class="main-hero-badge">🔥 Featured Today</div>
+      <h1 class="main-hero-title" id="mainHeroTitle">Mirzapur: The Movie</h1>
+      <div class="main-hero-meta">
+        <span class="main-hero-rating" id="mainHeroRating">★ 8.8</span>
+        <span id="mainHeroYear">2026</span>
+        <span style="border: 1px solid #777; padding: 0 4px; font-size: 0.65rem; border-radius: 3px;" id="mainHeroAge">A</span>
+        <span>India</span>
+      </div>
+      <p class="main-hero-overview" id="mainHeroOverview">The saga of power, deceit, and underworld supremacy unfolds on the big screen as the battle for the throne of Mirzapur reaches its final bloody chapter.</p>
+      <div class="main-hero-actions">
+        <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener" class="btn-main-hero-watch" id="mainHeroWatchBtn">▶ Watch Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Hover Hero Banner (X=0, Y=0 relative to hovered poster card, auto-switches backdrop to TMDB Trailer after 3s) -->
   <div id="floatingHero" class="hero-banner">
     <div class="hero-media-container" id="heroMediaContainer">
       <img src="" id="heroBackdrop" class="hero-bg" alt="Backdrop" />
@@ -563,7 +677,22 @@
       renderFilteredCatalog(movieCatalog);
       populateReportList();
       restoreRating();
+      initMainHero();
     });
+
+    function initMainHero() {
+      const hero = movieCatalog[0];
+      const data = cachedMovieData[hero.id] || {};
+      document.getElementById('mainHeroTitle').innerText = data.title || hero.name;
+      document.getElementById('mainHeroRating').innerText = `★ ${data.rating || hero.rating}`;
+      document.getElementById('mainHeroYear').innerText = data.year || hero.year;
+      document.getElementById('mainHeroAge').innerText = hero.age;
+      document.getElementById('mainHeroOverview').innerText = data.overview || "The saga of power, deceit, and underworld supremacy unfolds on the big screen as the battle for the throne of Mirzapur reaches its final bloody chapter.";
+      if (data.backdrop) {
+        document.getElementById('mainHeroBg').src = data.backdrop;
+      }
+      document.getElementById('mainHeroWatchBtn').href = `https://redflix.co/play?id=${hero.redflixId}&type=movie`;
+    }
 
     function renderSkeletonGrid() {
       const grid = document.getElementById('catalogGrid');
@@ -625,6 +754,7 @@
           };
         } catch(e) {}
       }));
+      initMainHero();
     }
 
     // Filter Logic
@@ -780,12 +910,17 @@
       document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
       document.getElementById(`nav-${tab}`).classList.add('active');
 
+      const mainHero = document.getElementById('mainHeroBanner');
+
       if (tab === 'mylist') {
+        mainHero.style.display = 'none';
         const saved = movieCatalog.filter(m => bookmarks.includes(m.id));
         renderFilteredCatalog(saved);
       } else if (tab === 'movies' || tab === 'home') {
+        mainHero.style.display = 'flex';
         renderFilteredCatalog(movieCatalog);
       } else {
+        mainHero.style.display = 'none';
         const grid = document.getElementById('catalogGrid');
         grid.innerHTML = `<p style="color:#777; grid-column: 1/-1; text-align:center; padding:40px;">Shows catalog will be updated shortly.</p>`;
       }
