@@ -6,34 +6,82 @@
   <title>XTREAM - Watch Free Movies & Shows</title>
   <style>
     body { background: #141414; margin: 0; font-family: sans-serif; color: white; }
-    header { background: #141414; padding: 15px 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+    header { background: #141414; padding: 15px 4%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; flex-wrap: wrap; gap: 15px; }
     .logo { color: #e50914; font-size: 1.6rem; margin: 0; letter-spacing: 2px; font-weight: bold; }
+    .nav-container { display: flex; align-items: center; gap: 30px; }
     .nav-links { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; font-size: 0.95rem; }
     .nav-links a { color: #b3b3b3; text-decoration: none; }
     .nav-links a.active { color: white; font-weight: bold; }
+    
+    .search-box {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid #333;
+      padding: 8px 14px;
+      border-radius: 4px;
+      color: white;
+      font-size: 0.9rem;
+      width: 220px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box:focus { border-color: #e50914; }
+
     .hero { padding: 50px 4%; background: linear-gradient(to bottom, rgba(20,20,20,0.8), #141414); }
     .hero-title { font-size: 2.5rem; margin: 10px 0; font-weight: 800; }
     .hero-btn { background: white; color: black; padding: 10px 24px; border-radius: 4px; font-weight: bold; font-size: 0.95rem; display: inline-block; text-decoration: none; }
+    
     .movies-section { padding: 30px 4%; }
     .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; max-width: 1200px; }
-    .movie-card { background: #1f1f1f; border-radius: 6px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: space-between; }
-    .poster-container { width: 100%; height: 250px; background: #000; overflow: hidden; }
-    .poster-container img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .movie-card { 
+      background: #1f1f1f; 
+      border-radius: 6px; 
+      overflow: hidden; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: space-between; 
+      transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    }
+    .movie-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
+    }
+
+    .poster-container { 
+      width: 100%; 
+      height: 250px; 
+      background: #111; 
+      overflow: hidden; 
+      position: relative; 
+    }
+    .poster-container img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      transition: transform 0.4s ease; 
+    }
+    .movie-card:hover .poster-container img { transform: scale(1.08); }
+
     .movie-info { padding: 10px 12px 2px 12px; }
     .movie-title { margin: 0 0 3px 0; font-size: 0.9rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .movie-genre { margin: 0; font-size: 0.75rem; color: #aaa; }
     .play-btn-container { padding: 10px 12px 12px 12px; }
-    .play-btn { display: block; text-align: center; background: #e50914; color: white; padding: 8px 0; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem; }
+    .play-btn { display: block; text-align: center; background: #e50914; color: white; padding: 8px 0; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem; transition: background 0.2s; }
+    .play-btn:hover { background: #f40612; }
   </style>
 </head>
 <body>
   <header>
-    <div style="display: flex; align-items: center; gap: 30px;">
+    <div class="nav-container">
       <h1 class="logo">XTREAM</h1>
       <ul class="nav-links">
         <li><a href="#" class="active">Home</a></li>
         <li><a href="#movies">Movies</a></li>
       </ul>
+    </div>
+    <div>
+      <input type="text" id="searchInput" class="search-box" placeholder="Search movies..." onkeyup="filterMovies()" />
     </div>
   </header>
 
@@ -51,13 +99,13 @@
 
     <section id="movies" class="movies-section">
       <h2 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 500; color: white;">Trending Movies</h2>
-      <div class="movies-grid">
+      <div class="movies-grid" id="moviesGrid">
         
         <!-- Movie 1: Jailer 2 -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="jailer 2">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/yF1eOkaYvwiORauRCPWznV9xVvi.jpg" alt="Jailer 2" />
+              <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80" alt="Jailer 2" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jailer 2</h3>
@@ -70,14 +118,14 @@
         </div>
 
         <!-- Movie 2: Mirzapur: The Movie -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="mirzapur the movie">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/r2J02Z29NzqfQKzQBXvClqjAOUn.jpg" alt="Mirzapur: The Movie" />
+              <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80" alt="Mirzapur: The Movie" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Mirzapur: The Movie</h3>
-              <p class="movie-genre">Action | Crime | Thriller</p>
+              <p class="movie-genre">Action | Thriller</p>
             </div>
           </div>
           <div class="play-btn-container">
@@ -86,10 +134,10 @@
         </div>
 
         <!-- Movie 3: Toxic -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="toxic">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/qNBAj3V4h9N5bTzXgS6l10nQJ0c.jpg" alt="Toxic" />
+              <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" alt="Toxic" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Toxic</h3>
@@ -102,10 +150,10 @@
         </div>
 
         <!-- Movie 4: Jana Nayagan -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="jana nayagan">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/gKkl37BUsVnygR2XqocO8c5qY2B.jpg" alt="Jana Nayagan" />
+              <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=500&q=80" alt="Jana Nayagan" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jana Nayagan</h3>
@@ -118,10 +166,10 @@
         </div>
 
         <!-- Movie 5: Peddi -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="peddi">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/4k7gEOUsH06z2m3k55e5W8u392r.jpg" alt="Peddi" />
+              <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80" alt="Peddi" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Peddi</h3>
@@ -134,10 +182,10 @@
         </div>
 
         <!-- Movie 6: Irumudi -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="irumudi">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/x5H6WvX5p3bZ2Qv592r2L0vQ.jpg" alt="Irumudi" />
+              <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=500&q=80" alt="Irumudi" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Irumudi</h3>
@@ -150,10 +198,10 @@
         </div>
 
         <!-- Movie 7: Pushpa: The Rise -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="pushpa the rise">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/mD1aXG4w3n8a0q8l32q1o95L.jpg" alt="Pushpa: The Rise" />
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80" alt="Pushpa: The Rise" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Pushpa: The Rise</h3>
@@ -166,10 +214,10 @@
         </div>
 
         <!-- Movie 8: Pushpa 2: The Rule -->
-        <div class="movie-card">
+        <div class="movie-card" data-title="pushpa 2 the rule">
           <div>
             <div class="poster-container">
-              <img src="https://image.tmdb.org/t/p/w500/nptv5W4qO5f15gYw7L97k5p250y.jpg" alt="Pushpa 2: The Rule" />
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt="Pushpa 2: The Rule" />
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Pushpa 2: The Rule</h3>
@@ -184,5 +232,21 @@
       </div>
     </section>
   </main>
+
+  <script>
+    function filterMovies() {
+      let input = document.getElementById('searchInput').value.toLowerCase();
+      let cards = document.getElementsByClassName('movie-card');
+
+      for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].getAttribute('data-title');
+        if (title.includes(input)) {
+          cards[i].style.display = "flex";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </body>
 </html>
