@@ -48,20 +48,26 @@
       box-shadow: 0 10px 20px rgba(229, 9, 20, 0.3);
     }
 
-    .poster-container { 
+    /* Clean Styled Card Header replacing broken images */
+    .poster-art { 
       width: 100%; 
-      height: 250px; 
-      background: #111; 
-      overflow: hidden; 
-      position: relative; 
+      height: 220px; 
+      background: linear-gradient(135deg, #1f1f1f 0%, #2a0808 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      text-align: center;
+      border-bottom: 2px solid #e50914;
     }
-    .poster-container img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      transition: transform 0.4s ease; 
+    .poster-art span {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    .movie-card:hover .poster-container img { transform: scale(1.08); }
 
     .movie-info { padding: 10px 12px 2px 12px; }
     .movie-title { margin: 0 0 3px 0; font-size: 0.9rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -101,11 +107,11 @@
       <h2 style="font-size: 1.2rem; margin-bottom: 15px; font-weight: 500; color: white;">Trending Movies</h2>
       <div class="movies-grid" id="moviesGrid">
         
-        <!-- Movie 1: Jailer 2 -->
+        <!-- Movie 1 -->
         <div class="movie-card" data-title="jailer 2">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80" alt="Jailer 2" />
+            <div class="poster-art">
+              <span>Jailer 2</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jailer 2</h3>
@@ -117,11 +123,11 @@
           </div>
         </div>
 
-        <!-- Movie 2: Mirzapur: The Movie -->
+        <!-- Movie 2 -->
         <div class="movie-card" data-title="mirzapur the movie">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80" alt="Mirzapur: The Movie" />
+            <div class="poster-art">
+              <span>Mirzapur</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Mirzapur: The Movie</h3>
@@ -133,11 +139,11 @@
           </div>
         </div>
 
-        <!-- Movie 3: Toxic -->
+        <!-- Movie 3 -->
         <div class="movie-card" data-title="toxic">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80" alt="Toxic" />
+            <div class="poster-art">
+              <span>Toxic</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Toxic</h3>
@@ -149,11 +155,11 @@
           </div>
         </div>
 
-        <!-- Movie 4: Jana Nayagan -->
+        <!-- Movie 4 -->
         <div class="movie-card" data-title="jana nayagan">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=500&q=80" alt="Jana Nayagan" />
+            <div class="poster-art">
+              <span>Jana Nayagan</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jana Nayagan</h3>
@@ -165,11 +171,11 @@
           </div>
         </div>
 
-        <!-- Movie 5: Peddi -->
+        <!-- Movie 5 -->
         <div class="movie-card" data-title="peddi">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=500&q=80" alt="Peddi" />
+            <div class="poster-art">
+              <span>Peddi</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Peddi</h3>
@@ -181,11 +187,11 @@
           </div>
         </div>
 
-        <!-- Movie 6: Irumudi -->
+        <!-- Movie 6 -->
         <div class="movie-card" data-title="irumudi">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=500&q=80" alt="Irumudi" />
+            <div class="poster-art">
+              <span>Irumudi</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Irumudi</h3>
@@ -197,11 +203,11 @@
           </div>
         </div>
 
-        <!-- Movie 7: Pushpa: The Rise -->
+        <!-- Movie 7 -->
         <div class="movie-card" data-title="pushpa the rise">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80" alt="Pushpa: The Rise" />
+            <div class="poster-art">
+              <span>Pushpa: The Rise</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Pushpa: The Rise</h3>
@@ -213,11 +219,11 @@
           </div>
         </div>
 
-        <!-- Movie 8: Pushpa 2: The Rule -->
+        <!-- Movie 8 -->
         <div class="movie-card" data-title="pushpa 2 the rule">
           <div>
-            <div class="poster-container">
-              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80" alt="Pushpa 2: The Rule" />
+            <div class="poster-art">
+              <span>Pushpa 2</span>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Pushpa 2: The Rule</h3>
