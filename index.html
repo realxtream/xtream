@@ -103,7 +103,6 @@
     }
     .search-input:focus { width: 240px; border-color: var(--primary); }
 
-    /* Instant Search Dropdown */
     .search-results-dropdown {
       display: none;
       position: absolute;
@@ -148,143 +147,91 @@
     }
     .report-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* Hero Billboard */
+    /* Floating Hero Banner (X=0, Y=0 relative to hovered poster) */
     .hero-banner {
-      position: relative;
-      width: 100%;
-      height: 60vh;
-      min-height: 400px;
-      max-height: 580px;
-      display: flex;
-      align-items: flex-end;
-      padding: 40px 5%;
-      margin-bottom: 20px;
+      display: none;
+      position: absolute;
+      width: 380px;
+      background: #14141c;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.95);
+      z-index: 2500;
       overflow: hidden;
-      background: #111;
+      pointer-events: none;
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
     .hero-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      width: 100%;
+      height: 180px;
       object-fit: cover;
-      object-position: center 20%;
-      filter: brightness(0.65);
-      z-index: 1;
-      transition: opacity 0.4s ease;
-    }
-    .hero-gradient {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(0deg, var(--bg) 5%, rgba(11,11,14,0.4) 60%, rgba(11,11,14,0.8) 100%),
-                  linear-gradient(90deg, var(--bg) 0%, transparent 60%);
-      z-index: 2;
+      display: block;
     }
     .hero-content {
-      position: relative;
-      z-index: 3;
-      max-width: 650px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(229, 9, 20, 0.2);
-      border: 1px solid var(--primary);
-      color: #ff5f68;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      width: fit-content;
-      text-transform: uppercase;
+      gap: 8px;
     }
     .hero-title {
-      font-size: 2.6rem;
-      font-weight: 900;
+      font-size: 1.1rem;
+      font-weight: 800;
       margin: 0;
-      line-height: 1.1;
-      letter-spacing: -0.5px;
     }
     .hero-meta {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 0.85rem;
+      gap: 10px;
+      font-size: 0.78rem;
       color: #bbb;
     }
     .hero-rating { color: #46d369; font-weight: bold; }
     .hero-overview {
-      font-size: 0.88rem;
-      color: #ccc;
-      line-height: 1.45;
+      font-size: 0.8rem;
+      color: #aaa;
+      line-height: 1.35;
       margin: 0;
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .hero-actions { display: flex; gap: 12px; margin-top: 6px; }
-    .btn-hero-watch {
-      background: #fff;
-      color: #000;
-      font-weight: 800;
-      font-size: 0.9rem;
-      padding: 10px 24px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-hero-watch:hover { background: var(--primary); color: #fff; transform: scale(1.03); }
-    .btn-hero-trailer {
-      background: rgba(255,255,255,0.18);
-      color: #fff;
-      backdrop-filter: blur(8px);
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 10px 20px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.25);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-    .btn-hero-trailer:hover { background: rgba(255,255,255,0.3); transform: scale(1.03); }
 
-    /* Shelf Section */
-    .shelves-container { max-width: 1400px; margin: 0 auto; padding: 0 4% 50px 4%; }
-    .shelf-group { margin-bottom: 38px; }
-    .shelf-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin: 0 0 14px 0;
+    /* Filter Section Bar */
+    .filter-bar {
+      max-width: 1400px;
+      margin: 25px auto 15px auto;
+      padding: 0 4%;
       display: flex;
-      align-items: center;
-      gap: 8px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      outline: none;
+      cursor: pointer;
+    }
+    .filter-select:hover { border-color: var(--primary); }
+
+    /* Movies Catalog Grid */
+    .catalog-container { max-width: 1400px; margin: 0 auto; padding: 0 4% 50px 4%; }
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+      gap: 20px;
     }
 
-    .shelf-row {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding: 12px 4px 22px 4px;
-      scrollbar-width: thin;
-      scrollbar-color: #333 transparent;
-    }
-    .shelf-row::-webkit-scrollbar { height: 6px; }
-    .shelf-row::-webkit-scrollbar-thumb { background: #262632; border-radius: 10px; }
-
+    /* Movie Cards */
     .movie-card {
-      flex: 0 0 205px;
       background: var(--surface-card);
       border-radius: var(--radius);
       overflow: hidden;
@@ -319,16 +266,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    .skeleton {
-      background: linear-gradient(90deg, #16161d 25%, #24242e 50%, #16161d 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
     }
 
     .card-content {
@@ -404,16 +341,6 @@
       transition: background 0.2s;
     }
     .btn-overlay-play:hover { background: var(--primary-hover); color: #fff; }
-    .btn-overlay-trailer {
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: #fff;
-      padding: 6px 0;
-      border-radius: 4px;
-      font-size: 0.72rem;
-      cursor: pointer;
-      text-align: center;
-    }
 
     /* Trailer Modal */
     .player-modal {
@@ -467,7 +394,7 @@
       border: none;
     }
 
-    /* Report Modal */
+    /* Report Modal with Poster Preview */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -484,12 +411,28 @@
       padding: 22px;
       border-radius: var(--radius);
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
     .modal-card h3 { margin: 0; font-size: 1.15rem; }
+    .report-flex-preview {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      background: #0e0e13;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .report-preview-poster {
+      width: 60px;
+      height: 85px;
+      object-fit: cover;
+      border-radius: 4px;
+      background: #000;
+    }
     .modal-select {
       background: #0b0b0e;
       border: 1px solid var(--border);
@@ -520,11 +463,11 @@
     .btn-cancel { background: transparent; border: 1px solid #444; color: #aaa; padding: 6px 14px; border-radius: 6px; cursor: pointer; }
     .btn-submit { background: var(--primary); border: none; color: #fff; padding: 6px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
-    /* Site Rating Widget */
+    /* Enhanced Interactive Rating Section */
     .site-rating-section {
       max-width: 1400px;
-      margin: 20px auto 40px auto;
-      padding: 18px 4%;
+      margin: 30px auto 50px auto;
+      padding: 24px 4%;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -532,24 +475,21 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
     }
-    .site-rating-info h4 { margin: 0 0 4px 0; font-size: 1.05rem; }
-    .site-rating-info p { margin: 0; color: var(--text-muted); font-size: 0.78rem; }
-    .site-stars { font-size: 1.4rem; cursor: pointer; display: flex; gap: 5px; }
-    .site-star { color: #444; transition: color 0.2s; }
-    .site-star.rated { color: #f5c518; }
+    .site-rating-info h4 { margin: 0 0 6px 0; font-size: 1.15rem; }
+    .site-rating-info p { margin: 0; color: var(--text-muted); font-size: 0.82rem; }
+    .site-stars { font-size: 1.8rem; cursor: pointer; display: flex; gap: 6px; }
+    .site-star { color: #444; transition: color 0.2s, transform 0.2s; }
+    .site-star:hover, .site-star.rated { color: #f5c518; transform: scale(1.1); }
 
     @media (max-width: 768px) {
       .nav-pill { padding: 6px 12px; }
       .search-input { width: 110px; }
       .search-input:focus { width: 140px; }
-      .hero-banner { height: 48vh; padding: 20px 4%; }
-      .hero-title { font-size: 1.7rem; }
-      .movie-card { flex: 0 0 145px; }
+      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .poster-container { height: 210px; }
-      .hover-overlay { opacity: 1; background: linear-gradient(180deg, transparent 50%, rgba(10,10,14,0.95) 90%); pointer-events: auto; }
-      .btn-overlay-trailer { display: none; }
+      .hero-banner { display: none !important; } /* Disable floating hover popup on small touch devices */
     }
   </style>
 </head>
@@ -578,41 +518,50 @@
     </div>
   </header>
 
-  <!-- Hero Billboard Feature -->
-  <section class="hero-banner" id="heroBanner">
-    <img src="" id="heroBackdrop" class="hero-bg" alt="Featured Backdrop" />
-    <div class="hero-gradient"></div>
+  <!-- Floating Hero Banner (Positioned at X=0, Y=0 relative to hovered poster card) -->
+  <div id="floatingHero" class="hero-banner">
+    <img src="" id="heroBackdrop" class="hero-bg" alt="Backdrop" />
     <div class="hero-content">
-      <div class="hero-badge" id="heroBadge">🔥 Featured Today</div>
-      <h1 class="hero-title" id="heroTitle">Loading...</h1>
+      <h3 class="hero-title" id="heroTitle">Title</h3>
       <div class="hero-meta">
         <span class="hero-rating" id="heroRating">★ --</span>
         <span id="heroYear">----</span>
         <span style="border: 1px solid #777; padding: 0 4px; font-size: 0.65rem; border-radius: 3px;" id="heroAge">A</span>
-        <span>India</span>
       </div>
-      <p class="hero-overview" id="heroOverview">Hover over any movie poster to preview its details here.</p>
-      <div class="hero-actions">
-        <a href="#" target="_blank" rel="noopener" class="btn-hero-watch" id="heroWatchBtn">▶ Watch Now</a>
-        <button class="btn-hero-trailer" id="heroTrailerBtn">🎬 Trailer</button>
-      </div>
+      <p class="hero-overview" id="heroOverview">Overview...</p>
     </div>
-  </section>
+  </div>
 
-  <!-- Main Shelves Area -->
-  <main class="shelves-container" id="mainShelves">
-    <div class="shelf-group">
-      <h2 class="shelf-title">🔥 Trending Blockbusters</h2>
-      <div class="shelf-row" id="shelfTrending"></div>
-    </div>
-    <div class="shelf-group">
-      <h2 class="shelf-title">💥 High-Octane Action & Crime</h2>
-      <div class="shelf-row" id="shelfAction"></div>
-    </div>
-    <div class="shelf-group">
-      <h2 class="shelf-title">🌟 All-Time Favorites</h2>
-      <div class="shelf-row" id="shelfClassics"></div>
-    </div>
+  <!-- Filter Options Bar -->
+  <div class="filter-bar">
+    <select id="genreFilter" class="filter-select" onchange="applyFilters()">
+      <option value="all">Genres: All</option>
+      <option value="action">Action</option>
+      <option value="thriller">Thriller</option>
+      <option value="crime">Crime</option>
+      <option value="drama">Drama</option>
+      <option value="comedy">Comedy</option>
+    </select>
+
+    <select id="yearFilter" class="filter-select" onchange="applyFilters()">
+      <option value="all">Years: All</option>
+      <option value="2026">2026</option>
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+      <option value="2021">2021</option>
+      <option value="2009">2009</option>
+    </select>
+
+    <select id="sortFilter" class="filter-select" onchange="applyFilters()">
+      <option value="popular">Sort: Most Popular</option>
+      <option value="rating">Sort: Highest Rated</option>
+      <option value="latest">Sort: Latest Release</option>
+    </select>
+  </div>
+
+  <!-- Main Catalog Grid Area -->
+  <main class="catalog-container">
+    <div class="catalog-grid" id="catalogGrid"></div>
   </main>
 
   <!-- Trailer Modal -->
@@ -628,19 +577,23 @@
     </div>
   </div>
 
-  <!-- Report Modal -->
+  <!-- Report Modal with Movie Poster Preview -->
   <div id="reportModal" class="modal-overlay">
     <div class="modal-card">
       <h3>Report an Issue</h3>
-      <div>
-        <label style="font-size:0.75rem; color:#888;">Select Movie:</label>
-        <select id="reportMovieSelect" class="modal-select"></select>
+      <div class="report-flex-preview">
+        <img id="reportPosterPreview" src="" class="report-preview-poster" alt="Poster" />
+        <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+          <label style="font-size:0.75rem; color:#888;">Select Movie:</label>
+          <select id="reportMovieSelect" class="modal-select" onchange="updateReportPreview()"></select>
+        </div>
       </div>
       <div>
         <label style="font-size:0.75rem; color:#888;">Select Problem:</label>
         <div class="issue-chips" id="issueChipsContainer" style="margin-top:6px;">
           <div class="issue-chip selected" onclick="selectIssue(this)">Video link not working</div>
           <div class="issue-chip" onclick="selectIssue(this)">Wrong poster / info displayed</div>
+          <div class="issue-chip" onclick="selectIssue(this)">Buffering / playback error</div>
         </div>
       </div>
       <div class="modal-actions">
@@ -650,18 +603,18 @@
     </div>
   </div>
 
-  <!-- Site Rating Widget -->
+  <!-- Enhanced Interactive Rating Section -->
   <footer class="site-rating-section">
     <div class="site-rating-info">
-      <h4 id="siteRatingTitle">How is your XTREAM experience?</h4>
-      <p id="siteRatingStats">Average: <span id="avgRating">4.8</span> / 5 (<span id="totalVotes">124</span> votes)</p>
+      <h4 id="siteRatingTitle">Rate Your Experience with XTREAM</h4>
+      <p id="siteRatingStats">Average Community Score: <span id="avgRating">4.8</span> / 5 (<span id="totalVotes">124</span> total ratings)</p>
     </div>
-    <div class="site-stars" id="siteStars">
-      <span class="site-star" onclick="rateSite(1)">★</span>
-      <span class="site-star" onclick="rateSite(2)">★</span>
-      <span class="site-star" onclick="rateSite(3)">★</span>
-      <span class="site-star" onclick="rateSite(4)">★</span>
-      <span class="site-star" onclick="rateSite(5)">★</span>
+    <div class="site-stars" id="siteStars" onmouseleave="resetStarHover()">
+      <span class="site-star" onclick="rateSite(1)" onmouseenter="hoverStars(1)">★</span>
+      <span class="site-star" onclick="rateSite(2)" onmouseenter="hoverStars(2)">★</span>
+      <span class="site-star" onclick="rateSite(3)" onmouseenter="hoverStars(3)">★</span>
+      <span class="site-star" onclick="rateSite(4)" onmouseenter="hoverStars(4)">★</span>
+      <span class="site-star" onclick="rateSite(5)" onmouseenter="hoverStars(5)">★</span>
     </div>
   </footer>
 
@@ -671,61 +624,39 @@
     const TMDB_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
     const movieCatalog = [
-      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", shelf: "trending", age: "A", rating: 8.8, redflixId: "1378537", trailerKey: "qeVjYn_U6Fk" },
-      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", shelf: "trending", age: "UA", rating: 8.4, redflixId: "1213243", trailerKey: "9bZkp7q19f0" },
-      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", shelf: "trending", age: "UA", rating: 8.5, redflixId: "857598", trailerKey: "g3JUbgZXBaM" },
-      { id: 1234139, name: "Jailer 2", year: "2026", shelf: "action", age: "A", rating: 8.2, redflixId: "1234139", trailerKey: "Y5BeWdODPqo" },
-      { id: 1235877, name: "Jana Nayagan", year: "2026", shelf: "action", age: "UA", rating: 8.1, redflixId: "1235877", trailerKey: "dQw4w9WgXcQ" },
-      { id: 1057265, name: "Peddi", year: "2026", shelf: "action", age: "UA", rating: 8.0, redflixId: "1057265", trailerKey: "dQw4w9WgXcQ" },
-      { id: 1441228, name: "Irumudi", year: "2026", shelf: "action", age: "UA", rating: 7.9, redflixId: "1441228", trailerKey: "dQw4w9WgXcQ" },
-      { id: 690957,  name: "Pushpa: The Rise", year: "2021", shelf: "classics", age: "UA", rating: 7.6, redflixId: "690957", trailerKey: "pKctjlpbcdc" },
-      { id: 20453,   name: "3 Idiots", year: "2009", shelf: "classics", age: "UA", rating: 8.4, redflixId: "20453", trailerKey: "K0eDlFX9GMc" }
+      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", age: "A", rating: 8.8, redflixId: "1378537", trailerKey: "qeVjYn_U6Fk" },
+      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", age: "UA", rating: 8.4, redflixId: "1213243", trailerKey: "9bZkp7q19f0" },
+      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", age: "UA", rating: 8.5, redflixId: "857598", trailerKey: "g3JUbgZXBaM" },
+      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", age: "A", rating: 8.2, redflixId: "1234139", trailerKey: "Y5BeWdODPqo" },
+      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", age: "UA", rating: 8.1, redflixId: "1235877", trailerKey: "dQw4w9WgXcQ" },
+      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", age: "UA", rating: 8.0, redflixId: "1057265", trailerKey: "dQw4w9WgXcQ" },
+      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", age: "UA", rating: 7.9, redflixId: "1441228", trailerKey: "dQw4w9WgXcQ" },
+      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", age: "UA", rating: 7.6, redflixId: "690957", trailerKey: "pKctjlpbcdc" },
+      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", age: "UA", rating: 8.4, redflixId: "20453", trailerKey: "K0eDlFX9GMc" }
     ];
 
     let cachedMovieData = {};
     let bookmarks = JSON.parse(localStorage.getItem('xtream_bookmarks') || '[]');
 
     window.addEventListener('DOMContentLoaded', async () => {
-      renderSkeletonShelves();
+      renderSkeletonGrid();
       await fetchAllTmdbData();
-      updateHeroBanner(movieCatalog[0]); // Default to first movie
-      renderShelves();
+      renderFilteredCatalog(movieCatalog);
       populateReportList();
       restoreRating();
     });
 
-    function updateHeroBanner(movie) {
-      const data = cachedMovieData[movie.id] || {};
-      
-      document.getElementById('heroTitle').innerText = data.title || movie.name;
-      document.getElementById('heroRating').innerText = `★ ${data.rating || movie.rating}`;
-      document.getElementById('heroYear').innerText = data.year || movie.year;
-      document.getElementById('heroAge').innerText = movie.age;
-      document.getElementById('heroOverview').innerText = data.overview || "Explore this title on XTREAM.";
-      
-      if (data.backdrop) {
-        document.getElementById('heroBackdrop').src = data.backdrop;
-      } else {
-        document.getElementById('heroBackdrop').src = "https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg";
-      }
-
-      document.getElementById('heroWatchBtn').href = `https://redflix.co/play?id=${movie.redflixId}&type=movie`;
-      document.getElementById('heroTrailerBtn').onclick = () => openTrailerModal(movie);
-    }
-
-    function renderSkeletonShelves() {
-      ['shelfTrending', 'shelfAction', 'shelfClassics'].forEach(shelfId => {
-        const row = document.getElementById(shelfId);
-        row.innerHTML = Array(4).fill(0).map(() => `
-          <div class="movie-card">
-            <div class="poster-container skeleton"></div>
-            <div class="card-content">
-              <div style="height:14px; width:75%; margin-bottom:6px;" class="skeleton"></div>
-              <div style="height:10px; width:45%;" class="skeleton"></div>
-            </div>
+    function renderSkeletonGrid() {
+      const grid = document.getElementById('catalogGrid');
+      grid.innerHTML = Array(8).fill(0).map(() => `
+        <div class="movie-card">
+          <div class="poster-container skeleton"></div>
+          <div class="card-content">
+            <div style="height:14px; width:75%; margin-bottom:6px;" class="skeleton"></div>
+            <div style="height:10px; width:45%;" class="skeleton"></div>
           </div>
-        `).join('');
-      });
+        </div>
+      `).join('');
     }
 
     async function fetchAllTmdbData() {
@@ -747,21 +678,37 @@
       }));
     }
 
-    function renderShelves() {
-      const trendingRow = document.getElementById('shelfTrending');
-      const actionRow = document.getElementById('shelfAction');
-      const classicsRow = document.getElementById('shelfClassics');
+    // Filter Logic
+    function applyFilters() {
+      const genreVal = document.getElementById('genreFilter').value;
+      const yearVal = document.getElementById('yearFilter').value;
+      const sortVal = document.getElementById('sortFilter').value;
 
-      trendingRow.innerHTML = '';
-      actionRow.innerHTML = '';
-      classicsRow.innerHTML = '';
-
-      movieCatalog.forEach(m => {
-        const cardHtml = createCardElement(m);
-        if (m.shelf === 'trending') trendingRow.appendChild(cardHtml);
-        else if (m.shelf === 'action') actionRow.appendChild(cardHtml);
-        else classicsRow.appendChild(cardHtml);
+      let filtered = movieCatalog.filter(m => {
+        const matchesGenre = genreVal === 'all' || m.genre.includes(genreVal);
+        const matchesYear = yearVal === 'all' || m.year === yearVal;
+        return matchesGenre && matchesYear;
       });
+
+      if (sortVal === 'rating') {
+        filtered.sort((a, b) => b.rating - a.rating);
+      } else if (sortVal === 'latest') {
+        filtered.sort((a, b) => parseInt(b.year) - parseInt(a.year));
+      } else {
+        filtered.sort((a, b) => b.rating - a.rating);
+      }
+
+      renderFilteredCatalog(filtered);
+    }
+
+    function renderFilteredCatalog(list) {
+      const grid = document.getElementById('catalogGrid');
+      grid.innerHTML = '';
+      if (list.length === 0) {
+        grid.innerHTML = `<p style="color:#777; grid-column: 1/-1; text-align:center; padding:40px;">No movies found matching your filter criteria.</p>`;
+        return;
+      }
+      list.forEach(m => grid.appendChild(createCardElement(m)));
     }
 
     function createCardElement(m) {
@@ -780,7 +727,6 @@
           <img src="${poster}" alt="${title}" loading="lazy" />
           <div class="hover-overlay">
             <a href="${watchUrl}" target="_blank" rel="noopener" class="btn-overlay-play">▶ Play Now</a>
-            <button class="btn-overlay-trailer">🎬 Trailer</button>
           </div>
         </div>
         <div class="card-content">
@@ -796,27 +742,31 @@
         </div>
       `;
 
-      // Hover event to dynamically update the hero banner
-      div.addEventListener('mouseenter', () => {
-        updateHeroBanner(m);
+      // X=0, Y=0 coordinate alignment relative to poster container on hover
+      div.addEventListener('mouseenter', (e) => {
+        const posterBox = div.querySelector('.poster-container').getBoundingClientRect();
+        const hero = document.getElementById('floatingHero');
+        
+        document.getElementById('heroTitle').innerText = title;
+        document.getElementById('heroRating').innerText = `★ ${rating}`;
+        document.getElementById('heroYear').innerText = year;
+        document.getElementById('heroAge').innerText = m.age;
+        document.getElementById('heroOverview').innerText = data.overview || "Explore this exciting title on XTREAM.";
+        document.getElementById('heroBackdrop').src = data.backdrop || poster;
+
+        hero.style.top = (window.scrollY + posterBox.top) + 'px';
+        hero.style.left = (window.scrollX + posterBox.left) + 'px';
+        hero.style.display = 'block';
       });
 
-      div.querySelector('.btn-overlay-trailer').onclick = (e) => { e.stopPropagation(); openTrailerModal(m); };
+      div.addEventListener('mouseleave', () => {
+        document.getElementById('floatingHero').style.display = 'none';
+      });
+
       div.querySelector('.bookmark-btn').onclick = (e) => { e.stopPropagation(); toggleBookmark(m.id, e.target); };
       div.onclick = () => window.open(watchUrl, '_blank', 'noopener');
 
       return div;
-    }
-
-    function openTrailerModal(movie) {
-      document.getElementById('trailerModalTitle').innerText = `${movie.name} - Official Trailer`;
-      document.getElementById('trailerPlayerFrame').src = `https://www.youtube.com/embed/${movie.trailerKey}?autoplay=1`;
-      document.getElementById('trailerModal').style.display = 'flex';
-    }
-
-    function closeTrailerModal() {
-      document.getElementById('trailerModal').style.display = 'none';
-      document.getElementById('trailerPlayerFrame').src = '';
     }
 
     function handleLiveSearch(query) {
@@ -837,7 +787,7 @@
           const poster = data.poster || `https://placehold.co/100x150/141418/e50914?text=${encodeURIComponent(m.name)}`;
           const watchUrl = `https://redflix.co/play?id=${m.redflixId}&type=movie`;
           return `
-            <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item" onmouseenter="updateHeroBanner(movieCatalog.find(x => x.id === ${m.id}))">
+            <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item">
               <img src="${poster}" class="search-thumb" alt="${m.name}" />
               <div class="search-item-info">
                 <h4>${m.name}</h4>
@@ -872,40 +822,19 @@
       document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
       document.getElementById(`nav-${tab}`).classList.add('active');
 
-      const hero = document.getElementById('heroBanner');
-      const trendingShelf = document.getElementById('shelfTrending').parentElement;
-      const actionShelf = document.getElementById('shelfAction').parentElement;
-      const classicsShelf = document.getElementById('shelfClassics').parentElement;
-
-      if (tab === 'movies' || tab === 'home') {
-        hero.style.display = 'flex';
-        trendingShelf.style.display = 'block';
-        actionShelf.style.display = 'block';
-        classicsShelf.style.display = 'block';
-      } else if (tab === 'mylist') {
-        hero.style.display = 'none';
-        actionShelf.style.display = 'none';
-        classicsShelf.style.display = 'none';
-        trendingShelf.querySelector('.shelf-title').innerText = '🔖 My Bookmarked Titles';
-        
-        const trendingRow = document.getElementById('shelfTrending');
-        trendingRow.innerHTML = '';
+      if (tab === 'mylist') {
         const saved = movieCatalog.filter(m => bookmarks.includes(m.id));
-        if (saved.length === 0) {
-          trendingRow.innerHTML = `<p style="color:#777; font-size:0.9rem; padding:10px;">Your saved list is empty.</p>`;
-        } else {
-          saved.forEach(m => trendingRow.appendChild(createCardElement(m)));
-        }
+        renderFilteredCatalog(saved);
+      } else if (tab === 'movies' || tab === 'home') {
+        renderFilteredCatalog(movieCatalog);
       } else {
-        hero.style.display = 'none';
-        actionShelf.style.display = 'none';
-        classicsShelf.style.display = 'none';
-        trendingShelf.querySelector('.shelf-title').innerText = '📺 Shows Catalog';
-        document.getElementById('shelfTrending').innerHTML = `<p style="color:#777; font-size:0.9rem; padding:10px;">Series catalog will be updated shortly.</p>`;
+        const grid = document.getElementById('catalogGrid');
+        grid.innerHTML = `<p style="color:#777; grid-column: 1/-1; text-align:center; padding:40px;">Shows catalog will be updated shortly.</p>`;
       }
     }
 
-    function openReportModal() { document.getElementById('reportModal').style.display = 'flex'; }
+    // Report Modal with Poster Preview
+    function openReportModal() { document.getElementById('reportModal').style.display = 'flex'; updateReportPreview(); }
     function closeReportModal() { document.getElementById('reportModal').style.display = 'none'; }
     function selectIssue(chip) {
       document.querySelectorAll('.issue-chip').forEach(c => c.classList.remove('selected'));
@@ -919,17 +848,35 @@
         opt.textContent = m.name;
         select.appendChild(opt);
       });
+      updateReportPreview();
+    }
+    function updateReportPreview() {
+      const selectName = document.getElementById('reportMovieSelect').value;
+      const movieObj = movieCatalog.find(m => m.name === selectName);
+      const previewImg = document.getElementById('reportPosterPreview');
+      if (movieObj && cachedMovieData[movieObj.id] && cachedMovieData[movieObj.id].poster) {
+        previewImg.src = cachedMovieData[movieObj.id].poster;
+      } else {
+        previewImg.src = `https://placehold.co/100x150/141418/e50914?text=Poster`;
+      }
     }
     function submitReport() {
       const movie = document.getElementById('reportMovieSelect').value;
       const issue = document.querySelector('.issue-chip.selected').innerText;
-      alert(`Report logged for [${movie}]: ${issue}. We will fix this link.`);
+      alert(`Report logged for [${movie}]: ${issue}. Thank you!`);
       closeReportModal();
     }
 
+    // Enhanced Rating Section Logic
     function restoreRating() {
       const saved = localStorage.getItem('xtream_user_rating');
       if (saved) highlightStars(parseInt(saved, 10));
+    }
+    function hoverStars(val) {
+      document.querySelectorAll('.site-star').forEach((s, idx) => s.classList.toggle('rated', idx < val));
+    }
+    function resetStarHover() {
+      restoreRating();
     }
     function highlightStars(val) {
       document.querySelectorAll('.site-star').forEach((s, idx) => s.classList.toggle('rated', idx < val));
@@ -937,12 +884,12 @@
     function rateSite(stars) {
       localStorage.setItem('xtream_user_rating', stars);
       highlightStars(stars);
-      document.getElementById('siteRatingTitle').innerText = "Thank you for supporting XTREAM!";
+      document.getElementById('siteRatingTitle').innerText = "Thank you for rating XTREAM!";
+      document.getElementById('siteRatingStats').innerText = `Your rating: ${stars}/5 Stars recorded successfully.`;
     }
 
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closeTrailerModal();
         closeReportModal();
       }
     });
