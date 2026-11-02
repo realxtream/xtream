@@ -55,13 +55,21 @@
       overflow: hidden; 
       position: relative; 
     }
-    .poster-container img { 
+    .poster-container img, .poster-container iframe { 
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%; 
       height: 100%; 
       object-fit: cover; 
-      transition: transform 0.4s ease; 
+      border: none;
+      transition: opacity 0.3s ease;
     }
-    .movie-card:hover .poster-container img { transform: scale(1.08); }
+    
+    /* Show poster by default, hide trailer. Swap on hover */
+    .poster-container iframe { opacity: 0; pointer-events: none; }
+    .movie-card:hover .poster-container iframe { opacity: 1; pointer-events: auto; }
+    .movie-card:hover .poster-container img { opacity: 0; }
 
     .movie-info { padding: 10px 12px 2px 12px; }
     .movie-title { margin: 0 0 3px 0; font-size: 0.9rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -106,6 +114,7 @@
           <div>
             <div class="poster-container">
               <img src="jailer2.webp" alt="Jailer 2" />
+              <iframe src="https://www.youtube.com/embed/g2Nf2A8s5bQ?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jailer 2</h3>
@@ -122,6 +131,7 @@
           <div>
             <div class="poster-container">
               <img src="mirzapur.webp" alt="Mirzapur: The Movie" />
+              <iframe src="https://www.youtube.com/embed/z5XW5x0c7Q8?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Mirzapur: The Movie</h3>
@@ -138,6 +148,7 @@
           <div>
             <div class="poster-container">
               <img src="toxic.webp" alt="Toxic" />
+              <iframe src="https://www.youtube.com/embed/1W9W2A2W2W2?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Toxic</h3>
@@ -154,6 +165,7 @@
           <div>
             <div class="poster-container">
               <img src="jananayagan.webp" alt="Jana Nayagan" />
+              <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Jana Nayagan</h3>
@@ -170,6 +182,7 @@
           <div>
             <div class="poster-container">
               <img src="peddi.webp" alt="Peddi" />
+              <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Peddi</h3>
@@ -186,6 +199,7 @@
           <div>
             <div class="poster-container">
               <img src="irumudi.webp" alt="Irumudi" />
+              <iframe src="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Irumudi</h3>
@@ -202,6 +216,7 @@
           <div>
             <div class="poster-container">
               <img src="pushpa1.webp" alt="Pushpa: The Rise" />
+              <iframe src="https://www.youtube.com/embed/pKwx0MgZEsw?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Pushpa: The Rise</h3>
@@ -218,6 +233,7 @@
           <div>
             <div class="poster-container">
               <img src="pushpa2.webp" alt="Pushpa 2: The Rule" />
+              <iframe src="https://www.youtube.com/embed/1_A2wPfZv6M?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">Pushpa 2: The Rule</h3>
@@ -234,6 +250,7 @@
           <div>
             <div class="poster-container">
               <img src="3idiots.webp" alt="3 Idiots" />
+              <iframe src="https://www.youtube.com/embed/K0eDlFX9GMc?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay"></iframe>
             </div>
             <div class="movie-info">
               <h3 class="movie-title">3 Idiots</h3>
