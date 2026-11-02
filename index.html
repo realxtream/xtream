@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XTREAM - Movies & Shows</title>
   <style>
-    body { background: #0b0b0e; margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: white; overflow-x: hidden; }
+    body { 
+      background: #0b0b0e; 
+      margin: 0; 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+      color: white; 
+      overflow-x: hidden; 
+    }
     
     /* Floating Pill Header */
     header { 
@@ -33,17 +39,54 @@
       gap: 10px;
     }
 
-    .logo { color: #e50914; font-size: 1.2rem; margin: 0; letter-spacing: 1px; font-weight: 900; text-decoration: none; white-space: nowrap; cursor: pointer; }
+    .logo { 
+      color: #e50914; 
+      font-size: 1.2rem; 
+      margin: 0; 
+      letter-spacing: 1px; 
+      font-weight: 900; 
+      text-decoration: none; 
+      white-space: nowrap; 
+      cursor: pointer; 
+    }
     
-    .nav-links { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; font-size: 0.8rem; align-items: center; }
-    .nav-links li a { color: #999; text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.2s; padding: 5px 8px; border-radius: 20px; white-space: nowrap; cursor: pointer; }
+    .nav-links { 
+      list-style: none; 
+      display: flex; 
+      gap: 4px; 
+      margin: 0; 
+      padding: 0; 
+      font-size: 0.8rem; 
+      align-items: center; 
+    }
+    .nav-links li a { 
+      color: #999; 
+      text-decoration: none; 
+      display: flex; 
+      align-items: center; 
+      gap: 4px; 
+      transition: color 0.2s; 
+      padding: 5px 8px; 
+      border-radius: 20px; 
+      white-space: nowrap; 
+      cursor: pointer; 
+    }
     .nav-links li a:hover { color: white; }
     .nav-links li a.active { color: white; background: #22222a; font-weight: 600; }
 
     .nav-right { display: flex; align-items: center; gap: 8px; }
     
     .search-container { display: flex; align-items: center; position: relative; }
-    .nav-search-btn { color: #aaa; background: transparent; border: none; outline: none; cursor: pointer; font-size: 1rem; padding: 6px; border-radius: 50%; }
+    .nav-search-btn { 
+      color: #aaa; 
+      background: transparent; 
+      border: none; 
+      outline: none; 
+      cursor: pointer; 
+      font-size: 1rem; 
+      padding: 6px; 
+      border-radius: 50%; 
+    }
     .nav-search-btn:hover { color: white; background: #1f1f28; }
     
     .search-input-hidden { 
@@ -55,18 +98,55 @@
       border-radius: 20px; 
       outline: none; 
       font-size: 0.8rem; 
-      width: 110px; 
+      width: 120px; 
     }
 
-    .ads-toggle { display: flex; align-items: center; gap: 4px; font-size: 0.7rem; color: #aaa; background: #1a1a22; padding: 4px 8px; border-radius: 20px; border: 1px solid #2a2a35; white-space: nowrap; }
+    .ads-toggle { 
+      display: flex; 
+      align-items: center; 
+      gap: 4px; 
+      font-size: 0.7rem; 
+      color: #aaa; 
+      background: #1a1a22; 
+      padding: 4px 8px; 
+      border-radius: 20px; 
+      border: 1px solid #2a2a35; 
+      white-space: nowrap; 
+    }
     .switch { position: relative; display: inline-block; width: 26px; height: 14px; }
     .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .3s; border-radius: 14px; }
-    .slider:before { position: absolute; content: ""; height: 10px; width: 10px; left: 2px; bottom: 2px; background-color: white; transition: .3s; border-radius: 50%; }
+    .slider { 
+      position: absolute; 
+      cursor: pointer; 
+      top: 0; left: 0; right: 0; bottom: 0; 
+      background-color: #333; 
+      transition: .3s; 
+      border-radius: 14px; 
+    }
+    .slider:before { 
+      position: absolute; 
+      content: ""; 
+      height: 10px; 
+      width: 10px; 
+      left: 2px; 
+      bottom: 2px; 
+      background-color: white; 
+      transition: .3s; 
+      border-radius: 50%; 
+    }
     input:checked + .slider { background-color: #e50914; }
     input:checked + .slider:before { transform: translateX(12px); }
 
-    .report-btn { background: #222; border: 1px solid #333; color: #bbb; font-size: 0.75rem; padding: 5px 10px; border-radius: 15px; cursor: pointer; white-space: nowrap; }
+    .report-btn { 
+      background: #222; 
+      border: 1px solid #333; 
+      color: #bbb; 
+      font-size: 0.75rem; 
+      padding: 5px 10px; 
+      border-radius: 15px; 
+      cursor: pointer; 
+      white-space: nowrap; 
+    }
     .report-btn:hover { background: #e50914; color: white; border-color: #e50914; }
 
     /* Filter Section */
@@ -87,7 +167,7 @@
       cursor: pointer;
       outline: none;
       flex: 1;
-      min-width: 95px;
+      min-width: 100px;
     }
     .dropdown:hover { background: #1f1f28; color: white; }
 
@@ -112,17 +192,11 @@
       flex-direction: column;
       transform-origin: center center;
     }
-    
-    .movie-card:hover {
-      transform: scale(1.15) translateY(-15px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 25px rgba(229, 9, 20, 0.3);
-      z-index: 500;
-    }
 
     .poster-container { 
       width: 100%; 
       height: 280px; 
-      background: #000; 
+      background: #101014; 
       overflow: hidden; 
       position: relative; 
     }
@@ -130,6 +204,7 @@
       width: 100%; 
       height: 100%; 
       object-fit: cover; 
+      display: block;
     }
 
     .card-content {
@@ -138,9 +213,39 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
+      flex: 1;
     }
 
-    .movie-title { margin: 0; font-size: 0.95rem; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; }
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .movie-title { 
+      margin: 0; 
+      font-size: 0.95rem; 
+      color: white; 
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      font-weight: bold; 
+      flex: 1;
+    }
+
+    .bookmark-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.5;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .bookmark-btn:hover { opacity: 1; transform: scale(1.15); }
+    .bookmark-btn.active { opacity: 1; }
     
     .meta-row {
       display: flex;
@@ -152,18 +257,10 @@
     .rating { color: #46d369; font-weight: bold; }
 
     .hover-details {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
       display: flex;
       flex-direction: column;
       gap: 6px;
-    }
-
-    .movie-card:hover .hover-details {
-      max-height: 100px;
-      opacity: 1;
+      margin-top: auto;
     }
 
     .watch-btn { 
@@ -180,7 +277,26 @@
     }
     .watch-btn:hover { background: #e50914; color: white; }
 
-    /* Report Issue Modal Overlay */
+    /* Netflix Desktop Hover Animation */
+    @media (hover: hover) and (pointer: fine) {
+      .movie-card:hover {
+        transform: scale(1.12) translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 25px rgba(229, 9, 20, 0.3);
+        z-index: 500;
+      }
+      .hover-details {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+      }
+      .movie-card:hover .hover-details {
+        max-height: 60px;
+        opacity: 1;
+      }
+    }
+
+    /* Modal Overlay */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -213,6 +329,7 @@
       font-size: 0.85rem;
       outline: none;
       width: 100%;
+      box-sizing: border-box;
     }
     .issue-chips { display: flex; flex-direction: column; gap: 8px; }
     .issue-chip {
@@ -262,7 +379,7 @@
     .site-star { color: #444; transition: color 0.2s; }
     .site-star.rated { color: #f5c518; }
 
-    /* Coming Soon Placeholder View */
+    /* Empty / Coming Soon View */
     .coming-soon-view {
       display: none;
       text-align: center;
@@ -272,20 +389,17 @@
       font-weight: 500;
     }
 
-    /* Mobile Responsive Optimizations */
+    /* Mobile Responsive */
     @media (max-width: 768px) {
-      .nav-pill-container {
-        padding: 6px 12px;
-        gap: 6px;
-      }
+      .nav-pill-container { padding: 6px 12px; gap: 6px; }
       .logo { font-size: 1rem; }
       .nav-links li a { padding: 4px 6px; font-size: 0.75rem; }
       .movies-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 14px;
         padding: 10px 4% 40px 4%;
       }
-      .poster-container { height: 210px; }
+      .poster-container { height: 220px; }
     }
   </style>
 </head>
@@ -331,15 +445,7 @@
         <label>Search & Select Movie:</label>
         <input type="text" id="reportMovieSearch" class="modal-input" placeholder="Type to filter movies..." onkeyup="filterReportMovies()" style="margin-bottom: 6px;" />
         <select id="reportMovieSelect" class="modal-select" size="3" style="height: 80px;">
-          <option value="Jailer 2">Jailer 2</option>
-          <option value="Mirzapur: The Movie">Mirzapur: The Movie</option>
-          <option value="Toxic">Toxic</option>
-          <option value="Jana Nayagan">Jana Nayagan</option>
-          <option value="Peddi">Peddi</option>
-          <option value="Irumudi">Irumudi</option>
-          <option value="Pushpa: The Rise">Pushpa: The Rise</option>
-          <option value="Pushpa 2: The Rule">Pushpa 2: The Rule</option>
-          <option value="3 Idiots">3 Idiots</option>
+          <!-- Dynamically filled by JS -->
         </select>
       </div>
 
@@ -364,7 +470,7 @@
   <div id="mainContent">
     <div class="filter-section">
       <h2 class="page-title" id="pageTitle">Movies</h2>
-      <p class="page-subtitle" id="pageSubtitle">Explore movies with genre, year, and country filters. Release-date sorting and TMDB-style scores.</p>
+      <p class="page-subtitle" id="pageSubtitle">Explore movies with genre, year, and rating filters.</p>
       
       <div class="filters-bar" id="filtersBar">
         <div class="dropdown-group">
@@ -406,13 +512,19 @@
       </div>
     </div>
 
+    <!-- Movie Cards Grid -->
     <div class="movies-grid" id="moviesGrid">
       
       <!-- Movie 1 -->
       <div class="movie-card" data-title="jailer 2" data-genre="action crime" data-year="2026" data-country="india" data-age="a" data-rating="8.2">
-        <div class="poster-container"><img src="jailer2.webp" alt="Jailer 2" /></div>
+        <div class="poster-container">
+          <img src="https://placehold.co/400x600/18181c/e50914?text=Jailer+2" alt="Jailer 2" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Jailer+2';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Jailer 2</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Jailer 2</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Jailer 2')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">8.2</span>
             <span>2026</span>
@@ -425,10 +537,15 @@
       </div>
 
       <!-- Movie 2 -->
-      <div class="movie-card" data-title="mirzapur the movie" data-genre="action thriller" data-year="2026" data-country="india" data-age="a" data-rating="8.8">
-        <div class="poster-container"><img src="mirzapur.webp" alt="Mirzapur: The Movie" /></div>
+      <div class="movie-card" data-title="mirzapur: the movie" data-genre="action thriller crime" data-year="2026" data-country="india" data-age="a" data-rating="8.8">
+        <div class="poster-container">
+          <img src="https://placehold.co/400x600/18181c/e50914?text=Mirzapur:+The+Movie" alt="Mirzapur: The Movie" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Mirzapur:+The+Movie';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Mirzapur: The Movie</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Mirzapur: The Movie</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Mirzapur: The Movie')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">8.8</span>
             <span>2026</span>
@@ -441,10 +558,15 @@
       </div>
 
       <!-- Movie 3 -->
-      <div class="movie-card" data-title="toxic" data-genre="action drama" data-year="2025" data-country="india" data-age="ua" data-rating="8.4">
-        <div class="poster-container"><img src="toxic.webp" alt="Toxic" /></div>
+      <div class="movie-card" data-title="toxic: a fairy tale for grown-ups" data-genre="action drama" data-year="2025" data-country="india" data-age="ua" data-rating="8.4">
+        <div class="poster-container">
+          <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="Toxic" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Toxic';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Toxic</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Toxic: A Fairy Tale</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Toxic: A Fairy Tale')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">8.4</span>
             <span>2025</span>
@@ -458,9 +580,14 @@
 
       <!-- Movie 4 -->
       <div class="movie-card" data-title="jana nayagan" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.1">
-        <div class="poster-container"><img src="jananayagan.webp" alt="Jana Nayagan" /></div>
+        <div class="poster-container">
+          <img src="https://placehold.co/400x600/18181c/e50914?text=Jana+Nayagan" alt="Jana Nayagan" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Jana+Nayagan';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Jana Nayagan</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Jana Nayagan</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Jana Nayagan')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">8.1</span>
             <span>2026</span>
@@ -474,9 +601,14 @@
 
       <!-- Movie 5 -->
       <div class="movie-card" data-title="peddi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="8.0">
-        <div class="poster-container"><img src="peddi.webp" alt="Peddi" /></div>
+        <div class="poster-container">
+          <img src="https://placehold.co/400x600/18181c/e50914?text=Peddi" alt="Peddi" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Peddi';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Peddi</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Peddi</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Peddi')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">8.0</span>
             <span>2026</span>
@@ -490,9 +622,14 @@
 
       <!-- Movie 6 -->
       <div class="movie-card" data-title="irumudi" data-genre="action drama" data-year="2026" data-country="india" data-age="ua" data-rating="7.9">
-        <div class="poster-container"><img src="irumudi.webp" alt="Irumudi" /></div>
+        <div class="poster-container">
+          <img src="https://placehold.co/400x600/18181c/e50914?text=Irumudi" alt="Irumudi" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Irumudi';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Irumudi</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Irumudi</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Irumudi')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">7.9</span>
             <span>2026</span>
@@ -505,10 +642,15 @@
       </div>
 
       <!-- Movie 7 -->
-      <div class="movie-card" data-title="pushpa the rise" data-genre="action thriller" data-year="2021" data-country="india" data-age="ua" data-rating="7.6">
-        <div class="poster-container"><img src="pushpa1.webp" alt="Pushpa: The Rise" /></div>
+      <div class="movie-card" data-title="pushpa: the rise" data-genre="action thriller" data-year="2021" data-country="india" data-age="ua" data-rating="7.6">
+        <div class="poster-container">
+          <img src="https://image.tmdb.org/t/p/w500/11ii5hyg1YqJb7eNf9d0c6lU64q.jpg" alt="Pushpa: The Rise" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Pushpa:+The+Rise';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Pushpa: The Rise</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Pushpa: The Rise</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Pushpa: The Rise')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">7.6</span>
             <span>2021</span>
@@ -521,10 +663,15 @@
       </div>
 
       <!-- Movie 8 -->
-      <div class="movie-card" data-title="pushpa 2 the rule" data-genre="action drama" data-year="2024" data-country="india" data-age="ua" data-rating="8.5">
-        <div class="poster-container"><img src="pushpa2.webp" alt="Pushpa 2: The Rule" /></div>
+      <div class="movie-card" data-title="pushpa 2: the rule" data-genre="action drama" data-year="2024" data-country="india" data-age="ua" data-rating="8.5">
+        <div class="poster-container">
+          <img src="https://image.tmdb.org/t/p/w500/bA4j5bTq3xR7kY1PZkF4z9C6w1B.jpg" alt="Pushpa 2: The Rule" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=Pushpa+2:+The+Rule';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">Pushpa 2: The Rule</h3>
+          <div class="title-row">
+            <h3 class="movie-title">Pushpa 2: The Rule</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, 'Pushpa 2: The Rule')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">8.5</span>
             <span>2024</span>
@@ -536,11 +683,16 @@
         </div>
       </div>
 
-      <!-- Movie 9 (3 Idiots - Fixed ID 20453) -->
+      <!-- Movie 9 -->
       <div class="movie-card" data-title="3 idiots" data-genre="comedy drama" data-year="2009" data-country="india" data-age="ua" data-rating="8.4">
-        <div class="poster-container"><img src="3idiots.webp" alt="3 Idiots" /></div>
+        <div class="poster-container">
+          <img src="https://image.tmdb.org/t/p/w500/66A9MqX3Z3964Q2gq0r1fT3u5d7.jpg" alt="3 Idiots" onerror="this.onerror=null; this.src='https://placehold.co/400x600/18181c/e50914?text=3+Idiots';" />
+        </div>
         <div class="card-content">
-          <h3 class="movie-title">3 Idiots</h3>
+          <div class="title-row">
+            <h3 class="movie-title">3 Idiots</h3>
+            <button class="bookmark-btn" onclick="toggleBookmark(event, '3 Idiots')" title="Add to My List">🔖</button>
+          </div>
           <div class="meta-row">
             <span class="rating">8.4</span>
             <span>2009</span>
@@ -570,12 +722,24 @@
     </div>
   </div>
 
-  <!-- Coming Soon View -->
+  <!-- Placeholder View for Shows/Anime -->
   <div id="comingSoonView" class="coming-soon-view">
-    <p>----- will be added soon</p>
+    <p>Titles will be added soon!</p>
   </div>
 
   <script>
+    let currentTotalScore = 595;
+    let currentVoteCount = 124;
+    let myBookmarkedTitles = JSON.parse(localStorage.getItem('xtream_mylist') || '[]');
+
+    // Setup on Page Load
+    window.addEventListener('DOMContentLoaded', () => {
+      populateReportDropdown();
+      restoreSavedRating();
+      updateBookmarkStyles();
+    });
+
+    // Toggle Search Bar
     function toggleSearchBox() {
       let box = document.getElementById('searchInput');
       if (box.style.display === 'inline-block') {
@@ -588,6 +752,7 @@
       }
     }
 
+    // Switch Top Header Tabs
     function switchTab(tabName, event) {
       if (event) event.preventDefault();
       
@@ -601,22 +766,71 @@
         mainContent.style.display = 'block';
         comingSoon.style.display = 'none';
         document.getElementById('pageTitle').innerText = tabName === 'movies' ? 'Movies' : 'Home';
+        applyFilters();
+      } else if (tabName === 'mylist') {
+        document.getElementById('nav-mylist').classList.add('active');
+        mainContent.style.display = 'block';
+        comingSoon.style.display = 'none';
+        document.getElementById('pageTitle').innerText = 'My Saved List';
+        
+        let cards = document.querySelectorAll('.movie-card');
+        cards.forEach(card => {
+          let title = card.querySelector('.movie-title').innerText.trim();
+          card.style.display = myBookmarkedTitles.includes(title) ? 'flex' : 'none';
+        });
       } else {
         if (tabName === 'shows') document.getElementById('nav-shows').classList.add('active');
         if (tabName === 'anime') document.getElementById('nav-anime').classList.add('active');
-        if (tabName === 'mylist') document.getElementById('nav-mylist').classList.add('active');
         
         mainContent.style.display = 'none';
         comingSoon.style.display = 'block';
       }
     }
 
-    // Report Modal Logic
+    // Bookmarks Management
+    function toggleBookmark(e, title) {
+      e.stopPropagation();
+      if (myBookmarkedTitles.includes(title)) {
+        myBookmarkedTitles = myBookmarkedTitles.filter(t => t !== title);
+      } else {
+        myBookmarkedTitles.push(title);
+      }
+      localStorage.setItem('xtream_mylist', JSON.stringify(myBookmarkedTitles));
+      updateBookmarkStyles();
+    }
+
+    function updateBookmarkStyles() {
+      document.querySelectorAll('.movie-card').forEach(card => {
+        let title = card.querySelector('.movie-title').innerText.trim();
+        let btn = card.querySelector('.bookmark-btn');
+        if (myBookmarkedTitles.includes(title)) {
+          btn.classList.add('active');
+          btn.style.opacity = '1';
+        } else {
+          btn.classList.remove('active');
+          btn.style.opacity = '0.5';
+        }
+      });
+    }
+
+    // Modal Operations
     function openReportModal() {
       document.getElementById('reportModal').style.display = 'flex';
     }
     function closeReportModal() {
       document.getElementById('reportModal').style.display = 'none';
+    }
+    function populateReportDropdown() {
+      let select = document.getElementById('reportMovieSelect');
+      select.innerHTML = '';
+      document.querySelectorAll('.movie-card').forEach(card => {
+        let title = card.querySelector('.movie-title').innerText.trim();
+        let opt = document.createElement('option');
+        opt.value = title;
+        opt.textContent = title;
+        select.appendChild(opt);
+      });
+      if (select.options.length > 0) select.selectedIndex = 0;
     }
     function filterReportMovies() {
       let filter = document.getElementById('reportMovieSearch').value.toLowerCase();
@@ -639,32 +853,48 @@
         alert("Please select a movie.");
         return;
       }
-      alert("Report submitted successfully for [" + movie + "]: " + issue);
+      alert("Report submitted for [" + movie + "]: " + issue);
       closeReportModal();
     }
 
-    let currentTotalScore = 595;
-    let currentVoteCount = 124;
+    // Close Modal on Outside Click or Escape
+    window.addEventListener('click', (e) => {
+      let modal = document.getElementById('reportModal');
+      if (e.target === modal) closeReportModal();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeReportModal();
+    });
 
-    function rateSite(stars) {
-      currentTotalScore += stars;
-      currentVoteCount += 1;
-      let newAvg = (currentTotalScore / currentVoteCount).toFixed(1);
-
-      document.getElementById('avgRating').innerText = newAvg;
-      document.getElementById('totalVotes').innerText = currentVoteCount;
-      document.getElementById('siteRatingTitle').innerText = "Thank you for rating XTREAM!";
-
-      let starElements = document.querySelectorAll('.site-star');
-      starElements.forEach((el, index) => {
-        if (index < stars) {
-          el.classList.add('rated');
-        } else {
-          el.classList.remove('rated');
-        }
+    // Rating System with LocalStorage
+    function restoreSavedRating() {
+      let saved = localStorage.getItem('xtream_site_rating');
+      if (saved) {
+        highlightStars(parseInt(saved, 10));
+        document.getElementById('siteRatingTitle').innerText = "Thanks for your feedback!";
+      }
+    }
+    function highlightStars(count) {
+      document.querySelectorAll('.site-star').forEach((el, index) => {
+        el.classList.toggle('rated', index < count);
       });
     }
+    function rateSite(stars) {
+      let saved = localStorage.getItem('xtream_site_rating');
+      if (saved) return;
 
+      currentTotalScore += stars;
+      currentVoteCount += 1;
+      localStorage.setItem('xtream_site_rating', stars);
+
+      let newAvg = (currentTotalScore / currentVoteCount).toFixed(1);
+      document.getElementById('avgRating').innerText = newAvg;
+      document.getElementById('totalVotes').innerText = currentVoteCount;
+      document.getElementById('siteRatingTitle').innerText = "Thanks for rating XTREAM!";
+      highlightStars(stars);
+    }
+
+    // Search, Filter, and Sort System
     function applyFilters() {
       let searchInput = document.getElementById('searchInput').value.toLowerCase();
       let genreVal = document.getElementById('genreFilter').value;
