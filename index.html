@@ -505,7 +505,7 @@
       </div>
       <p class="main-hero-overview" id="mainHeroOverview">The saga of power, deceit, and underworld supremacy unfolds on the big screen as the battle for the throne of Mirzapur reaches its final bloody chapter.</p>
       <div class="main-hero-actions">
-        <a href="https://vidsrc.xyz/embed/movie?tmdb=1378537" target="_blank" rel="noopener" class="btn-main-hero-watch" id="mainHeroWatchBtn">▶ Watch Now</a>
+        <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener" class="btn-main-hero-watch" id="mainHeroWatchBtn">▶ Watch Now</a>
       </div>
     </div>
   </section>
@@ -605,15 +605,15 @@
     const TMDB_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
     const movieCatalog = [
-      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", age: "A", rating: 8.8 },
-      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", age: "UA", rating: 8.4 },
-      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", age: "UA", rating: 8.5 },
-      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", age: "A", rating: 8.2 },
-      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", age: "UA", rating: 8.1 },
-      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", age: "UA", rating: 8.0 },
-      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", age: "UA", rating: 7.9 },
-      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", age: "UA", rating: 7.6 },
-      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", age: "UA", rating: 8.4 }
+      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", age: "A", rating: 8.8, redflixId: "1378537" },
+      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", age: "UA", rating: 8.4, redflixId: "1213243" },
+      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", age: "UA", rating: 8.5, redflixId: "857598" },
+      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", age: "A", rating: 8.2, redflixId: "1234139" },
+      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", age: "UA", rating: 8.1, redflixId: "1235877" },
+      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", age: "UA", rating: 8.0, redflixId: "1057265" },
+      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", age: "UA", rating: 7.9, redflixId: "1441228" },
+      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", age: "UA", rating: 7.6, redflixId: "690957" },
+      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", age: "UA", rating: 8.4, redflixId: "20453" }
     ];
 
     let cachedMovieData = {};
@@ -645,7 +645,7 @@
       if (data.backdrop) {
         document.getElementById('mainHeroBg').src = data.backdrop;
       }
-      document.getElementById('mainHeroWatchBtn').href = `https://vidsrc.xyz/embed/movie?tmdb=${movie.id}`;
+      document.getElementById('mainHeroWatchBtn').href = `https://redflix.co/play?id=${movie.redflixId}&type=movie`;
     }
 
     function renderSkeletonGrid() {
@@ -750,7 +750,7 @@
       const rating = data.rating || m.rating;
       const year = data.year || m.year;
       const isBookmarked = bookmarks.includes(m.id);
-      const watchUrl = `https://vidsrc.xyz/embed/movie?tmdb=${m.id}`;
+      const watchUrl = `https://redflix.co/play?id=${m.redflixId}&type=movie`;
 
       const a = document.createElement('a');
       a.className = 'movie-card';
@@ -835,7 +835,7 @@
         dropdown.innerHTML = matches.map(m => {
           const data = cachedMovieData[m.id] || {};
           const poster = data.poster || `https://placehold.co/100x150/141418/e50914?text=${encodeURIComponent(m.name)}`;
-          const watchUrl = `https://vidsrc.xyz/embed/movie?tmdb=${m.id}`;
+          const watchUrl = `https://redflix.co/play?id=${m.redflixId}&type=movie`;
           return `
             <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item">
               <img src="${poster}" class="search-thumb" alt="${m.name}" />
