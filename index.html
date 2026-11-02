@@ -160,6 +160,7 @@
       padding: 40px 5%;
       margin-bottom: 20px;
       overflow: hidden;
+      background: #111; /* fallback color */
     }
     .hero-bg {
       position: absolute;
@@ -168,7 +169,6 @@
       object-position: center 20%;
       filter: brightness(0.65);
       z-index: 1;
-      transition: opacity 0.8s ease;
     }
     .hero-gradient {
       position: absolute;
@@ -270,7 +270,6 @@
       gap: 8px;
     }
 
-    /* Horizontal Movie Shelf */
     .shelf-row {
       display: flex;
       gap: 16px;
@@ -283,7 +282,6 @@
     .shelf-row::-webkit-scrollbar { height: 6px; }
     .shelf-row::-webkit-scrollbar-thumb { background: #262632; border-radius: 10px; }
 
-    /* Movie Cards */
     .movie-card {
       flex: 0 0 205px;
       background: var(--surface-card);
@@ -320,10 +318,8 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: opacity 0.3s ease;
     }
 
-    /* Skeleton Loading Shimmer */
     .skeleton {
       background: linear-gradient(90deg, #16161d 25%, #24242e 50%, #16161d 75%);
       background-size: 200% 100%;
@@ -378,7 +374,6 @@
     .card-rating { color: #46d369; font-weight: bold; }
     .card-age { border: 1px solid #444; padding: 0 4px; border-radius: 3px; font-size: 0.62rem; }
 
-    /* Netflix-style Overlay Hover */
     .hover-overlay {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -419,7 +414,7 @@
       text-align: center;
     }
 
-    /* Trailer Player Modal */
+    /* Trailer Modal */
     .player-modal {
       display: none;
       position: fixed;
@@ -471,7 +466,7 @@
       border: none;
     }
 
-    /* Generic Modal Window */
+    /* Report Modal */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -544,7 +539,6 @@
     .site-star { color: #444; transition: color 0.2s; }
     .site-star.rated { color: #f5c518; }
 
-    /* Mobile Adaptations */
     @media (max-width: 768px) {
       .nav-pill { padding: 6px 12px; }
       .search-input { width: 110px; }
@@ -585,20 +579,20 @@
 
   <!-- Hero Billboard Feature -->
   <section class="hero-banner" id="heroBanner">
-    <img src="https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg" id="heroBackdrop" class="hero-bg" alt="Featured Poster" />
+    <img src="" id="heroBackdrop" class="hero-bg" alt="Featured Backdrop" />
     <div class="hero-gradient"></div>
     <div class="hero-content">
       <div class="hero-badge">🔥 Featured Today</div>
-      <h1 class="hero-title" id="heroTitle">Mirzapur: The Movie</h1>
+      <h1 class="hero-title" id="heroTitle">Loading...</h1>
       <div class="hero-meta">
-        <span class="hero-rating" id="heroRating">★ 8.8</span>
-        <span id="heroYear">2026</span>
+        <span class="hero-rating" id="heroRating">★ --</span>
+        <span id="heroYear">----</span>
         <span style="border: 1px solid #777; padding: 0 4px; font-size: 0.65rem; border-radius: 3px;">A</span>
         <span>India</span>
       </div>
-      <p class="hero-overview" id="heroOverview">The saga of power, deceit, and underworld supremacy unfolds on the big screen as the battle for the throne of Mirzapur reaches its final bloody chapter.</p>
+      <p class="hero-overview" id="heroOverview">Fetching featured movie details from database...</p>
       <div class="hero-actions">
-        <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener" class="btn-hero-watch" id="heroWatchBtn">▶ Watch Now</a>
+        <a href="#" target="_blank" rel="noopener" class="btn-hero-watch" id="heroWatchBtn">▶ Watch Now</a>
         <button class="btn-hero-trailer" id="heroTrailerBtn">🎬 Trailer</button>
       </div>
     </div>
@@ -606,25 +600,18 @@
 
   <!-- Main Shelves Area -->
   <main class="shelves-container" id="mainShelves">
-    
-    <!-- Shelf 1: Trending Now -->
     <div class="shelf-group">
       <h2 class="shelf-title">🔥 Trending Blockbusters</h2>
       <div class="shelf-row" id="shelfTrending"></div>
     </div>
-
-    <!-- Shelf 2: Action & Crime -->
     <div class="shelf-group">
       <h2 class="shelf-title">💥 High-Octane Action & Crime</h2>
       <div class="shelf-row" id="shelfAction"></div>
     </div>
-
-    <!-- Shelf 3: All Time Classics -->
     <div class="shelf-group">
       <h2 class="shelf-title">🌟 All-Time Favorites</h2>
       <div class="shelf-row" id="shelfClassics"></div>
     </div>
-
   </main>
 
   <!-- Trailer Player Modal -->
@@ -698,9 +685,9 @@
     let bookmarks = JSON.parse(localStorage.getItem('xtream_bookmarks') || '[]');
 
     window.addEventListener('DOMContentLoaded', async () => {
-      initHeroBillboard();
       renderSkeletonShelves();
       await fetchAllTmdbData();
+      initHeroBillboard();
       renderShelves();
       populateReportList();
       restoreRating();
@@ -708,9 +695,19 @@
 
     function initHeroBillboard() {
       const hero = movieCatalog[0];
-      document.getElementById('heroTitle').innerText = hero.name;
-      document.getElementById('heroRating').innerText = `★ ${hero.rating}`;
-      document.getElementById('heroYear').innerText = hero.year;
+      const data = cachedMovieData[hero.id] || {};
+      
+      document.getElementById('heroTitle').innerText = data.title || hero.name;
+      document.getElementById('heroRating').innerText = `★ ${data.rating || hero.rating}`;
+      document.getElementById('heroYear').innerText = data.year || hero.year;
+      document.getElementById('heroOverview').innerText = data.overview || "The saga of power, deceit, and underworld supremacy unfolds on the big screen.";
+      
+      if (data.backdrop) {
+        document.getElementById('heroBackdrop').src = data.backdrop;
+      } else {
+        document.getElementById('heroBackdrop').src = "https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg";
+      }
+
       document.getElementById('heroWatchBtn').href = `https://redflix.co/play?id=${hero.redflixId}&type=movie`;
       document.getElementById('heroTrailerBtn').onclick = () => openTrailerModal(hero);
     }
@@ -739,8 +736,10 @@
             cachedMovieData[m.id] = {
               title: data.title || m.name,
               poster: data.poster_path ? `${TMDB_IMG}${data.poster_path}` : null,
+              backdrop: data.backdrop_path ? `${TMDB_ORIGINAL}${data.backdrop_path}` : null,
               rating: data.vote_average ? data.vote_average.toFixed(1) : m.rating,
-              year: data.release_date ? data.release_date.split('-')[0] : m.year
+              year: data.release_date ? data.release_date.split('-')[0] : m.year,
+              overview: data.overview || ''
             };
           }
         } catch(e) {}
