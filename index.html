@@ -319,7 +319,7 @@
       gap: 15px;
     }
 
-    /* Movie Cards as Anchors for Mobile Compatibility */
+    /* Movie Cards as Anchors */
     .movie-card {
       background: var(--surface-card);
       border-radius: var(--radius);
@@ -505,7 +505,7 @@
       </div>
       <p class="main-hero-overview" id="mainHeroOverview">The saga of power, deceit, and underworld supremacy unfolds on the big screen as the battle for the throne of Mirzapur reaches its final bloody chapter.</p>
       <div class="main-hero-actions">
-        <a href="https://vidsrc.to/embed/movie/1378537" target="_blank" rel="noopener" class="btn-main-hero-watch" id="mainHeroWatchBtn">▶ Watch Now</a>
+        <a href="https://vidsrc.xyz/embed/movie?tmdb=1378537" target="_blank" rel="noopener" class="btn-main-hero-watch" id="mainHeroWatchBtn">▶ Watch Now</a>
       </div>
     </div>
   </section>
@@ -645,7 +645,7 @@
       if (data.backdrop) {
         document.getElementById('mainHeroBg').src = data.backdrop;
       }
-      document.getElementById('mainHeroWatchBtn').href = `https://vidsrc.to/embed/movie/${movie.id}`;
+      document.getElementById('mainHeroWatchBtn').href = `https://vidsrc.xyz/embed/movie?tmdb=${movie.id}`;
     }
 
     function renderSkeletonGrid() {
@@ -750,9 +750,8 @@
       const rating = data.rating || m.rating;
       const year = data.year || m.year;
       const isBookmarked = bookmarks.includes(m.id);
-      const watchUrl = `https://vidsrc.to/embed/movie/${m.id}`;
+      const watchUrl = `https://vidsrc.xyz/embed/movie?tmdb=${m.id}`;
 
-      // Change card into a native <a> anchor tag so mobile browsers treat it as a direct link navigation
       const a = document.createElement('a');
       a.className = 'movie-card';
       a.href = watchUrl;
@@ -776,7 +775,6 @@
         </div>
       `;
 
-      // Desktop Hover Events
       a.addEventListener('mouseenter', (e) => {
         if (window.innerWidth <= 768) return;
         updateMainHero(m);
@@ -812,7 +810,6 @@
         document.getElementById('floatingHero').style.display = 'none';
       });
 
-      // Prevent bookmark button from triggering the main link redirect
       a.querySelector('.bookmark-btn').onclick = (e) => { 
         e.preventDefault(); 
         e.stopPropagation(); 
@@ -838,7 +835,7 @@
         dropdown.innerHTML = matches.map(m => {
           const data = cachedMovieData[m.id] || {};
           const poster = data.poster || `https://placehold.co/100x150/141418/e50914?text=${encodeURIComponent(m.name)}`;
-          const watchUrl = `https://vidsrc.to/embed/movie/${m.id}`;
+          const watchUrl = `https://vidsrc.xyz/embed/movie?tmdb=${m.id}`;
           return `
             <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item">
               <img src="${poster}" class="search-thumb" alt="${m.name}" />
@@ -900,7 +897,7 @@
     function populateReportList() {
       const select = document.getElementById('reportMovieSelect');
       movieCatalog.forEach(m => {
-        const opt = document.option ? document.option : document.createElement('option');
+        const opt = document.createElement('option');
         opt.value = m.name;
         opt.textContent = m.name;
         select.appendChild(opt);
