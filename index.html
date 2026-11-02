@@ -127,6 +127,8 @@
       cursor: pointer;
       align-items: center;
       transition: background 0.2s;
+      text-decoration: none;
+      color: inherit;
     }
     .search-item:hover { background: #1e1e27; }
     .search-thumb { width: 38px; height: 54px; object-fit: cover; border-radius: 4px; background: #000; }
@@ -235,6 +237,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      text-decoration: none;
       transition: background 0.2s, transform 0.2s;
     }
     .btn-hero-watch:hover { background: var(--primary); color: #fff; transform: scale(1.03); }
@@ -400,9 +403,11 @@
       font-weight: 700;
       cursor: pointer;
       text-align: center;
+      text-decoration: none;
+      display: block;
       transition: background 0.2s;
     }
-    .btn-overlay-play:hover { background: var(--primary-hover); }
+    .btn-overlay-play:hover { background: var(--primary-hover); color: #fff; }
     .btn-overlay-trailer {
       background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.3);
@@ -414,7 +419,7 @@
       text-align: center;
     }
 
-    /* Embedded Video Player Modal */
+    /* Trailer Player Modal */
     .player-modal {
       display: none;
       position: fixed;
@@ -430,7 +435,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       width: 100%;
-      max-width: 960px;
+      max-width: 850px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -445,16 +450,6 @@
       border-bottom: 1px solid var(--border);
     }
     .player-title { margin: 0; font-size: 1rem; font-weight: 700; }
-    .player-controls-top { display: flex; align-items: center; gap: 10px; }
-    .server-select {
-      background: #0b0b0e;
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      outline: none;
-    }
     .btn-close-player {
       background: transparent;
       border: none;
@@ -467,7 +462,7 @@
     .player-frame-wrapper {
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 ratio */
+      padding-top: 56.25%;
       background: #000;
     }
     .player-frame-wrapper iframe {
@@ -499,7 +494,7 @@
       gap: 14px;
     }
     .modal-card h3 { margin: 0; font-size: 1.15rem; }
-    .modal-input, .modal-select {
+    .modal-select {
       background: #0b0b0e;
       border: 1px solid var(--border);
       color: white;
@@ -590,7 +585,7 @@
 
   <!-- Hero Billboard Feature -->
   <section class="hero-banner" id="heroBanner">
-    <img src="" id="heroBackdrop" class="hero-bg" alt="Featured Poster" />
+    <img src="https://image.tmdb.org/t/p/original/uENpkBjiXtmUAz9Yq4dFwA5m3m5.jpg" id="heroBackdrop" class="hero-bg" alt="Featured Poster" />
     <div class="hero-gradient"></div>
     <div class="hero-content">
       <div class="hero-badge">🔥 Featured Today</div>
@@ -603,7 +598,7 @@
       </div>
       <p class="hero-overview" id="heroOverview">The saga of power, deceit, and underworld supremacy unfolds on the big screen as the battle for the throne of Mirzapur reaches its final bloody chapter.</p>
       <div class="hero-actions">
-        <button class="btn-hero-watch" id="heroWatchBtn">▶ Watch Now</button>
+        <a href="https://redflix.co/play?id=1378537&type=movie" target="_blank" rel="noopener" class="btn-hero-watch" id="heroWatchBtn">▶ Watch Now</a>
         <button class="btn-hero-trailer" id="heroTrailerBtn">🎬 Trailer</button>
       </div>
     </div>
@@ -612,12 +607,6 @@
   <!-- Main Shelves Area -->
   <main class="shelves-container" id="mainShelves">
     
-    <!-- Continue Watching Shelf -->
-    <div class="shelf-group" id="shelfContinueGroup" style="display: none;">
-      <h2 class="shelf-title">🕒 Continue Watching</h2>
-      <div class="shelf-row" id="shelfContinue"></div>
-    </div>
-
     <!-- Shelf 1: Trending Now -->
     <div class="shelf-group">
       <h2 class="shelf-title">🔥 Trending Blockbusters</h2>
@@ -638,28 +627,9 @@
 
   </main>
 
-  <!-- Embedded In-Site Player Modal -->
-  <div id="playerModal" class="player-modal">
-    <div class="player-dialog">
-      <div class="player-topbar">
-        <h3 class="player-title" id="playerModalTitle">Playing Title</h3>
-        <div class="player-controls-top">
-          <select id="serverSelect" class="server-select" onchange="changePlayerServer()">
-            <option value="server1">Server 1 (RedFlix)</option>
-            <option value="server2">Server 2 (Backup Fast)</option>
-          </select>
-          <button class="btn-close-player" onclick="closePlayerModal()">✕</button>
-        </div>
-      </div>
-      <div class="player-frame-wrapper">
-        <iframe id="videoPlayerFrame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-      </div>
-    </div>
-  </div>
-
   <!-- Trailer Player Modal -->
   <div id="trailerModal" class="player-modal">
-    <div class="player-dialog" style="max-width: 850px;">
+    <div class="player-dialog">
       <div class="player-topbar">
         <h3 class="player-title" id="trailerModalTitle">Official Trailer</h3>
         <button class="btn-close-player" onclick="closeTrailerModal()">✕</button>
@@ -681,8 +651,7 @@
       <div>
         <label style="font-size:0.75rem; color:#888;">Select Problem:</label>
         <div class="issue-chips" id="issueChipsContainer" style="margin-top:6px;">
-          <div class="issue-chip selected" onclick="selectIssue(this)">Video stream broken / buffering</div>
-          <div class="issue-chip" onclick="selectIssue(this)">Audio out of sync or missing</div>
+          <div class="issue-chip selected" onclick="selectIssue(this)">Video link not working</div>
           <div class="issue-chip" onclick="selectIssue(this)">Wrong poster / info displayed</div>
         </div>
       </div>
@@ -713,48 +682,39 @@
     const TMDB_IMG = 'https://image.tmdb.org/t/p/w500';
     const TMDB_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
-    // Movie Catalog with TMDB IDs and Player IDs
     const movieCatalog = [
-      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", genre: "action crime thriller", shelf: "trending", age: "A", rating: 8.8, redflixId: "1378537", trailerKey: "qeVjYn_U6Fk" },
-      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", genre: "action drama", shelf: "trending", age: "UA", rating: 8.4, redflixId: "1213243", trailerKey: "9bZkp7q19f0" },
-      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", genre: "action thriller", shelf: "trending", age: "UA", rating: 8.5, redflixId: "857598", trailerKey: "g3JUbgZXBaM" },
-      { id: 1234139, name: "Jailer 2", year: "2026", genre: "action crime", shelf: "action", age: "A", rating: 8.2, redflixId: "1234139", trailerKey: "Y5BeWdODPqo" },
-      { id: 1235877, name: "Jana Nayagan", year: "2026", genre: "action drama", shelf: "action", age: "UA", rating: 8.1, redflixId: "1235877", trailerKey: "dQw4w9WgXcQ" },
-      { id: 1057265, name: "Peddi", year: "2026", genre: "action drama", shelf: "action", age: "UA", rating: 8.0, redflixId: "1057265", trailerKey: "dQw4w9WgXcQ" },
-      { id: 1441228, name: "Irumudi", year: "2026", genre: "action drama", shelf: "action", age: "UA", rating: 7.9, redflixId: "1441228", trailerKey: "dQw4w9WgXcQ" },
-      { id: 690957,  name: "Pushpa: The Rise", year: "2021", genre: "action thriller", shelf: "classics", age: "UA", rating: 7.6, redflixId: "690957", trailerKey: "pKctjlpbcdc" },
-      { id: 20453,   name: "3 Idiots", year: "2009", genre: "comedy drama", shelf: "classics", age: "UA", rating: 8.4, redflixId: "20453", trailerKey: "K0eDlFX9GMc" }
+      { id: 1378537, name: "Mirzapur: The Movie", year: "2026", shelf: "trending", age: "A", rating: 8.8, redflixId: "1378537", trailerKey: "qeVjYn_U6Fk" },
+      { id: 1213243, name: "Toxic: A Fairy Tale", year: "2025", shelf: "trending", age: "UA", rating: 8.4, redflixId: "1213243", trailerKey: "9bZkp7q19f0" },
+      { id: 857598,  name: "Pushpa 2: The Rule", year: "2024", shelf: "trending", age: "UA", rating: 8.5, redflixId: "857598", trailerKey: "g3JUbgZXBaM" },
+      { id: 1234139, name: "Jailer 2", year: "2026", shelf: "action", age: "A", rating: 8.2, redflixId: "1234139", trailerKey: "Y5BeWdODPqo" },
+      { id: 1235877, name: "Jana Nayagan", year: "2026", shelf: "action", age: "UA", rating: 8.1, redflixId: "1235877", trailerKey: "dQw4w9WgXcQ" },
+      { id: 1057265, name: "Peddi", year: "2026", shelf: "action", age: "UA", rating: 8.0, redflixId: "1057265", trailerKey: "dQw4w9WgXcQ" },
+      { id: 1441228, name: "Irumudi", year: "2026", shelf: "action", age: "UA", rating: 7.9, redflixId: "1441228", trailerKey: "dQw4w9WgXcQ" },
+      { id: 690957,  name: "Pushpa: The Rise", year: "2021", shelf: "classics", age: "UA", rating: 7.6, redflixId: "690957", trailerKey: "pKctjlpbcdc" },
+      { id: 20453,   name: "3 Idiots", year: "2009", shelf: "classics", age: "UA", rating: 8.4, redflixId: "20453", trailerKey: "K0eDlFX9GMc" }
     ];
 
     let cachedMovieData = {};
-    let currentPlayingItem = null;
     let bookmarks = JSON.parse(localStorage.getItem('xtream_bookmarks') || '[]');
-    let watchHistory = JSON.parse(localStorage.getItem('xtream_history') || '[]');
 
-    // Startup
     window.addEventListener('DOMContentLoaded', async () => {
       initHeroBillboard();
       renderSkeletonShelves();
       await fetchAllTmdbData();
       renderShelves();
-      renderContinueWatching();
       populateReportList();
       restoreRating();
     });
 
-    // Setup Featured Hero Billboard
     function initHeroBillboard() {
-      const hero = movieCatalog[0]; // Mirzapur: The Movie
+      const hero = movieCatalog[0];
       document.getElementById('heroTitle').innerText = hero.name;
       document.getElementById('heroRating').innerText = `★ ${hero.rating}`;
       document.getElementById('heroYear').innerText = hero.year;
-      document.getElementById('heroBackdrop').src = "https://images.hindustantimes.com/img/2024/10/28/1600x900/Mirzapur_the_movie_1730107297375_1730107307632.jpg";
-
-      document.getElementById('heroWatchBtn').onclick = () => openPlayerModal(hero);
+      document.getElementById('heroWatchBtn').href = `https://redflix.co/play?id=${hero.redflixId}&type=movie`;
       document.getElementById('heroTrailerBtn').onclick = () => openTrailerModal(hero);
     }
 
-    // Skeleton loaders while TMDB loads
     function renderSkeletonShelves() {
       ['shelfTrending', 'shelfAction', 'shelfClassics'].forEach(shelfId => {
         const row = document.getElementById(shelfId);
@@ -770,7 +730,6 @@
       });
     }
 
-    // Fetch TMDB Data in parallel
     async function fetchAllTmdbData() {
       await Promise.all(movieCatalog.map(async (m) => {
         try {
@@ -780,19 +739,14 @@
             cachedMovieData[m.id] = {
               title: data.title || m.name,
               poster: data.poster_path ? `${TMDB_IMG}${data.poster_path}` : null,
-              backdrop: data.backdrop_path ? `${TMDB_ORIGINAL}${data.backdrop_path}` : null,
               rating: data.vote_average ? data.vote_average.toFixed(1) : m.rating,
-              year: data.release_date ? data.release_date.split('-')[0] : m.year,
-              overview: data.overview || ''
+              year: data.release_date ? data.release_date.split('-')[0] : m.year
             };
           }
-        } catch(e) {
-          console.warn(`TMDB fail for ${m.name}`);
-        }
+        } catch(e) {}
       }));
     }
 
-    // Render Shelves
     function renderShelves() {
       const trendingRow = document.getElementById('shelfTrending');
       const actionRow = document.getElementById('shelfAction');
@@ -810,7 +764,6 @@
       });
     }
 
-    // Create Individual Movie Card Node
     function createCardElement(m) {
       const data = cachedMovieData[m.id] || {};
       const title = data.title || m.name;
@@ -818,14 +771,15 @@
       const rating = data.rating || m.rating;
       const year = data.year || m.year;
       const isBookmarked = bookmarks.includes(m.id);
+      const watchUrl = `https://redflix.co/play?id=${m.redflixId}&type=movie`;
 
       const div = document.createElement('div');
       div.className = 'movie-card';
       div.innerHTML = `
         <div class="poster-container">
-          <img src="${poster}" alt="${title}" loading="lazy" onerror="this.src='https://placehold.co/400x600/18181c/e50914?text=${encodeURIComponent(title)}';" />
+          <img src="${poster}" alt="${title}" loading="lazy" />
           <div class="hover-overlay">
-            <button class="btn-overlay-play">▶ Play Now</button>
+            <a href="${watchUrl}" target="_blank" rel="noopener" class="btn-overlay-play">▶ Play Now</a>
             <button class="btn-overlay-trailer">🎬 Trailer</button>
           </div>
         </div>
@@ -842,66 +796,13 @@
         </div>
       `;
 
-      // Event Listeners
-      div.querySelector('.btn-overlay-play').onclick = (e) => { e.stopPropagation(); openPlayerModal(m); };
       div.querySelector('.btn-overlay-trailer').onclick = (e) => { e.stopPropagation(); openTrailerModal(m); };
       div.querySelector('.bookmark-btn').onclick = (e) => { e.stopPropagation(); toggleBookmark(m.id, e.target); };
-      div.onclick = () => openPlayerModal(m);
+      div.onclick = () => window.open(watchUrl, '_blank', 'noopener');
 
       return div;
     }
 
-    // Continue Watching Management
-    function addToWatchHistory(movie) {
-      watchHistory = watchHistory.filter(item => item.id !== movie.id);
-      watchHistory.unshift(movie);
-      if (watchHistory.length > 6) watchHistory.pop();
-      localStorage.setItem('xtream_history', JSON.stringify(watchHistory));
-      renderContinueWatching();
-    }
-
-    function renderContinueWatching() {
-      const group = document.getElementById('shelfContinueGroup');
-      const row = document.getElementById('shelfContinue');
-      if (watchHistory.length === 0) {
-        group.style.display = 'none';
-        return;
-      }
-      group.style.display = 'block';
-      row.innerHTML = '';
-      watchHistory.forEach(m => row.appendChild(createCardElement(m)));
-    }
-
-    // In-Site Embedded Player Modal
-    function openPlayerModal(movie) {
-      currentPlayingItem = movie;
-      addToWatchHistory(movie);
-
-      document.getElementById('playerModalTitle').innerText = movie.name;
-      changePlayerServer();
-      document.getElementById('playerModal').style.display = 'flex';
-    }
-
-    function changePlayerServer() {
-      if (!currentPlayingItem) return;
-      const server = document.getElementById('serverSelect').value;
-      const iframe = document.getElementById('videoPlayerFrame');
-
-      if (server === 'server1') {
-        iframe.src = `https://redflix.co/play?id=${currentPlayingItem.redflixId}&type=movie`;
-      } else {
-        iframe.src = `https://vidsrc.to/embed/movie/${currentPlayingItem.id}`;
-      }
-    }
-
-    function closePlayerModal() {
-      const modal = document.getElementById('playerModal');
-      const iframe = document.getElementById('videoPlayerFrame');
-      modal.style.display = 'none';
-      iframe.src = '';
-    }
-
-    // Official Trailer Player Modal
     function openTrailerModal(movie) {
       document.getElementById('trailerModalTitle').innerText = `${movie.name} - Official Trailer`;
       document.getElementById('trailerPlayerFrame').src = `https://www.youtube.com/embed/${movie.trailerKey}?autoplay=1`;
@@ -913,7 +814,6 @@
       document.getElementById('trailerPlayerFrame').src = '';
     }
 
-    // Live Search with Instant Dropdown
     function handleLiveSearch(query) {
       const dropdown = document.getElementById('searchDropdown');
       const trimmed = query.trim().toLowerCase();
@@ -930,28 +830,27 @@
         dropdown.innerHTML = matches.map(m => {
           const data = cachedMovieData[m.id] || {};
           const poster = data.poster || `https://placehold.co/100x150/141418/e50914?text=${encodeURIComponent(m.name)}`;
+          const watchUrl = `https://redflix.co/play?id=${m.redflixId}&type=movie`;
           return `
-            <div class="search-item" onclick="openPlayerModal(movieCatalog.find(x => x.id === ${m.id}))">
+            <a href="${watchUrl}" target="_blank" rel="noopener" class="search-item">
               <img src="${poster}" class="search-thumb" alt="${m.name}" />
               <div class="search-item-info">
                 <h4>${m.name}</h4>
                 <span>${m.year} • ★ ${m.rating}</span>
               </div>
-            </div>
+            </a>
           `;
         }).join('');
       }
       dropdown.style.display = 'block';
     }
 
-    // Click outside to close search dropdown
     window.addEventListener('click', (e) => {
       if (!e.target.closest('.search-box')) {
         document.getElementById('searchDropdown').style.display = 'none';
       }
     });
 
-    // Bookmarking / My List
     function toggleBookmark(id, btnElement) {
       if (bookmarks.includes(id)) {
         bookmarks = bookmarks.filter(b => b !== id);
@@ -963,7 +862,6 @@
       localStorage.setItem('xtream_bookmarks', JSON.stringify(bookmarks));
     }
 
-    // Header Navigation Tabs
     function switchTab(tab, event) {
       if (event) event.preventDefault();
       document.querySelectorAll('.nav-links a').forEach(el => el.classList.remove('active'));
@@ -1002,7 +900,6 @@
       }
     }
 
-    // Report Modal
     function openReportModal() { document.getElementById('reportModal').style.display = 'flex'; }
     function closeReportModal() { document.getElementById('reportModal').style.display = 'none'; }
     function selectIssue(chip) {
@@ -1025,7 +922,6 @@
       closeReportModal();
     }
 
-    // Star Rating
     function restoreRating() {
       const saved = localStorage.getItem('xtream_user_rating');
       if (saved) highlightStars(parseInt(saved, 10));
@@ -1039,10 +935,8 @@
       document.getElementById('siteRatingTitle').innerText = "Thank you for supporting XTREAM!";
     }
 
-    // Escape Key Support
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        closePlayerModal();
         closeTrailerModal();
         closeReportModal();
       }
